@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.business.OrderMapper">
+	
+	<sql id="gridWhere">
+		from t_order o
+		left join t_customer u on o.customerId=u.id
+		<where>
+		</where>
+	</sql>
+	<select id="listPaged" resultType="Order">
+		select o.id,o.customerId,o.createtime,o.paytime,o.price,o.status,u.showname
+		<include refid="gridWhere"/>
+		limit #{start},#{rows}
+	</select>
+	<select id="count" resultType="long">
+		select count(*)
+		<include refid="gridWhere"/>
+	</select>
+	
+	<select id="orderList" resultType="Order">
+	select * from t_order where customerId=#{customerId}
+	</select>
+</mapper>

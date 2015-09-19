@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.FiletypeMapper">
+	<insert id="insert" parameterType="Filetype" useGeneratedKeys="true" keyProperty="id">
+		insert into t_filetype
+		(name
+		<if test="parentId != 0">
+		,parentId
+		</if>
+		) values
+		(#{name}
+		<if test="parentId != 0">
+		,#{parentId}
+		</if>
+		)
+	</insert>
+	
+	<update id="update" parameterType="Filetype">
+		update t_filetype
+		<set>
+			name=#{name},
+			parentId=#{parentId}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_filetype where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from t_filetype where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</delete>
+	
+	<select id="selectById" resultType="Filetype">
+		select * from t_filetype where id=#{id}
+	</select>
+	
+	<select id="selectByParentId" resultType="TreeNode">
+		select id,name text from t_filetype
+		<where>
+			<choose>
+				<when test="parentId != 0">parentId=#{parentId}</when>
+				<otherwise>parentId is null</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.UserMapper">
+	<insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+		insert into t_user
+		(username,password,name,status,createtime,sex,age,phone,email)
+		values
+		(#{username},#{password},#{name},#{status},#{createtime},#{sex},#{age},#{phone},#{email})
+	</insert>
+	
+	<update id="update" parameterType="User">
+		update t_user
+		<set>
+			username=#{username},
+			name=#{name},
+			<if test="null != password and '' != password">
+			password=#{password},
+			</if>
+			type=#{type},
+			status=#{status},
+			phone=#{phone},
+			email=#{email},
+			age=#{age},
+			sex=#{sex}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_user where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from t_user where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 登录验证 -->
+	<select id="findByUsername" resultType="User">
+		select * from t_user where username=#{username}
+	</select>
+	
+	<select id="selectById" resultType="User">
+		select * from t_user where id=#{id}
+	</select>
+	
+	<sql id="gridWhere">
+		from t_user u
+		<where>
+		</where>
+	</sql>
+	<select id="listPaged" resultType="User">
+		select id,username,name,sex,age,createtime,phone,email,type,status
+		<include refid="gridWhere"/>
+		limit #{start},#{rows}
+	</select>
+	<select id="count" resultType="long">
+		select count(*)
+		<include refid="gridWhere"/>
+	</select>
+</mapper>

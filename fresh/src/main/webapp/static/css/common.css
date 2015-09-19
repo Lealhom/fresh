@@ -1,0 +1,44 @@
+* {
+	font-size: 13px !important;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: verdana, helvetica, arial, sans-serif;
+	background: #fff;
+	text-align: center;
+}
+
+.textbox {
+	padding: 0 5px;
+	height: 20px;
+	width: 90%;
+}
+
+.formtable {
+	border-spacing: 15px;
+	width: 100%;
+}
+
+.formtable td {
+	padding: 0 5px;
+}
+
+.formtable td.form-title {
+	text-align: right;
+	vertical-align: top;
+	width: 100px;
+}
+
+.formtable td.form-input {
+	text-align: left;
+}
+
+.formtable td.form-input textarea {
+	width: 90%;
+	min-height: 150px;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.hy.manager.domain.User" alias="User" />
+		<typeAlias type="com.hy.manager.domain.Role" alias="Role" />
+		<typeAlias type="com.hy.manager.domain.Menu" alias="Menu" />
+		<typeAlias type="com.hy.manager.domain.File" alias="File" />
+		<typeAlias type="com.hy.manager.domain.Filetype" alias="Filetype" />
+	
+		<typeAlias type="com.hy.manager.domain.business.Order" alias="Order" />
+		<typeAlias type="com.hy.manager.domain.business.Comment" alias="Comment" />
+		<typeAlias type="com.hy.manager.domain.business.Address" alias="Address" />
+		<typeAlias type="com.hy.manager.domain.business.Activity" alias="Activity" />
+		<typeAlias type="com.hy.manager.domain.business.Brand" alias="Brand" />
+		<typeAlias type="com.hy.manager.domain.business.Product" alias="Product" />
+		<typeAlias type="com.hy.manager.domain.business.Sku" alias="Sku" />
+		<typeAlias type="com.hy.manager.domain.business.Category" alias="Category" />
+		<typeAlias type="com.hy.manager.domain.business.Customer" alias="Customer" />
+		
+		<typeAlias type="com.hy.manager.web.TreeNode" alias="TreeNode" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/hy/manager/domain/UserMapper.xml" />
+		<mapper resource="com/hy/manager/domain/RoleMapper.xml" />
+		<mapper resource="com/hy/manager/domain/MenuMapper.xml" />
+		<mapper resource="com/hy/manager/domain/FileMapper.xml" />
+		<mapper resource="com/hy/manager/domain/FiletypeMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/OrderMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/CommentMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/AddressMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/ActivityMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/BrandMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/ProductMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/SkuMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/CategoryMapper.xml" />
+		<mapper resource="com/hy/manager/domain/business/CustomerMapper.xml" />
+	</mappers>
+</configuration>

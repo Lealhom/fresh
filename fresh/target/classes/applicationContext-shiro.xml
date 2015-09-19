@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<description>Shiro安全配置</description>
+
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm"></property>
+		<property name="cacheManager" ref="shiroEhcacheManager" />
+	</bean>
+
+	<!-- 项目自定义的Realm -->
+	<bean id="shiroDbRealm" class="com.hy.manager.shiro.ShiroDbRealm">
+		<property name="useCaptcha" value="false"/>
+	</bean>
+
+	<!-- ShiroFilter基本配置 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/" />
+		<property name="unauthorizedUrl" value="/unauthorized"></property>
+        <property name="filters">
+	        <map>
+	        	<!-- 是否启用验证码检验 -->
+	            <entry key="authc" value-ref="captchaFormAuthenticationFilter"/>
+	            <entry key="logout" value-ref="customLogoutFilter"/>
+	            <entry key="app" value-ref="appTokenAuthenticationFilter"></entry>
+	        </map>
+        </property>
+		<property name="filterChainDefinitions">
+			<value>
+				/Captcha.jpg = anon
+				/themes/** = anon
+				/script/** = anon
+				/api/app_login = anon
+				/login = authc
+				/logout = logout
+				/api/** = app
+		    	/** = user
+		 	</value>
+		</property>
+	</bean>
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache-shiro.xml"/>
+	</bean>
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+	<bean id="customLogoutFilter" class="com.hy.manager.shiro.CustomLogoutFilter"></bean>
+	<bean id="captchaFormAuthenticationFilter" class="com.hy.manager.shiro.CaptchaFormAuthenticationFilter"/>
+	<bean id="appTokenAuthenticationFilter" class="com.hy.manager.shiro.AppTokenAuthenticationFilter"/>
+</beans>

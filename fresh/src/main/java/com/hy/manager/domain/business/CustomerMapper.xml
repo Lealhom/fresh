@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.business.CustomerMapper">
+	<insert id="insert" parameterType="Customer" useGeneratedKeys="true" keyProperty="id">
+		insert into t_customer
+		(username,password,showname,phone,email)
+		values
+		(#{username},#{password},#{showname},#{phone},#{email})
+	</insert>
+	
+	<update id="update" parameterType="Customer">
+		update t_customer
+		<set>
+			username=#{username},
+			password=#{password},
+			showname=#{showname},
+			phone=#{phone},
+			email=#{email}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_customer where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from t_customer where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</delete>
+	
+	<select id="selectById" resultType="Customer">
+		select * from t_customer where id=#{id}
+	</select>
+	
+	<sql id="gridWhere">
+		from t_customer u
+		<where>
+		</where>
+	</sql>
+	<select id="listPaged" resultType="Customer">
+		select id,username,showname,phone,email
+		<include refid="gridWhere"/>
+		limit #{start},#{rows}
+	</select>
+	<select id="count" resultType="long">
+		select count(*)
+		<include refid="gridWhere"/>
+	</select>
+</mapper>

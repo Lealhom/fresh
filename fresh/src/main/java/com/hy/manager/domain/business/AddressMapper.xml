@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.business.AddressMapper">
+	<insert id="insert" parameterType="Address" useGeneratedKeys="true" keyProperty="id">
+		insert into t_address
+		(userId,phone,address,sex,consignee,longitude,latitude)
+		values
+		(#{userId},#{phone},#{address},#{sex},#{consignee},#{longitude},#{latitude})
+	</insert>
+	
+	<update id="update" parameterType="Address">
+		update t_address
+		<set>
+			phone=#{phone},
+			address=#{address},
+			sex=#{sex},
+			consignee=#{consignee},
+			longitude=#{longitude},
+			latitude=#{latitude}
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_address where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from t_address where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</delete>
+	
+	<select id="selectById" resultType="Address">
+		select * from t_address where id=#{id}
+	</select>
+
+	<select id="addressList" resultType="Address">
+		select * from t_address where userId=#{userId}
+	</select>
+</mapper>

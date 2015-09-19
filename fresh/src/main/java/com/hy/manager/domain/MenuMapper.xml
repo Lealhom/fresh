@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.MenuMapper">
+	<insert id="insert" parameterType="Menu" useGeneratedKeys="true" keyProperty="id">
+		insert into t_menu
+		(name,code,url,icon,type,status,ordernum
+		<if test="parentId != null and parentId != 0">
+		,parentId
+		</if>)
+		values
+		(#{name},#{code},#{url},#{icon},#{type},#{status},#{ordernum}
+		<if test="parentId != null and parentId != 0">
+		,#{parentId}
+		</if>
+		)
+	</insert>
+	
+	<update id="update" parameterType="Menu">
+		update t_menu
+		<set>
+			name=#{name},
+			code=#{code},
+			url=#{url},
+			icon=#{icon},
+			type=#{type},
+			status=#{status},
+			ordernum=#{ordernum}
+			<choose>
+				<when test="parentId == 0">
+				,parentId=null
+				</when>
+				<otherwise>
+				,parentId=#{parentId}
+				</otherwise>
+			</choose>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_menu where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from t_menu where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</delete>
+	
+	<select id="selectById" resultType="Menu">
+		select * from t_menu where id=#{id}
+	</select>
+	
+	<select id="findPermissionMenu" resultType="Menu">
+		select * from t_menu where status=1
+	</select>
+	
+	<sql id="gridWhere">
+		from t_menu u
+		left join t_menu p on u.parentId=p.id
+		<where>
+		</where>
+	</sql>
+	<select id="listPaged" resultType="Menu">
+		select u.id,u.name,u.code,u.url,u.icon,u.type,u.status,u.ordernum,u.parentId,p.name parentName
+		<include refid="gridWhere"/>
+		<if test="rows > 0">
+		limit #{start},#{rows}
+		</if>
+	</select>
+	<select id="count" resultType="long">
+		select count(*)
+		<include refid="gridWhere"/>
+	</select>
+	
+</mapper>
