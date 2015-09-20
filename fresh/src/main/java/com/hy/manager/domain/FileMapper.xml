@@ -2,20 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.manager.domain.FileMapper">
-	<insert id="insert" parameterType="File">
-		<selectKey keyProperty="id" resultType="String" order="BEFORE">
-			select sys_guid() from dual
-		</selectKey>
+	<insert id="insert" parameterType="File" useGeneratedKeys="true" keyProperty="id">
 		insert into t_file
-		(id,name,type,uploadTime) values
-		(#{id},#{name},#{type},#{uploadTime})
+		(name,typeId,path,uploadTime) values
+		(#{name},#{typeId},#{path},#{uploadTime})
 	</insert>
 	
 	<update id="update" parameterType="File">
 		update t_file
 		<set>
 			name=#{name},
-			type=#{type},
+			typeId=#{typeId},
+			path=#{path},
 			uploadTime=#{uploadTime}
 		</set>
 		where id = #{id}
@@ -42,7 +40,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="File">
-		select id,name,type,uploadTime
+		select id,name,typeId,uploadTime
 		<include refid="gridWhere"/>
 		<if test="rows > 0">
 		limit #{start},#{rows}

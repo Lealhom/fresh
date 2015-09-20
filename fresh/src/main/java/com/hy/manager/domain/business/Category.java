@@ -16,7 +16,8 @@ public class Category implements Serializable {
 	private int id;
 	private String name;
 	private int level;
-	private int parentId;
+	private String parentId;
+	private String parentName;
 
 	public int getId() {
 		return id;
@@ -42,12 +43,20 @@ public class Category implements Serializable {
 		this.level = level;
 	}
 
-	public int getParentId() {
+	public String getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
 
 }

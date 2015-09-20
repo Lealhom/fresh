@@ -1,14 +1,24 @@
 package com.hy.manager.web.controller.business;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hy.manager.domain.File;
 import com.hy.manager.domain.business.Product;
+import com.hy.manager.service.FileService;
 import com.hy.manager.service.business.ProductService;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
@@ -21,6 +31,8 @@ public class ProductController extends BasicController {
 
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private FileService fileService;
 
 	@RequestMapping(value = "page")
 	public ModelAndView index() {
@@ -42,8 +54,33 @@ public class ProductController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Product product) {
+	public ResponseMessage add(Product product,@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
+		if(file.getSize() > 5*(1024*1024)){
+			message.setMessage("上传文件大小不能超过5M");
+			return message;
+		}
+		String uuidFileName = UUID.randomUUID()+"-"+file.getOriginalFilename();
+		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuidFileName;
+		String reletivePath = "static/upload/" + uuidFileName;
+		if (!file.isEmpty()) {
+			java.io.File localFile = new java.io.File(realPath);
+			try {
+				FileUtils.copyInputStreamToFile(file.getInputStream(), localFile);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		File f = new File();
+		f.setName(file.getOriginalFilename());
+		f.setPath(reletivePath);
+		f.setUploadTime(new Date());
+		fileService.insert(f);
+		
+		product.setCreateTime(new Date());
+		product.setFileId(f.getId());
 		productService.insert(product);
 		return message;
 	}

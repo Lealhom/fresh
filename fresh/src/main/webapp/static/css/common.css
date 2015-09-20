@@ -12,7 +12,13 @@ body {
 	background: #fff;
 	text-align: center;
 }
-
+.index_title {
+	margin-top: 12px;
+	margin-left: 20px;
+	font-family: »ªÎÄÐÐ¿¬;
+	font-size: 25px !important;
+	color: #000080;
+}
 .textbox {
 	padding: 0 5px;
 	height: 20px;
@@ -31,7 +37,7 @@ body {
 .formtable td.form-title {
 	text-align: right;
 	vertical-align: top;
-	width: 100px;
+	width: 60px;
 }
 
 .formtable td.form-input {

@@ -1,8 +1,13 @@
 package com.hy.manager.web.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +30,7 @@ import com.hy.manager.web.ResponseMessage;
 public class FileController extends BasicController {
 
 	@RequestMapping(value = "upload", method = RequestMethod.POST)
-	public ModelAndView upload(
-			@RequestParam("fileUpload") CommonsMultipartFile file) {
+	public ModelAndView upload(@RequestParam("file") CommonsMultipartFile file) {
 		if (!file.isEmpty()) {
 			String path = "D:/" + file.getOriginalFilename();
 			java.io.File localFile = new java.io.File(path);
@@ -75,19 +79,28 @@ public class FileController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(@RequestParam("fileUpload") CommonsMultipartFile file) {
+	public ResponseMessage add(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request,File entity) {
 		ResponseMessage message = new ResponseMessage();
+		if(file.getSize() > 5*(1024*1024)){
+			message.setMessage("上传文件大小不能超过5M");
+			return message;
+		}
+		String uuidFileName = UUID.randomUUID()+"-"+file.getOriginalFilename();
+		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuidFileName;
+		String reletivePath = "static/upload/" + uuidFileName;
 		if (!file.isEmpty()) {
-			String path = "D:/" + file.getOriginalFilename();
-			java.io.File localFile = new java.io.File(path);
+			java.io.File localFile = new java.io.File(realPath);
 			try {
-				file.transferTo(localFile);
+				FileUtils.copyInputStreamToFile(file.getInputStream(), localFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		entity.setPath(reletivePath);
+		entity.setUploadTime(new Date());
+		fileService.insert(entity);
 		return message;
 	}
 

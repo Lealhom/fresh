@@ -3,7 +3,7 @@ define('crud', ['data'], function(DATA) {
 	function dialog(options, loadCallback, saveCallback) {
 		var dialog = $('<div></div>').appendTo('body').dialog($.extend({
 			title: '',
-			width: 800,
+			width: 700,
 			height: 500,
 			modal: true,
 			resizable: true,
@@ -13,9 +13,14 @@ define('crud', ['data'], function(DATA) {
 				handler: function() {
 					$(dialog.find('form')).form('submit', {
 						success: function(data) {
+							var msg = '操作成功';
+							data = $.parseJSON(data);
+							if(data.message){
+								msg = data.message;
+							}
 							$.messager.show({
 								title: '提示',
-								msg: '成功',
+								msg: msg,
 								showType: 'show'
 							});
 							dialog.dialog('close');

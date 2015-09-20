@@ -41,7 +41,9 @@
 	<select id="listPaged" resultType="Brand">
 		select id,name,description
 		<include refid="gridWhere"/>
+		<if test="rows > 0">
 		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="count" resultType="long">
 		select count(*)

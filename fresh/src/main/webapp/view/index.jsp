@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>"/>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-<title>管理</title>
+<title>生鲜超市后台管理系统</title>
 <link href="static/js/easyui/themes/metro-blue/easyui.css" rel="stylesheet" type="text/css"/>
 <link href="static/js/easyui/themes/icon.css" rel="stylesheet" type="text/css"/>
 <link href="static/css/common.css" rel="stylesheet" type="text/css"/>
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="static/js/require.js" type="text/javascript"></script>
 </head>
 <body class="easyui-layout">
-	<div data-options="region:'north',split:false" style="height:50px;"></div>
+	<div data-options="region:'north',split:false,href:'./view/north.jsp'" style="height:50px;"></div>
 	<div data-options="region:'west',title:'菜单',split:true" style="width:200px;">
 		<ul id="menu">
 		<c:forEach items="${menus }" var="menu">
@@ -38,7 +38,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<div data-options="region:'center'">
 		<div id="index-tab">
-			<div title="首页"></div>
+			<div title="首页">
+				欢迎登录生鲜超市后台管理系统
+			</div>
 		</div>
 	</div>
 <script type="text/javascript" src="static/js/horse.js"></script>

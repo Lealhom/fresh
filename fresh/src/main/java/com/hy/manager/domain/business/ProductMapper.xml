@@ -4,9 +4,9 @@
 <mapper namespace="com.hy.manager.domain.business.ProductMapper">
 	<insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
 		insert into t_product
-		(name,description)
+		(name,status,createTime,updateTime,fileId,brandId,description)
 		values
-		(#{name},#{description})
+		(#{name},#{status},#{createTime},#{updateTime},#{fileId},#{brandId},#{description})
 	</insert>
 	
 	<update id="update" parameterType="Product">
@@ -39,9 +39,14 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Product">
-		select id,name,description
-		<include refid="gridWhere"/>
+		select t1.id,t1.name,t1.description,t1.status,t1.createTime,t1.updateTime,
+			   t2.path filePath,t3.name	brandName
+		from t_product t1 
+		left join t_file t2 on t1.fileId = t2.id
+		left join t_brand t3 on t1.brandId = t3.id
+		<if test="rows > 0">
 		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="count" resultType="long">
 		select count(*)

@@ -14,6 +14,8 @@ define('page/category', ['crud'], function(CRUD) {
 					field: 'name', title: '名称', width: 150
 				}, {
 					field: 'level', title: '等级', width: 150
+				}, {
+					field: 'parentName', title: '父级品类', width: 150
 				}]],
 				toolbar: [{
 					text: '添加',
@@ -21,6 +23,8 @@ define('page/category', ['crud'], function(CRUD) {
 					handler: function() {
 						CRUD.add({
 							title: '添加品类',
+							width:420,
+							height:420,
 							href: 'category/add'
 						}, function() {
 							the.loaded();

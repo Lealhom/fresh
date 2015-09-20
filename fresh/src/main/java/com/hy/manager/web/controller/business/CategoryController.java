@@ -44,6 +44,12 @@ public class CategoryController extends BasicController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseMessage add(Category category) {
 		ResponseMessage message = new ResponseMessage();
+		if("".equals(category.getParentId())){
+			category.setLevel(1);
+		}else{
+			Category parentCategory = categoryService.selectById(category.getParentId());
+			category.setLevel(parentCategory.getLevel()+1);
+		}
 		categoryService.insert(category);
 		return message;
 	}

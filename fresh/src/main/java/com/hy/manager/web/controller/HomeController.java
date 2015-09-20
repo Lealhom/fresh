@@ -1,8 +1,12 @@
 package com.hy.manager.web.controller;
 
+import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.web.session.HttpServletSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +41,16 @@ public class HomeController extends BasicController {
 	public ModelAndView unauthorized() {
 		ModelAndView mav = new ModelAndView("unauthorized");
 		return mav;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping("loginout")
+	public String loginout(HttpServletRequest request) {
+		Enumeration em = request.getSession().getAttributeNames();
+		while (em.hasMoreElements()) {
+			request.getSession().removeAttribute(em.nextElement().toString());
+		}
+		return "login";
 	}
 
 }

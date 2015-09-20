@@ -16,7 +16,14 @@ define('page/file', ['crud'], function(CRUD) {
 				tools: [{
 					iconCls:'icon-add',
 					handler: function() {
-						
+						CRUD.add({
+							title: '添加文件分类',
+							href: 'file/add'
+						}, function() {
+							the.loaded();
+						}, function() {
+							the.saveOrUpdate();
+						});
 					}
 				}]
 			}).layout('add', {
@@ -39,9 +46,9 @@ define('page/file', ['crud'], function(CRUD) {
 				}, {
 					field: 'name', title: '名称', width: 150
 				}, {
-					field: 'status', title: '状态', width: 150
+					field: 'typeName', title: '文件分类', width: 150
 				}, {
-					field: 'description', title: '描述', width: 350
+					field: 'uploadTime', title: '上传时间', width: 180
 				}]],
 				toolbar: [{
 					text: '添加',

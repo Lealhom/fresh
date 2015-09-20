@@ -10,9 +10,20 @@ define('page/product', ['crud'], function(CRUD) {
 				pagination: true,
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
+				},{
+					field: 'filePath', title: '图片', width: 90,formatter:function(value){
+						var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+						return s;
+					}
 				}, {
-					field: 'name', title: '名称', width: 150
+					field: 'name', title: '名称', width: 200
 				}, {
+					field: 'brandName', title: '所属品牌', width: 150
+				},{
+					field: 'createTime', title: '创建时间', width: 150
+				},{
+					field: 'updateTime', title: '更新时间', width: 150
+				},{
 					field: 'status', title: '状态', width: 150
 				}]],
 				toolbar: [{

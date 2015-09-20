@@ -4,7 +4,7 @@
 	<table cellpadding="5">
 		<tr>
 			<td>名称</td>
-			<td><input name="name" value="${carte.name }" class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,10]'"></td>
+			<td><input name="name" value="${carte.name }" class="easyui-validatebox textbox" data-options="required:true,validType:'length[1,20]'"></td>
 			<td>状态</td>
 			<td><select class="easyui-combobox" name="status" style="width:80px;">
 				<option value="1" ${carte.status == 1 ? 'selected' : '' }>正常</option>
