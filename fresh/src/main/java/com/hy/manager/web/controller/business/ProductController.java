@@ -82,6 +82,8 @@ public class ProductController extends BasicController {
 		product.setCreateTime(new Date());
 		product.setFileId(f.getId());
 		productService.insert(product);
+		//添加品类跟品牌的关联关系
+		productService.addCategoryIds(product.getId(),product.getCategoryIds());
 		return message;
 	}
 

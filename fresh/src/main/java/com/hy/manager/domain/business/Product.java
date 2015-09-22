@@ -18,12 +18,13 @@ public class Product implements Serializable {
 	private Date createTime;//创建时间
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date updateTime;//最后更新时间
-	private String description;
+	private String description;//产品描述
+	private String bornPlace;//产地
 	private int fileId;//记录图片文件的id
 	private String filePath;//记录图片文件存储路径
 	private int brandId;//品牌id
 	private String brandName;//品牌名称
-	
+	private String categoryIds[];
 
 	public int getId() {
 		return id;
@@ -103,6 +104,22 @@ public class Product implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String[] getCategoryIds() {
+		return categoryIds;
+	}
+
+	public void setCategoryIds(String[] categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+
+	public String getBornPlace() {
+		return bornPlace;
+	}
+
+	public void setBornPlace(String bornPlace) {
+		this.bornPlace = bornPlace;
 	}
 
 }

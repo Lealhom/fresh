@@ -22,5 +22,12 @@ public class ProductService extends AbstractService<Product> {
 	public AbstractMapper getAbstractMapper() {
 		return productMapper;
 	}
-
+	public void addCategoryId(int productId,String categoryId){
+		this.productMapper.addCategoryId(Integer.toString(productId),categoryId);
+	}
+	public void addCategoryIds(int productId,String categoryIds[]){
+		for(String s:categoryIds){
+			this.addCategoryId(productId,s);
+		}
+	}
 }

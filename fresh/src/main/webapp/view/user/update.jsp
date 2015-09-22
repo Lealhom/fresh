@@ -16,19 +16,19 @@
 		</tr>
 		<tr>
 			<td class="form-title">类型</td>
-			<td class="form-input"><select class="easyui-combobox" name="type">
+			<td class="form-input"><select class="easyui-combobox" name="type" style="width:200px;">
 				<option value="1" ${user.type == 1 ? 'selected' : '' }>普通</option>
 				<option value="2" ${user.type == 2 ? 'selected' : '' }>系统管理员</option>
 			</select></td>
 			<td class="form-title">状态</td>
-			<td class="form-input"><select class="easyui-combobox" name="status">
+			<td class="form-input"><select class="easyui-combobox" name="status" style="width:200px;">
 				<option value="1" ${user.status == 1 ? 'selected' : '' }>正常</option>
 				<option value="2" ${user.status == 2 ? 'selected' : '' }>禁用</option>
 			</select></td>
 		</tr>
 		<tr>
 			<td class="form-title">性别</td>
-			<td class="form-input"><select class="easyui-combobox" name="sex">
+			<td class="form-input"><select class="easyui-combobox" name="sex" style="width:200px;">
 				<option value="1" ${user.sex == 1 ? 'selected' : '' }>男</option>
 				<option value="0" ${user.sex == 0 ? 'selected' : '' }>女</option>
 			</select></td>

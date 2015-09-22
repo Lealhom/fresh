@@ -4,17 +4,19 @@
 <mapper namespace="com.hy.manager.domain.business.SkuMapper">
 	<insert id="insert" parameterType="Sku" useGeneratedKeys="true" keyProperty="id">
 		insert into t_sku
-		(pruductId,name,price,standard,quantity)
+		(status,pruductId,name,originalPrice,discountPrice,standard,quantity)
 		values
-		(#{pruductId},#{name},#{price},#{standard},#{quantity})
+		(#{status},#{pruductId},#{name},#{originalPrice},#{discountPrice},#{standard},#{quantity})
 	</insert>
 	
 	<update id="update" parameterType="Sku">
 		update t_sku
 		<set>
 			name=#{name},
+			status=#{status},
 			pruductId=#{pruductId},
-			price=#{price},
+			originalPrice=#{originalPrice},
+			discountPrice=#{discountPrice},
 			standard=#{standard},
 			quantity=#{quantity}
 		</set>
@@ -42,9 +44,11 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Sku">
-		select id,pruductId,name,price,standard,quantity
-		<include refid="gridWhere"/>
+		select a.*,b.name,b.name productName,b.status productStatus from t_sku a left join t_product b
+		on a.productId = b.id
+		<if test="rows > 0">
 		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="count" resultType="long">
 		select count(*)

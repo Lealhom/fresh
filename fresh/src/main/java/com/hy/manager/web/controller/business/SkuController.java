@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hy.manager.domain.business.Activity;
-import com.hy.manager.service.business.ActivityService;
+import com.hy.manager.domain.business.Sku;
+import com.hy.manager.service.business.SkuService;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
@@ -20,7 +20,7 @@ import com.hy.manager.web.controller.BasicController;
 public class SkuController extends BasicController {
 
 	@Autowired
-	private ActivityService skuService;
+	private SkuService skuService;
 
 	@RequestMapping(value = "page")
 	public ModelAndView index() {
@@ -42,7 +42,7 @@ public class SkuController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Activity sku) {
+	public ResponseMessage add(Sku sku) {
 		ResponseMessage message = new ResponseMessage();
 		skuService.insert(sku);
 		return message;
@@ -51,14 +51,14 @@ public class SkuController extends BasicController {
 	@RequestMapping(value = "update", method = RequestMethod.GET)
 	public ModelAndView updatePage(int id) {
 		ModelAndView mav = new ModelAndView("sku/update");
-		Activity sku = skuService.selectById(id);
+		Sku sku = skuService.selectById(id);
 		mav.addObject("sku", sku);
 		return mav;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public ResponseMessage update(Activity sku) {
+	public ResponseMessage update(Sku sku) {
 		ResponseMessage message = new ResponseMessage();
 		skuService.update(sku);
 		return message;

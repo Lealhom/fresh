@@ -4,11 +4,11 @@ define('page/user', ['crud'], function(CRUD) {
 		init: function() {
 			var the = this;
 			this.bind();
-			this.grid = $('#userContainer table').datagrid({
+			this.grid = $('#usergrid').datagrid({
 				url: 'user/paged',
 				fit: true,
-				checkOnSelect: false,
-				selectOnCheck: false,
+				checkOnSelect: true,//选中行，背景变成深色，并且不会褪掉
+				selectOnCheck: true,//选中checkbox，背景变深色，并且不会褪掉
 				rownumbers: true,
 				pagination: true,
 				columns: [[{
@@ -89,14 +89,14 @@ define('page/user', ['crud'], function(CRUD) {
 		},
 		bind: function() {
 			var the = this;
-			$('#userContainer').on('click', 'a.edit-btn', function(event) {
+			$('#usergrid').on('click', 'a.edit-btn', function(event) {
 				event.stopPropagation();
 				var target = $(event.target);
 				var id = target.data('id');
 				var title = target.data('title');
 				the.edit(id, title);
 			});
-			$('#userContainer').on('click', 'a.del-btn', function(event) {
+			$('#usergrid').on('click', 'a.del-btn', function(event) {
 				event.stopPropagation();
 				var target = $(event.target);
 				var id = target.data('id');
@@ -104,7 +104,7 @@ define('page/user', ['crud'], function(CRUD) {
 			});
 		},
 		unbind: function() {
-			$('#userContainer').off();
+			$('#usergrid').off();
 		},
 		loaded: function(data) {
 		},

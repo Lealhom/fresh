@@ -13,7 +13,7 @@ define('page/brand', ['crud'], function(CRUD) {
 				}, {
 					field: 'name', title: '名称', width: 150
 				}, {
-					field: 'description', title: '描述', width: 300
+					field: 'description', title: '描述', width: 700
 				}]],
 				toolbar: [{
 					text: '添加',

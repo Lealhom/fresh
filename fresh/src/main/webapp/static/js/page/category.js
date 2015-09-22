@@ -40,6 +40,8 @@ define('page/category', ['crud'], function(CRUD) {
 						if (CRUD.onlyCheckedOne(checkRow)) {
 							CRUD.edit({
 								title: '编辑品类--' + checkRow[0].name,
+								width:420,
+								height:420,
 								href: 'category/update?id=' + checkRow[0].id
 							}, function() {
 								the.loaded();

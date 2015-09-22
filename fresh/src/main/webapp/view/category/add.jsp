@@ -10,7 +10,7 @@
 		<tr>
 			<td class="form-title">父级品类</td>
 			<td class="form-input">
-				<select name="parentId" class="easyui-combogrid" style="width: 185px;" data-options="
+				<input name="parentId" class="easyui-combogrid" style="width: 185px;" data-options="
 				panelWidth: 185,
 				idField: 'id',
 				textField: 'name',
@@ -22,8 +22,6 @@
 					field:'name',title:'名称',width:122
 				}]]
 			">
-			</select>
-				<!-- <select id="parentId" name="parentId" class="easyui-combobox" url='category/paged'><option value="0">请选择</option></select> -->
 			</td>
 		</tr>
 	</table>

@@ -8,13 +8,17 @@ define('page/sku', ['crud'], function(CRUD) {
 				fit: true,
 				rownumbers: true,
 				pagination: true,
-				columns: [[{
-					field: 'id', title: 'ID', checkbox: true
-				}, {
-					field: 'name', title: '名称', width: 150
-				}, {
-					field: 'description', title: '描述', width: 300
-				}]],
+				columns: [[
+				           	{field: 'id', title: 'ID', checkbox: true}, 
+				           	{field: 'name', title: '名称', width: 150}, 
+				           	{field: 'productName', title: '产品名称', width: 300}, 
+				           	{field: 'originalPrice', title: '原价', width: 100}, 
+				           	{field: 'discountPrice', title: '折扣价', width: 100}, 
+				           	{field: 'standard', title: '规格', width: 200},
+				           	{field: 'quantity', title: '库存', width: 100},
+				           	{field: 'status', title: '状态', width: 100}
+					]
+				],
 				toolbar: [{
 					text: '添加',
 					iconCls: 'icon-add',

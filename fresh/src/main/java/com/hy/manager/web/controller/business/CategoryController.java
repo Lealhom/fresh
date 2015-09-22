@@ -66,6 +66,8 @@ public class CategoryController extends BasicController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseMessage update(Category category) {
 		ResponseMessage message = new ResponseMessage();
+		Category parentCategory = categoryService.selectById(category.getParentId());
+		category.setLevel(parentCategory.getLevel()+1);
 		categoryService.update(category);
 		return message;
 	}

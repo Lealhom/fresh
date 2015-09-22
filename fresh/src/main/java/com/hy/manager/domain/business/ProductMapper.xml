@@ -8,7 +8,12 @@
 		values
 		(#{name},#{status},#{createTime},#{updateTime},#{fileId},#{brandId},#{description})
 	</insert>
-	
+	<insert id="addCategoryId">
+		insert into t_category_product 
+		(productId,categoryId)
+		values
+		(#{productId},#{categoryId})
+	</insert>
 	<update id="update" parameterType="Product">
 		update t_product
 		<set>
