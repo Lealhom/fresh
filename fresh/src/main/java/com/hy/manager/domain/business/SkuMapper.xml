@@ -14,7 +14,7 @@
 		<set>
 			name=#{name},
 			status=#{status},
-			pruductId=#{pruductId},
+			productId=#{productId},
 			originalPrice=#{originalPrice},
 			discountPrice=#{discountPrice},
 			standard=#{standard},

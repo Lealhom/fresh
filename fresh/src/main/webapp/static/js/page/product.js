@@ -20,6 +20,12 @@ define('page/product', ['crud'], function(CRUD) {
 				}, {
 					field: 'brandName', title: '所属品牌', width: 150
 				},{
+					field: 'categoryNames', title: '所属品类', width: 200
+				},{
+					field: 'bornPlace', title: '产地', width: 150
+				},{
+					field: 'description', title: '描述', width: 350
+				},{
 					field: 'createTime', title: '创建时间', width: 150
 				},{
 					field: 'updateTime', title: '更新时间', width: 150

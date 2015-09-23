@@ -24,7 +24,8 @@ public class Product implements Serializable {
 	private String filePath;//记录图片文件存储路径
 	private int brandId;//品牌id
 	private String brandName;//品牌名称
-	private String categoryIds[];
+	private String categoryIds[];//接收添加商品是，前端传回来的参数
+	private String categoryNames;//接收数据库返回回来的品类名称
 
 	public int getId() {
 		return id;
@@ -112,6 +113,14 @@ public class Product implements Serializable {
 
 	public void setCategoryIds(String[] categoryIds) {
 		this.categoryIds = categoryIds;
+	}
+
+	public String getCategoryNames() {
+		return categoryNames;
+	}
+
+	public void setCategoryNames(String categoryNames) {
+		this.categoryNames = categoryNames;
 	}
 
 	public String getBornPlace() {

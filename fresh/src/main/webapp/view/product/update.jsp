@@ -1,21 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form method="post" action="carte/update">
-	<input type="hidden" name="id" value="${carte.id }">
-	<table cellpadding="5">
+<form method="post" action="product/update">
+	<input type="hidden" name="id" value="${product.id }">
+	<table class="formtable"> 
 		<tr>
-			<td>名称</td>
-			<td><input name="name" value="${carte.name }" class="easyui-validatebox textbox" data-options="required:true,validType:'length[1,20]'"></td>
-			<td>状态</td>
-			<td><select class="easyui-combobox" name="status" style="width:80px;">
-				<option value="1" ${carte.status == 1 ? 'selected' : '' }>正常</option>
-				<option value="2" ${carte.status == 2 ? 'selected' : '' }>禁用</option>
+			<td class="form-title">名称</td>
+			<td><input name="name"  value="${product.name }" class="easyui-validatebox textbox" data-options="required:true,validType:'length[1,20]'"></td>
+			<td class="form-title">状态</td>
+			<td><select class="easyui-combobox" name="status" style="width:220px;" >
+				<option value="1" ${product.status == 1 ? 'selected' : '' }>上架</option>
+				<option value="2" ${product.status == 2 ? 'selected' : '' }>下架</option>
 			</select></td>
 		</tr>
 		<tr>
-			<td>价格</td>
-			<td><input name="price" value="${carte.price }" class="easyui-numberbox textbox" data-options="required:true,min:0,precision:2"></td>
-			<td>折扣</td>
-			<td><input name="discount" value="${carte.discount }" class="easyui-numberbox textbox" data-options="required:true,min:0,precision:2"></td>
+			<td class="form-title">品类</td>
+			<td class="form-input">
+				<input id = "xxx" name="categoryIds" class="easyui-combogrid" style="width: 220px;" data-options="
+				panelWidth: 220,
+				idField: 'id',
+				textField: 'name',
+				multiple:true,
+				url: 'category/paged',
+				method: 'get',
+				columns: [[{
+					field:'id',title:'ID',width:100
+				}, {
+					field:'name',title:'名称',width:118
+				}]]
+			">
+			</td>
+			<td class="form-title">品牌</td>
+			<td class="form-input">
+				<input name="brandId" value="${product.brandId == 0 ? '' : product.brandId}" class="easyui-combogrid" style="width: 220px;" data-options="
+				panelWidth: 220,
+				idField: 'id',
+				textField: 'name',
+				url: 'brand/paged',
+				method: 'get',
+				columns: [[{
+					field:'id',title:'ID',width:100
+				}, {
+					field:'name',title:'名称',width:118
+				}]]
+			">
+			</td>
+		</tr>
+		<tr>
+			<td class="form-title">产地</td>
+			<td class="form-input" colspan="3"><input name="bornPlace"  value="${product.bornPlace }" class="easyui-textbox" style="width: 215px;"></td>
+		</tr>
+		<tr>
+			<td class="form-title">描述</td>
+			<td class="form-input" colspan="3"><textarea name="description">${product.description }</textarea></td>
 		</tr>
 	</table>
 </form>

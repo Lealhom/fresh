@@ -10,13 +10,13 @@
 		</tr>
 		<tr>
 			<td class="form-title">原价</td>
-			<td class="form-input"><input name="originalPrice" value="${sku.originalPrice }" class="easyui-numberspinner" data-options="value:0,min:0"></td>
+			<td class="form-input"><input name="originalPrice" value="${sku.originalPrice }" class="easyui-numberspinner" data-options="min:0"></td>
 			<td class="form-title">折扣价</td>
-			<td class="form-input"><input name="discountPrice" value="${sku.discountPrice }" class="easyui-numberspinner" data-options="value:0,min:0"></td>
+			<td class="form-input"><input name="discountPrice" value="${sku.discountPrice }" class="easyui-numberspinner" data-options="min:0"></td>
 		</tr>
 		<tr>
 			<td class="form-title">库存数量</td>
-			<td class="form-input"><input name="quantity" value="${sku.quantity }" class="easyui-numberspinner" data-options="value:0,min:0"></td>
+			<td class="form-input"><input name="quantity" value="${sku.quantity }" class="easyui-numberspinner" data-options="min:0"></td>
 			<td class="form-title">状态</td>
 				<td><select class="easyui-combobox" name="status" style="width:140px;" >
 					<option value="1" ${sku.status == 1 ? 'selected' : '' }>上架</option>
