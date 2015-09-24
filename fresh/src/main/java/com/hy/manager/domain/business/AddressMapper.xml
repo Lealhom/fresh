@@ -4,9 +4,9 @@
 <mapper namespace="com.hy.manager.domain.business.AddressMapper">
 	<insert id="insert" parameterType="Address" useGeneratedKeys="true" keyProperty="id">
 		insert into t_address
-		(userId,phone,address,sex,consignee,longitude,latitude)
+		(customerId,phone,address,sex,consignee,longitude,latitude,defualt)
 		values
-		(#{userId},#{phone},#{address},#{sex},#{consignee},#{longitude},#{latitude})
+		(#{customerId},#{phone},#{address},#{sex},#{consignee},#{longitude},#{latitude},#{defualt})
 	</insert>
 	
 	<update id="update" parameterType="Address">
@@ -17,7 +17,8 @@
 			sex=#{sex},
 			consignee=#{consignee},
 			longitude=#{longitude},
-			latitude=#{latitude}
+			latitude=#{latitude},
+			defualt=#{defualt}
 		</set>
 		where id = #{id}
 	</update>
@@ -38,6 +39,6 @@
 	</select>
 
 	<select id="addressList" resultType="Address">
-		select * from t_address where userId=#{userId}
+		select * from t_address where customerId=#{customerId}
 	</select>
 </mapper>

@@ -11,13 +11,14 @@ public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private int userId;
+	private int customerId;//消费者ID
 	private String phone;
 	private String address;
 	private int sex;
-	private String consignee;
-	private double longitude;
-	private double latitude;
+	private String consignee;//收件人
+	private double longitude;//经度
+	private double latitude;//维度
+	private boolean defualt;//是否为默认地址
 
 	public int getId() {
 		return id;
@@ -26,15 +27,15 @@ public class Address implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getUserId() {
-		return userId;
+	
+	public int getCustomerId() {
+		return customerId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
-
+	
 	public String getPhone() {
 		return phone;
 	}
@@ -81,6 +82,14 @@ public class Address implements Serializable {
 
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+
+	public boolean isDefualt() {
+		return defualt;
+	}
+
+	public void setDefualt(boolean defualt) {
+		this.defualt = defualt;
 	}
 
 }
