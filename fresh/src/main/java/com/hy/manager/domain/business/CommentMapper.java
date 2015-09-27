@@ -8,5 +8,5 @@ import com.hy.manager.domain.AbstractMapper;
 
 public interface CommentMapper extends AbstractMapper {
 
-	public List<Comment> selectByCarteId(@Param("productId") int productId);
+	public List<Comment> selectByOrderId(@Param("orderId") int orderId);
 }

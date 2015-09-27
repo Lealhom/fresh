@@ -21,18 +21,19 @@ public class Order implements Serializable {
 	public static final int STATUS_FINISH = 4;
 	/**5订单完成**/
 	public static final int STATUS_COMMENT = 5;
+	/**6订单过期**/
+	public static final int STATUS_EXPIRE = 6;
 	
 	private int id;
 	@JSONField(format = "yyyy/HH/dd hh:mm")
-	private Date createtime;// 订单创建时间
+	private Date createTime;// 订单创建时间
 	@JSONField(format = "yyyy/HH/dd hh:mm")
-	private Date paytime;// 付款时间
-	private double price;// 订单价格
-	private int status;// 订单状态：0待付款 1已付款 2订单取消 3订单退款 4待评价 5订单完成
+	private Date payTime;// 付款时间
+	private int status;// 订单状态：0待付款 1已付款 2订单取消 3订单退款 4待评价 5订单完成 6订单过期
 	private String no;//订单编号（根据一定的业务规则进行生成）
 	private int customerId;//购买人ID
 	private int addressId;//收货地址
-	private double totalPrice;//订单总价
+	private double price;// 订单价格
 	private double discountPrice;//订单折后价
 	private double freight;//运费
 	private String message;//给卖家留言 
@@ -44,17 +45,17 @@ public class Order implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getCreatetime() {
-		return createtime;
+	public Date getCreateTime() {
+		return createTime;
 	}
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
-	public Date getPaytime() {
-		return paytime;
+	public Date getPayTime() {
+		return payTime;
 	}
-	public void setPaytime(Date paytime) {
-		this.paytime = paytime;
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
 	}
 	public double getPrice() {
 		return price;
@@ -85,12 +86,6 @@ public class Order implements Serializable {
 	}
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
-	}
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 	public double getDiscountPrice() {
 		return discountPrice;

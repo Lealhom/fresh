@@ -26,7 +26,7 @@ define('page/user', ['crud'], function(CRUD) {
 				}, {
 					field: 'email', title: '邮箱', width: 200
 				}, {
-					field: 'createtime', title: '创建时间', width: 200
+					field: 'createTime', title: '创建时间', width: 200
 				}, {
 					field: 'opr', title: '操作', width: 100, formatter: function(value, row, index) {
 						return '<a class="edit-btn" data-title="' + row.name + '" data-id="' + row.id + '">修改</a> <a class="del-btn" data-id="' + row.id + '">删除</a>';

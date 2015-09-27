@@ -25,8 +25,8 @@ public class CommentService extends AbstractService<Comment> {
 		return commentMapper;
 	}
 	
-	public List<Comment> selectByCarteId(int carteId) {
-		return this.commentMapper.selectByCarteId(carteId);
+	public List<Comment> selectByOrderId(int orderId) {
+		return this.commentMapper.selectByOrderId(orderId);
 	}
 
 }

@@ -16,12 +16,11 @@ public class Comment implements Serializable {
 
 	private int id;
 	private int customerId;
-	private int carteId;
 	private int orderId;
 	@JSONField(format = "yyyy-HH-dd hh:mm:ss")
-	private Date createtime;
+	private Date createTime;
 	private String content;
-	private int rank;
+	private int rank;//评分
 	
 	private String username;
 	
@@ -41,14 +40,6 @@ public class Comment implements Serializable {
 		this.customerId = customerId;
 	}
 
-	public int getCarteId() {
-		return carteId;
-	}
-
-	public void setCarteId(int carteId) {
-		this.carteId = carteId;
-	}
-
 	public int getOrderId() {
 		return orderId;
 	}
@@ -57,12 +48,12 @@ public class Comment implements Serializable {
 		this.orderId = orderId;
 	}
 
-	public Date getCreatetime() {
-		return createtime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getContent() {

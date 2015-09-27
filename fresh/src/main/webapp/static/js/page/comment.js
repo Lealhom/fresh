@@ -17,7 +17,7 @@ define('page/comment', ['crud'], function(CRUD) {
 				}, {
 					field: 'carteId', title: '菜单ID', width: 150
 				}, {
-					field: 'createtime', title: '创建时间', width: 200
+					field: 'createTime', title: '创建时间', width: 200
 				}, {
 					field: 'rank', title: '评分等级', width: 150
 				}, {

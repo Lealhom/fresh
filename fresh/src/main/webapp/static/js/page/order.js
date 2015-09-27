@@ -8,19 +8,22 @@ define('page/order', ['crud'], function(CRUD) {
 				fit: true,
 				rownumbers: true,
 				pagination: true,
-				columns: [[{
-					field: 'id', title: 'ID', checkbox: true
-				}, {
-					field: 'username', title: '用户名称', width: 150
-				}, {
-					field: 'status', title: '状态', width: 150
-				}, {
-					field: 'price', title: '价格', width: 150
-				}, {
-					field: 'createtime', title: '创建时间', width: 200
-				}, {
-					field: 'paytime', title: '付款时间', width: 200
-				}]],
+				columns: [
+				          [
+				           {field: 'id', title: 'ID', checkbox: true}, 
+				           {field: 'username', title: '用户名', width: 100}, 
+				           {field: 'showname', title: '昵称', width: 100}, 
+				           {field: 'status', title: '状态', width: 50}, 
+				           {field: 'price', title: '价格', width: 100}, 
+				           {field: 'discountPrice', title: '折后价', width: 100}, 
+				           {field: 'address', title: '收货地址', width: 250}, 
+				           {field: 'consignee', title: '收件人', width: 100}, 
+				           {field: 'phone', title: '联系方式', width: 100}, 
+				           {field: 'message', title: '买家留言', width: 150}, 
+				           {field: 'createTime', title: '创建时间', width: 150}, 
+				           {field: 'payTime', title: '付款时间', width: 150}
+				          ]
+				],
 				toolbar: [{
 					text: '退款',
 					iconCls: 'icon-add',

@@ -45,7 +45,7 @@ public class UserController extends BasicController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseMessage add(User user) {
 		ResponseMessage message = new ResponseMessage();
-		user.setCreatetime(new Date());
+		user.setCreateTime(new Date());
 		userService.insert(user);
 		return message;
 	}

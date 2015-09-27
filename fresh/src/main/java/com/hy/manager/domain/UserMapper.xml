@@ -4,9 +4,9 @@
 <mapper namespace="com.hy.manager.domain.UserMapper">
 	<insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
 		insert into t_user
-		(username,password,name,status,createtime,sex,age,phone,email)
+		(username,password,name,status,createTime,sex,age,phone,email)
 		values
-		(#{username},#{password},#{name},#{status},#{createtime},#{sex},#{age},#{phone},#{email})
+		(#{username},#{password},#{name},#{status},#{createTime},#{sex},#{age},#{phone},#{email})
 	</insert>
 	
 	<update id="update" parameterType="User">
@@ -53,7 +53,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="User">
-		select id,username,name,sex,age,createtime,phone,email,type,status
+		select id,username,name,sex,age,createTime,phone,email,type,status
 		<include refid="gridWhere"/>
 		limit #{start},#{rows}
 	</select>

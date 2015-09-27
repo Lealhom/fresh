@@ -9,4 +9,8 @@ import com.hy.manager.domain.AbstractMapper;
 public interface OrderMapper extends AbstractMapper {
 
 	public List<Order> orderList(@Param("userId") int userId);
+	
+	public void updateExpireOrder();
+	
+	public void updateSkuQuantity();
 }

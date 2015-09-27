@@ -51,6 +51,11 @@ public class ProductController extends BasicController {
 		ModelAndView mav = new ModelAndView("product/add");
 		return mav;
 	}
+	@RequestMapping(value = "upload", method = RequestMethod.GET)
+	public ModelAndView upload() {
+		ModelAndView mav = new ModelAndView("product/upload");
+		return mav;
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)

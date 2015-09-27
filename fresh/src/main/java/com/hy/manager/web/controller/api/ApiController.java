@@ -54,21 +54,40 @@ public class ApiController {
 	@RequestMapping(value = "order", method = {RequestMethod.POST})
 	@ResponseBody
 	public ResponseMessage order(Order order) {
-		order.setCreatetime(new Date());
+		order.setCreateTime(new Date());//设置订单创建时间
+		//设置订单编号
+		long l = System.currentTimeMillis();
+		String no = l+""+order.getCustomerId();
+		order.setNo(no);
 		orderService.insert(order);
 		ResponseMessage message = new ResponseMessage();
-		message.setData("评论成功!");
+		message.setData("下单成功!");
 		return message;
 	}
 
 	/**
+	 * 更新订单
+	 * @return
+	 */
+	@RequestMapping(value = "order/update", method = {RequestMethod.POST})
+	@ResponseBody
+	public ResponseMessage orderUpdate(Order order) {
+		if(order.getStatus()==Order.STATUS_PAYMENT){
+			order.setPayTime(new Date());//设置订单付款时间
+		}
+		orderService.update(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("操作订单成功!");
+		return message;
+	}
+	/**
 	 * 获得订单列表
 	 * @return
 	 */
-	@RequestMapping(value = "order/{userId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "order/{customerId}", method = {RequestMethod.POST})
 	@ResponseBody
-	public ResponseMessage order(@PathVariable int userId) {
-		List<Order> list = orderService.orderList(userId);
+	public ResponseMessage order(@PathVariable int customerId) {
+		List<Order> list = orderService.orderList(customerId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -78,11 +97,11 @@ public class ApiController {
 	 * 获得评论列表
 	 * @return
 	 */
-	@RequestMapping(value = "comment/{carteId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "comment/{orderId}", method = {RequestMethod.POST})
 	@ResponseBody
-	public ResponseMessage comment(@PathVariable int carteId) {
+	public ResponseMessage comment(@PathVariable int orderId) {
 		ResponseMessage message = new ResponseMessage();
-		List<Comment> list = this.commentService.selectByCarteId(carteId);
+		List<Comment> list = this.commentService.selectByOrderId(orderId);
 		message.setData(list);
 		return message;
 	}
@@ -91,15 +110,14 @@ public class ApiController {
 	 * 评论
 	 * @return
 	 */
-	@RequestMapping(value = "{userId}/comment/{carteId}/{orderId}/{rank}/{content}", method = {RequestMethod.POST})
+	@RequestMapping(value = "{customerId}/comment/{carteId}/{orderId}/{rank}/{content}", method = {RequestMethod.POST})
 	@ResponseBody
-	public ResponseMessage comment(@PathVariable int userId, @PathVariable int carteId, @PathVariable int orderId, @PathVariable int rank, @PathVariable String content) {
+	public ResponseMessage comment(@PathVariable int customerId, @PathVariable int orderId, @PathVariable int rank, @PathVariable String content) {
 		Comment comment = new Comment();
-//		comment.setUserId(userId);
-		comment.setCarteId(carteId);
+		comment.setCustomerId(customerId);
 		comment.setOrderId(orderId);
 		comment.setContent(content);
-		comment.setCreatetime(new Date());
+		comment.setCreateTime(new Date());
 		comment.setRank(rank);
 		this.commentService.insert(comment);
 		ResponseMessage message = new ResponseMessage();

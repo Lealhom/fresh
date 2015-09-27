@@ -1,4 +1,4 @@
-define('page/product', ['crud'], function(CRUD) {
+define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 	var product = {
 		grid: null,
 		init: function() {
@@ -76,10 +76,28 @@ define('page/product', ['crud'], function(CRUD) {
 							});
 						}
 					}
+				},{
+					text: '添加图片',
+					iconCls: 'icon-add',
+					handler: function() {
+						CRUD.add({
+							title: '添加商品',
+							href: 'product/upload'
+						}, function() {
+							the.loaded();
+						}, function() {
+							the.saveOrUpdate();
+						});
+						
+					}
 				}]
 			});
 		},
 		loaded: function(data) {
+			var options = {
+					element:$("#uploadFile")
+				}
+			FileUploader.newUploader(options);
 		},
 		saveOrUpdate: function(data) {
 			this.reload();

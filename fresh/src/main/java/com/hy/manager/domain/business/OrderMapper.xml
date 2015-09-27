@@ -9,14 +9,59 @@
 		<where>
 		</where>
 	</sql>
+	<insert id="insert" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+		insert into t_order
+		(createTime,payTime,status,no,customerId,addressId,price,discountPrice,freight,message,payType,logisticsNo)
+		values
+		(	
+			#{createTime},#{payTime},#{status},#{no},#{customerId},#{addressId},#{price},
+			#{discountPrice},#{freight},#{message},#{payType},#{logisticsNo}
+		)
+	</insert>
+	<update id="update" parameterType="Order">
+		update t_order
+		<set>
+			payTime=#{payTime},
+			status=#{status},
+			<if test="null != logisticsNo and '' != logisticsNo">
+			logisticsNo=#{logisticsNo},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	<update id="updateSkuQuantity">
+		update t_sku a inner join 
+		(	
+			select t1.skuId,sum(quantity) as quantity from t_order_sku t1 
+			inner join t_order t2 on t1.orderId = t2.id 
+			where t2.status = 0  and t2.createTime &lt; date_sub(now(),interval 1 day) 
+			group by t1.skuId
+		) b
+		on a.id = b.skuId
+		set a.quantity = a.quantity + b.quantity 
+	</update>
+	<update id="updateExpireOrder">
+		update t_order set status = 6   where createTime &lt; date_sub(now(),interval 1 day) and status = 0
+	</update>
+	
 	<select id="listPaged" resultType="Order">
-		select o.id,o.customerId,o.createtime,o.paytime,o.price,o.status,u.showname
-		<include refid="gridWhere"/>
+		select 
+		    a . *, b.showname, c.address,c.consignee,c.phone
+		from
+		    t_order a
+		        left join
+		    t_customer b ON a.customerId = b.id
+		        left join
+		    t_address c ON a.addressId = c.id
 		limit #{start},#{rows}
 	</select>
 	<select id="count" resultType="long">
 		select count(*)
 		<include refid="gridWhere"/>
+	</select>
+	
+	<select id="selectById" resultType="Order">
+		select * from t_order where id=#{id}
 	</select>
 	
 	<select id="orderList" resultType="Order">

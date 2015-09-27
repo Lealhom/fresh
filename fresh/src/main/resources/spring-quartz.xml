@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="checkExpireOrderJob" class="com.hy.manager.job.CheckExpireOrderJob">
+</bean>
+<bean id="jobDetailFactoryBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<property name="targetObject">
+		<ref bean="checkExpireOrderJob" />
+	</property> 
+	<property name="targetMethod">  <!-- 要执行的方法名称 -->
+		<value>execute</value>
+	</property>
+</bean>          
+<!-- ======================== 调度触发器 ======================== -->
+<bean id="checkExpireOrderCronTriggerBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+	<property name="jobDetail" ref="jobDetailFactoryBean"></property>
+	<property name="cronExpression" value="0/5 * * * * ?"></property><!-- 每5秒执行一次，5秒只是为了方便测试，具体时间间隔到时候再商议 -->
+</bean>           
+<!-- ======================== 调度工厂 ======================== -->
+<bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	<property name="triggers">
+		<list>
+			<ref bean="checkExpireOrderCronTriggerBean" />
+		</list>
+	</property>
+</bean> 
+
+</beans>

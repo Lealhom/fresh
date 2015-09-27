@@ -18,8 +18,7 @@ public class Address implements Serializable {
 	private String consignee;//收件人
 	private double longitude;//经度
 	private double latitude;//维度
-	private boolean defualt;//是否为默认地址
-
+	private boolean defaultFlag;//是否为默认地址 
 	public int getId() {
 		return id;
 	}
@@ -84,12 +83,12 @@ public class Address implements Serializable {
 		this.latitude = latitude;
 	}
 
-	public boolean isDefualt() {
-		return defualt;
+	public boolean isDefaultFlag() {
+		return defaultFlag;
 	}
 
-	public void setDefualt(boolean defualt) {
-		this.defualt = defualt;
+	public void setDefaultFlag(boolean defaultFlag) {
+		this.defaultFlag = defaultFlag;
 	}
 
 }

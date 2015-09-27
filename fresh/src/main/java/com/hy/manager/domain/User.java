@@ -22,7 +22,7 @@ public class User implements Serializable {
 	private int status;
 	private int type;
 	@JSONField(format = "yyyy-HH-dd hh:mm:ss")
-	private Date createtime;
+	private Date createTime;
 	private int sex;
 	private int age;
 	private String phone;
@@ -92,12 +92,12 @@ public class User implements Serializable {
 		this.age = age;
 	}
 
-	public Date getCreatetime() {
-		return createtime;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
 	public String getPhone() {
