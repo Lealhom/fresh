@@ -1,13 +1,10 @@
 package com.hy.manager.web.controller;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +18,7 @@ import com.hy.manager.domain.File;
 import com.hy.manager.domain.Filetype;
 import com.hy.manager.service.FileService;
 import com.hy.manager.service.FiletypeService;
+import com.hy.manager.util.FileUploadUtil;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
@@ -81,25 +79,11 @@ public class FileController extends BasicController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseMessage add(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request,File entity) {
 		ResponseMessage message = new ResponseMessage();
-		if(file.getSize() > 5*(1024*1024)){
-			message.setMessage("上传文件大小不能超过5M");
+		File f = FileUploadUtil.upload(file, request);
+		if(f==null){
+			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
 			return message;
 		}
-		String uuidFileName = UUID.randomUUID()+"-"+file.getOriginalFilename();
-		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuidFileName;
-		String reletivePath = "static/upload/" + uuidFileName;
-		if (!file.isEmpty()) {
-			java.io.File localFile = new java.io.File(realPath);
-			try {
-				FileUtils.copyInputStreamToFile(file.getInputStream(), localFile);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		entity.setPath(reletivePath);
-		entity.setUploadTime(new Date());
 		fileService.insert(entity);
 		return message;
 	}

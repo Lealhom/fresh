@@ -4,9 +4,9 @@
 <mapper namespace="com.hy.manager.domain.business.SkuMapper">
 	<insert id="insert" parameterType="Sku" useGeneratedKeys="true" keyProperty="id">
 		insert into t_sku
-		(status,pruductId,name,originalPrice,discountPrice,standard,quantity)
+		(status,productId,name,originalPrice,discountPrice,standard,quantity)
 		values
-		(#{status},#{pruductId},#{name},#{originalPrice},#{discountPrice},#{standard},#{quantity})
+		(#{status},#{productId},#{name},#{originalPrice},#{discountPrice},#{standard},#{quantity})
 	</insert>
 	
 	<update id="update" parameterType="Sku">
@@ -37,7 +37,11 @@
 	<select id="selectById" resultType="Sku">
 		select * from t_sku where id=#{id}
 	</select>
-	
+	<select id="selectByOrderId" resultType="Sku">
+		select a.name,a.originalPrice,discountPrice,standard,b.quantity 
+		from t_sku a inner join t_order_sku b on a.id = b.skuId 
+		where b.orderId = #{orderId}
+	</select>
 	<sql id="gridWhere">
 		from t_sku u
 		<where>

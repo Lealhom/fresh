@@ -1,5 +1,7 @@
 package com.hy.manager.service;
 
+import java.util.List;
+
 import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
@@ -54,7 +56,13 @@ public abstract class AbstractService<T> {
 	public T selectById(Object id) {
 		return getAbstractMapper().selectById(id);
 	}
-
+	/**
+	 * 查询所有
+	 * @return
+	 */
+	public List<T> listAll() {
+		return getAbstractMapper().listAll();
+	}
 	/**
 	 * 分页
 	 * 

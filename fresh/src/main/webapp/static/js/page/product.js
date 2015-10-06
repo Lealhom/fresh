@@ -11,7 +11,8 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
 				},{
-					field: 'filePath', title: '图片', width: 90,formatter:function(value){
+					field: 'filePath', title: '图片', width: 90,
+					formatter:function(value){
 						var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
 						return s;
 					}
@@ -22,7 +23,7 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				},{
 					field: 'categoryNames', title: '所属品类', width: 200
 				},{
-					field: 'bornPlace', title: '产地', width: 150
+					field: 'bornPlace', title: '产地', width: 100
 				},{
 					field: 'description', title: '描述', width: 350
 				},{
@@ -30,7 +31,9 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				},{
 					field: 'updateTime', title: '更新时间', width: 150
 				},{
-					field: 'status', title: '状态', width: 150
+					field: 'status', title: '状态', width: 100
+				},{
+					field: 'hot', title: '是否热销', width: 100
 				}]],
 				toolbar: [{
 					text: '添加',
@@ -89,6 +92,40 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 							the.saveOrUpdate();
 						});
 						
+					}
+				},{
+					text: '设为热销',
+					iconCls: 'icon-add',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						var ids = CRUD.getCheckedIds(checkRow);
+						if (ids) {
+							CRUD.operate({
+								url: 'product/setHot',
+								data: {ids: ids}
+							}, 
+							'确认设置为热销产品？',
+							function() {
+								the.reload();
+							});
+						}
+					}
+				},{
+					text: '取消热销',
+					iconCls: 'icon-cancel',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						var ids = CRUD.getCheckedIds(checkRow);
+						if (ids) {
+							CRUD.operate({
+								url: 'product/cancelHot',
+								data: {ids: ids}
+							}, 
+							'确认取消热销产品？',
+							function() {
+								the.reload();
+							});
+						}
 					}
 				}]
 			});

@@ -68,6 +68,14 @@ define('crud', ['data'], function(DATA) {
 				 }
 			 });
 		},
+		operate: function(options,message,successCallback, errorCallback) {
+			var s = message ||  '确定操作？';
+			 $.messager.confirm('提示',s, function(r){
+				 if (r) {
+					 DATA.ajax(options, successCallback, errorCallback);
+				 }
+			 });
+		},
 		onlyCheckedOne: function(checkRow) {
 			if (!checkRow || 1 != checkRow.length) {
 				$.messager.show({

@@ -51,5 +51,9 @@ public class TestCustomerService extends AbstractTest{
 		entity.setPhone("110");
 		customerService.update(entity);
 	}
-	
+	@Test
+	public void testSelectOne(){
+		Customer entity = customerService.selectById(2);
+		System.out.println(entity);
+	}
 }

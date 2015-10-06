@@ -10,7 +10,18 @@ define('page/customer', ['crud'], function(CRUD) {
 				pagination: true,
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
-				}, {
+				},{field: 'imgPath', title: '头像', width: 90,
+					formatter:function(value){
+						if(value){
+							var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+							return s;
+						}else{
+							return '';
+						}
+						
+					}
+				}, 
+				{
 					field: 'showname', title: '昵称', width: 150
 				}, {
 					field: 'username', title: '用户名', width: 150

@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="static/css/common.css" rel="stylesheet" type="text/css"/>
 <script src="static/js/jquery.min.js" type="text/javascript"></script>
 <script src="static/js/easyui/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="static/js/easyui/datagrid-detailview.js" type="text/javascript"></script>
 <script src="static/js/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
 <script src="static/js/require.js" type="text/javascript"></script>
 </head>

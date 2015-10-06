@@ -45,6 +45,8 @@ public class ActivityController extends BasicController {
 	public ResponseMessage add(Activity activity) {
 		ResponseMessage message = new ResponseMessage();
 		activityService.insert(activity);
+		//添加产品与活动的关联关系
+		activityService.addProductIds(activity.getId(),activity.getProductIds());
 		return message;
 	}
 

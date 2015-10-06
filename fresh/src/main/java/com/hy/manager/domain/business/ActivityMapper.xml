@@ -4,15 +4,22 @@
 <mapper namespace="com.hy.manager.domain.business.ActivityMapper">
 	<insert id="insert" parameterType="Activity" useGeneratedKeys="true" keyProperty="id">
 		insert into t_activity
-		(name,description,startTime,endTime)
+		(name,description,startTime,endTime,status,banner)
 		values
-		(#{name},#{description},#{startTime},#{endTime})
+		(#{name},#{description},#{startTime},#{endTime},#{status},#{banner})
 	</insert>
-	
+	<insert id="addProductId">
+		insert into t_activity_product 
+		(activityId,productId)
+		values
+		(#{activityId},#{productId})
+	</insert>
 	<update id="update" parameterType="Activity">
 		update t_activity
 		<set>
 			name=#{name},
+			status=#{status},
+			banner=#{banner},
 			description=#{description},
 			startTime=#{startTime},
 			endTime=#{endTime}
@@ -34,16 +41,25 @@
 	<select id="selectById" resultType="Activity">
 		select * from t_activity where id=#{id}
 	</select>
-	
+	<select id="listAll" resultType="Activity">
+		SELECT * FROM t_activity 
+		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') and status = 1
+	</select>
 	<sql id="gridWhere">
 		from t_activity u
 		<where>
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Activity">
-		select id,name,description,startTime,endTime
-		<include refid="gridWhere"/>
+		select t1.id,t1.name,t1.description,t1.status,t1.banner,t1.startTime,t1.endTime,t1.imgPath,
+			   group_concat(t3.name) productNames
+		from t_activity t1 
+		left join t_activity_product t2 on t1.id = t2.activityId
+		left join t_product t3 on t2.productId = t3.id
+		group by t1.id
+		<if test="rows > 0">
 		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="count" resultType="long">
 		select count(*)

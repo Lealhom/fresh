@@ -26,7 +26,7 @@ public class Product implements Serializable {
 	private String brandName;//品牌名称
 	private String categoryIds[];//接收添加商品是，前端传回来的参数
 	private String categoryNames;//接收数据库返回回来的品类名称
-
+	private int hot;//是否为热销商品
 	public int getId() {
 		return id;
 	}
@@ -129,6 +129,14 @@ public class Product implements Serializable {
 
 	public void setBornPlace(String bornPlace) {
 		this.bornPlace = bornPlace;
+	}
+
+	public int getHot() {
+		return hot;
+	}
+
+	public void setHot(int hot) {
+		this.hot = hot;
 	}
 
 }

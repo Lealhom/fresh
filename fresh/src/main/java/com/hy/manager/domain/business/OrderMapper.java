@@ -13,4 +13,6 @@ public interface OrderMapper extends AbstractMapper {
 	public void updateExpireOrder();
 	
 	public void updateSkuQuantity();
+
+	public void updateStatus(@Param("ids")int[] ids,@Param("status")int status);
 }

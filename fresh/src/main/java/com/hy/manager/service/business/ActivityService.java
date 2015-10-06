@@ -22,5 +22,13 @@ public class ActivityService extends AbstractService<Activity> {
 	public AbstractMapper getAbstractMapper() {
 		return activityMapper;
 	}
+	public void addProductId(int activityId, String productId) {
+		activityMapper.addProductId(Integer.toString(activityId),productId);
+	}
+	public void addProductIds(int activityId, String[] productIds) {
+		for(String s:productIds){
+			this.addProductId(activityId,s);
+		}
+	}
 
 }

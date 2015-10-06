@@ -32,13 +32,19 @@ public class Order implements Serializable {
 	private int status;// 订单状态：0待付款 1已付款 2订单取消 3订单退款 4待评价 5订单完成 6订单过期
 	private String no;//订单编号（根据一定的业务规则进行生成）
 	private int customerId;//购买人ID
-	private int addressId;//收货地址
+	private String username;//购买者的用户名
+	private String showname;//显示名，昵称
+	private int addressId;//收货地址Id
+	private String address;//收货地址
+	private String consignee;//收货人
+	private String phone;//手机
 	private double price;// 订单价格
 	private double discountPrice;//订单折后价
 	private double freight;//运费
 	private String message;//给卖家留言 
 	private int payType;//付款方式
 	private String logisticsNo;//物流编号（在卖家发货后，输入物流编号，方便消费者在相应的物流官网上进行查询）
+	
 	public int getId() {
 		return id;
 	}
@@ -56,12 +62,6 @@ public class Order implements Serializable {
 	}
 	public void setPayTime(Date payTime) {
 		this.payTime = payTime;
-	}
-	public double getPrice() {
-		return price;
-	}
-	public void setPrice(double price) {
-		this.price = price;
 	}
 	public int getStatus() {
 		return status;
@@ -81,11 +81,47 @@ public class Order implements Serializable {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getShowname() {
+		return showname;
+	}
+	public void setShowname(String showname) {
+		this.showname = showname;
+	}
 	public int getAddressId() {
 		return addressId;
 	}
 	public void setAddressId(int addressId) {
 		this.addressId = addressId;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getConsignee() {
+		return consignee;
+	}
+	public void setConsignee(String consignee) {
+		this.consignee = consignee;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public double getDiscountPrice() {
 		return discountPrice;
@@ -117,4 +153,5 @@ public class Order implements Serializable {
 	public void setLogisticsNo(String logisticsNo) {
 		this.logisticsNo = logisticsNo;
 	}
+	
 }

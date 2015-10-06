@@ -3,12 +3,16 @@ package com.hy.manager.web.controller.business;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hy.manager.domain.business.Order;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
+import com.hy.manager.web.ResponseMessage;
 import com.hy.manager.web.controller.BasicController;
 
 @Controller
@@ -29,5 +33,18 @@ public class OrderController extends BasicController {
 	public GridData listPaged(Parameter parameter) {
 		return orderService.listPaged(parameter);
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "sendGoods", method = RequestMethod.POST)
+	public ResponseMessage sendGoods(@RequestParam("ids[]") int[] ids) {
+		ResponseMessage message = new ResponseMessage();
+		orderService.updateStatus(ids,Order.STATUS_PAYMENT);
+		return message;
+	}
+	@ResponseBody
+	@RequestMapping(value = "refund", method = RequestMethod.POST)
+	public ResponseMessage refund(@RequestParam("ids[]") int[] ids) {
+		ResponseMessage message = new ResponseMessage();
+		orderService.updateStatus(ids,Order.STATUS_REFUND);
+		return message;
+	}
 }

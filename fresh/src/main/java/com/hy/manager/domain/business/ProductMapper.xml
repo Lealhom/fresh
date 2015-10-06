@@ -14,6 +14,16 @@
 		values
 		(#{productId},#{categoryId})
 	</insert>
+	<insert id="addCollection">
+		insert into t_collection 
+		(customerId,productId)
+		values
+		(#{customerId},#{productId})
+	</insert>
+	<insert id="delCollection">
+		delete from t_collection 
+		where customerId = #{customerId} and productId = #{productId}
+	</insert>
 	<update id="update" parameterType="Product">
 		update t_product
 		<set>
@@ -28,7 +38,22 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+	<update id="setHot">
+		update t_product 
+		set hot = 1
+		where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</update>
+	<update id="cancelHot">
+		update t_product 
+		set hot = 0
+		where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</update>
 	<delete id="deleteById" parameterType="int">
 		delete from t_product where id=#{id}
 	</delete>
@@ -51,14 +76,20 @@
 		where t1.id = #{id}
 		group by t1.id 
 	</select>
-	
+	<select id="listCollection" resultType="Product">
+		select t1.id,t1.name,t1.description,t3.name brandName 
+		from t_product t1
+		left join t_collection t2 on t1.id = t2.productId
+		left join t_brand t3 on t1.brandId = t3.id
+		where t2.customerId = #{customerId}
+	</select>
 	<sql id="gridWhere">
 		from t_product u
 		<where>
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Product">
-		select t1.id,t1.name,t1.description,t1.status,t1.createTime,t1.updateTime,t1.bornPlace,
+		select t1.id,t1.name,t1.description,t1.status,t1.hot,t1.createTime,t1.updateTime,t1.bornPlace,
 			   t2.path filePath,t3.name	brandName,group_concat(t5.name) categoryNames
 		from t_product t1 
 		left join t_file t2 on t1.fileId = t2.id

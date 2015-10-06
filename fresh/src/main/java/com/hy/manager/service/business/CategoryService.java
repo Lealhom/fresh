@@ -1,5 +1,8 @@
 package com.hy.manager.service.business;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,14 @@ public class CategoryService extends AbstractService<Category> {
 	@Override
 	public AbstractMapper getAbstractMapper() {
 		return categoryMapper;
+	}
+
+	public List<Map<String,Object>> categoryList() {
+		return categoryMapper.categoryList();
+	}
+
+	public List<Category> selectByParentId(int parentId) {
+		return categoryMapper.selectByParentId(parentId);
 	}
 
 }

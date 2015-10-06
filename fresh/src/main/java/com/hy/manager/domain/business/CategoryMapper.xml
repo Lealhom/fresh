@@ -33,14 +33,16 @@
 	<select id="selectById" resultType="Category">
 		select * from t_category where id=#{id}
 	</select>
-	
+	<select id="selectByParentId" resultType="Category">
+		select * from t_category where parentId=#{parentId}
+	</select>
 	<sql id="gridWhere">
 		from t_category u
 		<where>
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Category">
-		select t1.id,t1.name,t1.level,t2.name parentName
+		select t1.id,t1.name,t1.level,t1.imgPath,t2.name parentName
 		from t_category t1
 		left join t_category t2 on t1.parentId = t2.id 
 		<if test="rows > 0">
@@ -50,5 +52,8 @@
 	<select id="count" resultType="long">
 		select count(*)
 		<include refid="gridWhere"/>
+	</select>
+	<select id="categoryList" resultType="map">
+	select * from t_category
 	</select>
 </mapper>

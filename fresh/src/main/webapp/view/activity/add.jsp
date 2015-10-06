@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form method="post" action="carte/add">
-	<table cellpadding="5">
+<form method="post" action="activity/add">
+	<table class="formtable">
 		<tr>
 			<td>名称</td>
 			<td><input name="name" class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,10]'"></td>
@@ -11,10 +11,39 @@
 			</select></td>
 		</tr>
 		<tr>
-			<td>价格</td>
-			<td><input name="price" class="easyui-numberbox textbox" data-options="required:true,min:0,precision:2"></td>
-			<td>折扣</td>
-			<td><input name="discount" class="easyui-numberbox textbox" data-options="required:true,min:0,precision:2"></td>
+			<td>开始时间</td>
+			<td><input class="easyui-datetimebox" name="startTime" required style="width:210px"></td>
+			<td>结束时间</td>
+			<td><input class="easyui-datetimebox" name="endTime" required style="width:210px"></td>
+		</tr>
+		<tr>
+			<td>活动产品</td>
+			<td class="form-input" colspan="3">
+				<input name="productIds" class="easyui-combogrid validatebox" style="width: 535px;" data-options="
+				required:true,
+				multiple:true,
+				panelWidth: 535,
+				idField: 'id',
+				textField: 'name',
+				url: 'product/paged',
+				method: 'get',
+				columns: [[
+					{field:'id',title:'ID',width:60}, 
+					{field:'name',title:'产品名称',width:408}
+				]]
+			">
+			</td>
+		</tr>
+		<tr>
+		<td>是否banner</td>
+			<td><select class="easyui-combobox" name="banner" style="width:80px;">
+				<option value="1">是</option>
+				<option value="2">否</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td>描述</td>
+			<td class="form-input" colspan="3"><textarea name="description"></textarea></td>
 		</tr>
 	</table>
 </form>

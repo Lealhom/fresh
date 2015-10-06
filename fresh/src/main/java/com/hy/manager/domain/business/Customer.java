@@ -14,6 +14,7 @@ public class Customer implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
+	private String imgPath;//头像
 	private String username;
 	private String password;
 	private String showname;
@@ -26,6 +27,14 @@ public class Customer implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	public String getUsername() {

@@ -16,6 +16,7 @@ public class Category implements Serializable {
 	private int id;
 	private String name;
 	private int level;
+	private String imgPath;
 	private String parentId;
 	private String parentName;
 
@@ -37,6 +38,14 @@ public class Category implements Serializable {
 
 	public int getLevel() {
 		return level;
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	public void setLevel(int level) {

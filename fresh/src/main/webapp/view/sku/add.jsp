@@ -25,7 +25,7 @@
 		<tr>
 			<td class="form-title">所属产品</td>
 			<td class="form-input" colspan="3">
-				<input name="pruductId" class="easyui-combogrid validatebox" style="width: 300px;" data-options="
+				<input name="productId" class="easyui-combogrid validatebox" style="width: 300px;" data-options="
 				required:true,
 				panelWidth: 300,
 				idField: 'id',

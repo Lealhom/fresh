@@ -8,19 +8,33 @@ define('page/activity', ['crud'], function(CRUD) {
 				fit: true,
 				rownumbers: true,
 				pagination: true,
-				columns: [[{
-					field: 'id', title: 'ID', checkbox: true
-				}, {
-					field: 'name', title: '名称', width: 150
-				}, {
-					field: 'description', title: '描述', width: 300
-				}]],
+				columns: [[
+				           {field: 'id', title: 'ID', checkbox: true}, 
+				           {field: 'imgPath', title: '图片', width: 90,
+								formatter:function(value){
+									if(value){
+										var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+										return s;
+									}else{
+										return '';
+									}
+									
+								}
+						    }, 
+				           {field: 'name', title: '名称', width: 150}, 
+				           {field: 'productNames', title: '参加活动的产品', width: 350}, 
+				           {field: 'description', title: '描述', width: 300},
+				           {field: 'startTime', title: '开始时间', width: 200},
+				           {field: 'endTime', title: '结束时间', width: 200},
+				           {field: 'status', title: '状态', width: 100},
+				           {field: 'banner', title: '是否为banner', width: 100}
+				         ]],
 				toolbar: [{
 					text: '添加',
 					iconCls: 'icon-add',
 					handler: function() {
 						CRUD.add({
-							title: '添加品牌',
+							title: '添加活动',
 							href: 'activity/add'
 						}, function() {
 							the.loaded();
@@ -35,7 +49,7 @@ define('page/activity', ['crud'], function(CRUD) {
 						var checkRow = the.grid.datagrid('getChecked');
 						if (CRUD.onlyCheckedOne(checkRow)) {
 							CRUD.edit({
-								title: '编辑品牌--' + checkRow[0].name,
+								title: '编辑活动--' + checkRow[0].name,
 								href: 'activity/update?id=' + checkRow[0].id
 							}, function() {
 								the.loaded();

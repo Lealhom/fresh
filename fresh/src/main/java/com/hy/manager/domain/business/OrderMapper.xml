@@ -18,6 +18,16 @@
 			#{discountPrice},#{freight},#{message},#{payType},#{logisticsNo}
 		)
 	</insert>
+	<update id="updateStatus" parameterType="Order">
+		update t_order
+		<set>
+			status=#{status},
+		</set>
+		where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</update>
 	<update id="update" parameterType="Order">
 		update t_order
 		<set>
@@ -46,7 +56,7 @@
 	
 	<select id="listPaged" resultType="Order">
 		select 
-		    a . *, b.showname, c.address,c.consignee,c.phone
+		    a . *, b.username,b.showname, c.address,c.consignee,c.phone
 		from
 		    t_order a
 		        left join

@@ -40,4 +40,8 @@ public class OrderService extends AbstractService<Order> {
 	public void updateSkuQuantity(){
 		this.orderMapper.updateSkuQuantity();
 	}
+
+	public void updateStatus(int[] ids,int status) {
+		this.orderMapper.updateStatus(ids,status);
+	}
 }

@@ -42,7 +42,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Customer">
-		select id,username,showname,phone,email
+		select id,username,showname,phone,email,imgPath
 		<include refid="gridWhere"/>
 		limit #{start},#{rows}
 	</select>
