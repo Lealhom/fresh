@@ -17,10 +17,12 @@ public class Comment implements Serializable {
 	private int id;
 	private int customerId;
 	private int orderId;
+	private int productId;//关联的产品
 	@JSONField(format = "yyyy-HH-dd hh:mm:ss")
 	private Date createTime;
 	private String content;
 	private int rank;//评分
+	
 	
 	private String username;
 	
@@ -42,6 +44,14 @@ public class Comment implements Serializable {
 
 	public int getOrderId() {
 		return orderId;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public void setOrderId(int orderId) {

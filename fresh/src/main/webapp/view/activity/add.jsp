@@ -40,6 +40,8 @@
 				<option value="1">是</option>
 				<option value="2">否</option>
 			</select></td>
+			<td class="form-title">序号</td>
+			<td class="form-input"><input name="orderNum" class="easyui-numberspinner" data-options="value:1,min:1"></td>
 		</tr>
 		<tr>
 			<td>描述</td>

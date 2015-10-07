@@ -13,4 +13,6 @@ public interface CategoryMapper extends AbstractMapper {
 
 	public List<Category> selectByParentId(@Param("parentId") int parentId);
 
+	public List<Map<String, Object>> listCategoryMap();
+
 }

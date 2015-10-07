@@ -44,7 +44,7 @@ public class OrderController extends BasicController {
 	@RequestMapping(value = "refund", method = RequestMethod.POST)
 	public ResponseMessage refund(@RequestParam("ids[]") int[] ids) {
 		ResponseMessage message = new ResponseMessage();
-		orderService.updateStatus(ids,Order.STATUS_REFUND);
+		orderService.updateStatus(ids,Order.STATUS_REFUNDING);
 		return message;
 	}
 }

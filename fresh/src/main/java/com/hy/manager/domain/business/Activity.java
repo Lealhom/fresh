@@ -23,6 +23,7 @@ public class Activity implements Serializable {
 	private int banner;//是否为banner
 	private String productIds[];
 	private String productNames;
+	private int orderNum;//序号
 	public int getId() {
 		return id;
 	}
@@ -101,6 +102,14 @@ public class Activity implements Serializable {
 
 	public void setProductNames(String productNames) {
 		this.productNames = productNames;
+	}
+
+	public int getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
 	}
 
 }

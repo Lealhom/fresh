@@ -1,5 +1,8 @@
 package com.hy.manager.service.business;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +32,14 @@ public class ActivityService extends AbstractService<Activity> {
 		for(String s:productIds){
 			this.addProductId(activityId,s);
 		}
+	}
+
+	public List<Map<String,Object>> listBanner() {
+		return this.activityMapper.listBanner();
+	}
+	
+	public List<Map<String,Object>> listActivity() {
+		return this.activityMapper.listBanner();
 	}
 
 }

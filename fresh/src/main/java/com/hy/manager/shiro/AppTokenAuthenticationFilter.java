@@ -15,40 +15,40 @@ public class AppTokenAuthenticationFilter extends AbstractAppAuthenticationFilte
 
 	@Override
 	public boolean isAccess(HttpServletRequest request, HttpServletResponse response) {
-		String token = "";
-		String nextToken = "";
-		String password = "";
-
-		Cookie[] cookies = request.getCookies();
-		
-		if (null == cookies || cookies.length == 0) {
-			return false;
-		}
-		
-		for (Cookie cookie : cookies) {
-			if (cookie.getName().equals("token")) {
-				token = cookie.getValue();
-			} else if (cookie.getName().equals("next")) {
-				nextToken = cookie.getValue();
-			} else if (cookie.getName().equals("password")) {
-				password = cookie.getValue();
-			} else if(cookie.getName().equals("userName")){
-				request.setAttribute("userName", cookie.getValue());
-			}
-		}
-		if (!TokenUtils.validToken(token, password) && !TokenUtils.validToken(nextToken, password)) {
-			return false;
-		}
-		Date now = new Date(System.currentTimeMillis());
-		token = TokenUtils.getToken(password, now);
-		nextToken = TokenUtils.getToken(password, TokenUtils.getNextHour(now));
-		Cookie tokenCookie = new Cookie("token", token);
-		tokenCookie.setPath("/");
-		Cookie nextTokenCookie = new Cookie("next", nextToken);
-		nextTokenCookie.setPath("/");
+//		String token = "";
+//		String nextToken = "";
+//		String password = "";
+//
+//		Cookie[] cookies = request.getCookies();
+//		
+//		if (null == cookies || cookies.length == 0) {
+//			return false;
+//		}
+//		
+//		for (Cookie cookie : cookies) {
+//			if (cookie.getName().equals("token")) {
+//				token = cookie.getValue();
+//			} else if (cookie.getName().equals("next")) {
+//				nextToken = cookie.getValue();
+//			} else if (cookie.getName().equals("password")) {
+//				password = cookie.getValue();
+//			} else if(cookie.getName().equals("userName")){
+//				request.setAttribute("userName", cookie.getValue());
+//			}
+//		}
+//		if (!TokenUtils.validToken(token, password) && !TokenUtils.validToken(nextToken, password)) {
+//			return false;
+//		}
+//		Date now = new Date(System.currentTimeMillis());
+//		token = TokenUtils.getToken(password, now);
+//		nextToken = TokenUtils.getToken(password, TokenUtils.getNextHour(now));
+//		Cookie tokenCookie = new Cookie("token", token);
+//		tokenCookie.setPath("/");
+//		Cookie nextTokenCookie = new Cookie("next", nextToken);
+//		nextTokenCookie.setPath("/");
 		//将两个新token发给客户端
-		response.addCookie(tokenCookie);
-		response.addCookie(nextTokenCookie);
+//		response.addCookie(tokenCookie);
+//		response.addCookie(nextTokenCookie);
 		return true;
 	}
 

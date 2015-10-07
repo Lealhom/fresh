@@ -20,8 +20,8 @@ public class Product implements Serializable {
 	private Date updateTime;//最后更新时间
 	private String description;//产品描述
 	private String bornPlace;//产地
-	private int fileId;//记录图片文件的id
-	private String filePath;//记录图片文件存储路径
+	private int fileId;//记录主图的id
+	private String filePath;//记录主图的存储路径
 	private int brandId;//品牌id
 	private String brandName;//品牌名称
 	private String categoryIds[];//接收添加商品是，前端传回来的参数

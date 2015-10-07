@@ -1,9 +1,7 @@
 package com.hy.manager.web.controller.api;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hy.manager.domain.business.Activity;
 import com.hy.manager.domain.business.Address;
-import com.hy.manager.domain.business.Category;
 import com.hy.manager.domain.business.Comment;
 import com.hy.manager.domain.business.Customer;
 import com.hy.manager.domain.business.Order;
@@ -29,7 +25,6 @@ import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.CustomerService;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.service.business.ProductService;
-import com.hy.manager.util.TokenUtils;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -59,9 +54,15 @@ public class ApiController {
 	
 	@RequestMapping(value = "app_login", method = {RequestMethod.POST})
 	@ResponseBody
-	public ResponseMessage login(String username, String password, String time) {
+	public ResponseMessage login(String username, String password) {
 		ResponseMessage message = new ResponseMessage();
-		message.setData(TokenUtils.getToken(time));
+		boolean b = customerService.login(username, password);
+		if(b){
+			message.setMessage("登录成功");
+		}else{
+			message.setMessage("用户名密码错误");
+		}
+		message.setData(b);
 		return message;
 	}
 	/**
@@ -214,64 +215,6 @@ public class ApiController {
 		this.addressService.deleteById(addressId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("删除成功!");
-		return message;
-	}
-	/**
-	 * 获取活动
-	 * @return
-	 */
-	@RequestMapping(value = "activity/list")
-	@ResponseBody
-	public ResponseMessage listActivity() {
-		List<Activity> list = activityService.listAll();
-		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
-		return message;
-	}
-	/**
-	 * 获得品类列表
-	 * @return
-	 */
-	@RequestMapping(value = "category/list")
-	@ResponseBody
-	public ResponseMessage listCategory() {
-		List<Map<String,Object>> list = categoryService.categoryList();
-		List<Map<String,Object>> listLevel1 = new ArrayList<Map<String,Object>>(); 
-		List<Map<String,Object>> listLevel2 = new ArrayList<Map<String,Object>>();
-		for(Map<String,Object> c:list){
-			if("1".equals(c.get("level").toString())){
-				listLevel1.add(c);
-			}else if("2".equals(c.get("level").toString())){
-				listLevel2.add(c);
-			}
-		}
-		for(Map<String,Object> c1:listLevel1){
-			List<Map<String,Object>> children = new ArrayList<Map<String,Object>>();
-			for(Map<String,Object> c2:listLevel2){
-				String id = c1.get("id").toString();
-				String parentId = c2.get("parentId").toString();
-				if(id.equals(parentId)){
-					children.add(c2);
-				}
-			}
-			if(children.size()!=0){
-				c1.put("children", children);
-			}
-		}
-		ResponseMessage message = new ResponseMessage();
-		message.setData(listLevel1);
-		return message;
-	}
-	/**
-	 * 根据某个一级品类的ID，得到它的子品类
-	 * @return
-	 */
-	@RequestMapping(value = "category/find/{parentId}")
-	@ResponseBody
-	public ResponseMessage findChildrenCategory(@PathVariable int parentId) {
-		List<Category> list = categoryService.selectByParentId(parentId);
-		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
 		return message;
 	}
 	/**

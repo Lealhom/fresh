@@ -1,6 +1,7 @@
 package com.hy.manager.service.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,11 @@ public class ProductService extends AbstractService<Product> {
 	public void cancelHot(int[] ids) {
 		this.productMapper.cancelHot(ids);
 	}
-
+	
+	public List<Map<String,Object>> listHotProduct(){
+		return this.productMapper.listHotProduct();
+	}
+	
 	public void addCollection(int customerId, int productId) {
 		this.productMapper.addCollection(customerId,productId);
 	}
@@ -51,4 +56,21 @@ public class ProductService extends AbstractService<Product> {
 	public List<Product> listCollection(int customerId) {
 		return this.productMapper.listCollection(customerId);
 	}
+	
+	public List<Map<String,Object>> listByActivityId(int activityId) {
+		return this.productMapper.listByActivityId(activityId);
+	}
+
+	public List<Map<String, Object>> listByCategoryId(int categoryId) {
+		return this.productMapper.listByCategoryId(categoryId);
+	}
+
+	public List<Map<String, Object>> search(String name) {
+		return this.productMapper.search(name);
+	}
+
+	public List<Map<String, Object>> detail(int productId) {
+		return this.productMapper.detail(productId);
+	}
+
 }

@@ -11,25 +11,29 @@ public class Order implements Serializable {
 	
 	/**0待付款**/
 	public static final int STATUS_NON_PAYMENT = 0;
-	/**1已付款**/
-	public static final int STATUS_PAYMENT = 1;
-	/**2订单取消**/
-	public static final int STATUS_CANCEL = 2;
-	/**3订单退款**/
-	public static final int STATUS_REFUND = 3;
-	/**4待评价**/
-	public static final int STATUS_FINISH = 4;
-	/**5订单完成**/
-	public static final int STATUS_COMMENT = 5;
-	/**6订单过期**/
-	public static final int STATUS_EXPIRE = 6;
+	/**1订单取消**/
+	public static final int STATUS_CANCEL = 1;
+	/**2已付款**/
+	public static final int STATUS_PAYMENT = 2;
+	/**3已发货**/
+	public static final int STATUS_SEND = 3;
+	/**4收货**/
+	public static final int STATUS_RECEIVE = 4;
+	/**5申请退款、待退款**/
+	public static final int STATUS_REFUNDING = 5;
+	/**6申请退款、已退款**/
+	public static final int STATUS_REFUNDED = 6;
+	/**7已评价**/
+	public static final int STATUS_FINISH = 7;
+	/**8订单过期**/
+	public static final int STATUS_EXPIRE = 8;
 	
 	private int id;
 	@JSONField(format = "yyyy/HH/dd hh:mm")
 	private Date createTime;// 订单创建时间
 	@JSONField(format = "yyyy/HH/dd hh:mm")
 	private Date payTime;// 付款时间
-	private int status;// 订单状态：0待付款 1已付款 2订单取消 3订单退款 4待评价 5订单完成 6订单过期
+	private int status;// 订单状态
 	private String no;//订单编号（根据一定的业务规则进行生成）
 	private int customerId;//购买人ID
 	private String username;//购买者的用户名

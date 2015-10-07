@@ -56,4 +56,20 @@
 	<select id="categoryList" resultType="map">
 	select * from t_category
 	</select>
+	<select id="listCategoryMap" resultMap="categoryMap">
+		select b.id,b.name,b.imgPath,a.id id2,a.name name2, a.imgPath imgPath2 
+		from t_category a
+		left join t_category b on a.parentId=b.id 
+		where a.level = 2
+	</select>
+	<resultMap type="hashmap" id="categoryMap">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="imgPath" column="imgPath"/>
+		<collection property="children" ofType="hashmap"  >
+			<id property="id" column="id2"/>
+			<result property="name" column="name2"/>
+			<result property="imgPath" column="imgPath2"/>
+		</collection>
+	</resultMap>
 </mapper>

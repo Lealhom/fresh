@@ -35,7 +35,9 @@
 	<select id="selectById" resultType="Customer">
 		select * from t_customer where id=#{id}
 	</select>
-	
+	<select id="login" resultType="Customer">
+		select * from t_customer where username=#{username} and password=#{password}
+	</select>
 	<sql id="gridWhere">
 		from t_customer u
 		<where>

@@ -10,10 +10,23 @@ public class ResponseMessage implements Serializable {
 	public static final int STATUS_UNAUTHORIZED = 401;// 需要登录
 	public static final int STATUS_FORBIDDEN = 403;// 权限不够
 	public static final int STATUS_ERROR = 500;// 权限不够
-
+	
+	public static final int ACTION_TOAST = 1;//弹出toast
+	public static final int ACTION_LOGIN = 2;//回到登录页
+	
+	
+	private int action = ACTION_TOAST;
 	private int status = STATUS_OK;
 	private String message;
 	private Object data;
+
+	public int getAction() {
+		return action;
+	}
+
+	public void setAction(int action) {
+		this.action = action;
+	}
 
 	public int getStatus() {
 		return status;

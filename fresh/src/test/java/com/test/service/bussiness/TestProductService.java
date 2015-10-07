@@ -1,6 +1,7 @@
 package com.test.service.bussiness;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,5 +32,11 @@ public class TestProductService extends AbstractTest{
 	public void testListCollection(){
 		List<Product> list= productService.listCollection(1);
 		System.out.println(list);
+	}
+	
+	@Test
+	public void testListHotProduct(){
+		List<Map<String,Object>> list= productService.listHotProduct();
+		System.out.println(list.size());
 	}
 }
