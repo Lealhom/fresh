@@ -24,28 +24,37 @@ public class ApiProductController {
 	 */
 	@RequestMapping(value = "hot")
 	@ResponseBody
-	public List<Map<String,Object>> listHotProduct(){
-		return this.productService.listHotProduct();
+	public ResponseMessage listHotProduct(){
+		List<Map<String,Object>> list = this.productService.listHotProduct();
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
 	}
 	
 	/**
 	 * 获取某活动下的产品
 	 * @return
 	 */
-	@RequestMapping(value = "activity/{activityId}")
+	@RequestMapping(value = "list_by_activityId/{activityId}")
 	@ResponseBody
-	public List<Map<String,Object>> listByActivityId(@PathVariable int activityId){
-		return this.productService.listByActivityId(activityId);
+	public ResponseMessage listByActivityId(@PathVariable int activityId){
+		List<Map<String,Object>> list = this.productService.listByActivityId(activityId);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
 	}
 	
 	/**
 	 * 获取某品类下的产品
 	 * @return
 	 */
-	@RequestMapping(value = "category/{categoryId}")
+	@RequestMapping(value = "list_by_categoryId/{categoryId}")
 	@ResponseBody
-	public List<Map<String,Object>> listByCategoryId(@PathVariable int categoryId){
-		return this.productService.listByCategoryId(categoryId);
+	public ResponseMessage listByCategoryId(@PathVariable int categoryId){
+		List<Map<String,Object>> list = this.productService.listByCategoryId(categoryId);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
 	}
 	
 	/**
@@ -54,38 +63,50 @@ public class ApiProductController {
 	 */
 	@RequestMapping(value = "search/{name}")
 	@ResponseBody
-	public List<Map<String,Object>> search(@PathVariable String name){
-		return this.productService.search(name);
+	public ResponseMessage search(@PathVariable String name){
+		List<Map<String,Object>> list = this.productService.search(name);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
 	}
 	
 	/**
 	 * 产品详情
 	 * @return
 	 */
-	@RequestMapping(value = "detail/{productId}")
+	@RequestMapping(value = "detail/{productId}/{skuId}")
 	@ResponseBody
-	public List<Map<String,Object>> detail(@PathVariable int productId){
-		return this.productService.detail(productId);
+	public ResponseMessage detail(@PathVariable int productId,@PathVariable int skuId){
+		List<Map<String,Object>> list = this.productService.detail(productId,skuId);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
 	}
 	
 	/**
 	 * 添加收藏
 	 * @return
 	 */
-	@RequestMapping(value = "add_collection")
+	@RequestMapping(value = "add_collection/{productId}")
 	@ResponseBody
-	public ResponseMessage addCollection() {
+	public ResponseMessage addCollection(@PathVariable int productId) {
+		int customerId = 1;
+		productService.addCollection(customerId,productId);
 		ResponseMessage message = new ResponseMessage();
+		message.setMessage("添加收藏成功!");
 		return message;
 	}
 	/**
 	 * 取消收藏
 	 * @return
 	 */
-	@RequestMapping(value = "del_collection")
+	@RequestMapping(value = "del_collection/{productId}")
 	@ResponseBody
-	public ResponseMessage delCollection() {
+	public ResponseMessage delCollection(@PathVariable int productId) {
+		int customerId = 1;
+		productService.delCollection(customerId,productId);
 		ResponseMessage message = new ResponseMessage();
+		message.setMessage("取消收藏成功!");
 		return message;
 	}
 	

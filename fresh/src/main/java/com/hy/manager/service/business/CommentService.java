@@ -1,6 +1,7 @@
 package com.hy.manager.service.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,12 @@ public class CommentService extends AbstractService<Comment> {
 		return commentMapper;
 	}
 	
-	public List<Comment> selectByOrderId(int orderId) {
-		return this.commentMapper.selectByOrderId(orderId);
+	public List<Map<String, Object>> listByOrderId(int orderId) {
+		return this.commentMapper.listByOrderId(orderId);
+	}
+
+	public List<Map<String, Object>> listByProductId(int productId) {
+		return this.commentMapper.listByProductId(productId);
 	}
 
 }

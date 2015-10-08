@@ -1,10 +1,13 @@
 package com.hy.manager.web.controller.api;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hy.manager.domain.business.Order;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.web.ResponseMessage;
 
@@ -20,76 +23,83 @@ public class ApiOrderController {
 	 */
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ResponseMessage add(){
-		this.orderService.insert(null);
-		return null;
-	}
-	
-	/**
-	 * 付款
-	 * @return
-	 */
-	@RequestMapping(value = "pay/{orderId}")
-	@ResponseBody
-	public ResponseMessage pay(){
-		return null;
-	}
-	
-	/**
-	 * 删除
-	 * @return
-	 */
-	@RequestMapping(value = "del/{orderId}")
-	@ResponseBody
-	public ResponseMessage del(){
-		return null;
-	}
-	
-	/**
-	 * 买家申请退货
-	 * @return
-	 */
-	@RequestMapping(value = "refunding/{orderId}")
-	@ResponseBody
-	public ResponseMessage refunding(){
-		return null;
-	}
-	/**
-	 * 卖家退货
-	 * @return
-	 */
-	@RequestMapping(value = "refunded/{orderId}")
-	@ResponseBody
-	public ResponseMessage refunded(){
-		return null;
+	public ResponseMessage add(Order order){
+		order.setCreateTime(new Date());//设置订单创建时间
+		//设置订单编号
+		long l = System.currentTimeMillis();
+		String no = l+""+order.getCustomerId();
+		order.setNo(no);
+		order.setStatus(Order.STATUS_NON_PAYMENT);//待付款
+		orderService.insert(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("下单成功!");
+		return message;
 	}
 	/**
 	 * 取消订单
 	 * @return
 	 */
-	@RequestMapping(value = "cancel/{orderId}")
+	@RequestMapping(value = "cancel")
 	@ResponseBody
-	public ResponseMessage cancel(){
-		return null;
+	public ResponseMessage cancel(Order order){
+		order.setStatus(Order.STATUS_CANCEL);//取消订单
+		orderService.update(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("取消订单成功!");
+		return message;
 	}
-	
 	/**
-	 * 发货
+	 * 付款
 	 * @return
 	 */
-	@RequestMapping(value = "send/{orderId}")
+	@RequestMapping(value = "pay")
 	@ResponseBody
-	public ResponseMessage send(){
-		return null;
+	public ResponseMessage pay(Order order){
+		order.setPayTime(new Date());//设置订单付款时间
+		order.setStatus(Order.STATUS_PAYMENT);//已付款
+		orderService.update(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("付款成功!");
+		return message;
 	}
 	/**
 	 * 收货
 	 * @return
 	 */
-	@RequestMapping(value = "receive/{orderId}")
+	@RequestMapping(value = "receive")
 	@ResponseBody
-	public ResponseMessage receive(){
-		return null;
+	public ResponseMessage receive(Order order){
+		order.setStatus(Order.STATUS_RECEIVE);//已收货
+		orderService.update(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("收货成功!");
+		return message;
+	}
+	/**
+	 * 买家申请退货
+	 * @return
+	 */
+	@RequestMapping(value = "refunding")
+	@ResponseBody
+	public ResponseMessage refunding(Order order){
+		order.setStatus(Order.STATUS_REFUNDING);//已收货
+		orderService.update(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("申请退货!");
+		return message;
+	}
+	/**
+	 * 删除
+	 * @return
+	 */
+	@RequestMapping(value = "del")
+	@ResponseBody
+	public ResponseMessage del(Order order){
+		order.setStatus(Order.STATUS_DEL);
+		orderService.update(order);
+		ResponseMessage message = new ResponseMessage();
+		message.setData("删除成功!");
+		return message;
 	}
 	
 }

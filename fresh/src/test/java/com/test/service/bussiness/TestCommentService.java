@@ -2,6 +2,7 @@ package com.test.service.bussiness;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,11 +31,9 @@ public class TestCommentService extends AbstractTest{
 		Assert.assertEquals(1, i);
 	}
 	@Test
-	public void testList(){
-		List<Comment> list = this.commentService.selectByOrderId(1);
-		for(Comment c: list){
-			System.out.println(c.getContent());
-		}
+	public void testListByOrderId(){
+		List<Map<String,Object>> list = this.commentService.listByOrderId(1);
+		System.out.println(list.size());
 	}
 	@Test
 	public void testDelete(){

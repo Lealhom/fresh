@@ -50,12 +50,12 @@
 	<select id="listActivity" resultType="map">
 		SELECT id,imgPath FROM t_activity 
 		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 1 order by orderNum 
+		and status = 1 and banner = 0 order by orderNum 
 	</select>
 	<select id="listBanner" resultType="map">
 		SELECT id,imgPath FROM t_activity 
 		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 0 order by orderNum 
+		and status = 1 and banner = 1 order by orderNum 
 	</select>
 	<sql id="gridWhere">
 		from t_activity u

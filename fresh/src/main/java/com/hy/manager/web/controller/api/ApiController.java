@@ -2,6 +2,7 @@ package com.hy.manager.web.controller.api;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -52,19 +53,6 @@ public class ApiController {
 	    response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
 	}
 	
-	@RequestMapping(value = "app_login", method = {RequestMethod.POST})
-	@ResponseBody
-	public ResponseMessage login(String username, String password) {
-		ResponseMessage message = new ResponseMessage();
-		boolean b = customerService.login(username, password);
-		if(b){
-			message.setMessage("登录成功");
-		}else{
-			message.setMessage("用户名密码错误");
-		}
-		message.setData(b);
-		return message;
-	}
 	/**
 	 * 获取用户个人信息
 	 * @return
@@ -132,7 +120,7 @@ public class ApiController {
 	@ResponseBody
 	public ResponseMessage listComment(@PathVariable int orderId) {
 		ResponseMessage message = new ResponseMessage();
-		List<Comment> list = this.commentService.selectByOrderId(orderId);
+		List<Map<String, Object>> list = this.commentService.listByOrderId(orderId);
 		message.setData(list);
 		return message;
 	}

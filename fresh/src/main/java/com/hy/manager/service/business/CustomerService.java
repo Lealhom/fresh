@@ -23,11 +23,7 @@ public class CustomerService extends AbstractService<Customer> {
 		return customerMapper;
 	}
 	
-	public boolean login(String username, String password){
-		Customer customer = this.customerMapper.login(username,password);
-		if(customer!=null){
-			return true;
-		}
-		return false;
+	public Customer login(String username, String password){
+		return this.customerMapper.login(username,password);
 	}
 }

@@ -39,7 +39,7 @@ public class ActivityService extends AbstractService<Activity> {
 	}
 	
 	public List<Map<String,Object>> listActivity() {
-		return this.activityMapper.listBanner();
+		return this.activityMapper.listActivity();
 	}
 
 }

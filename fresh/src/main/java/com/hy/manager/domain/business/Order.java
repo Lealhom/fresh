@@ -27,6 +27,8 @@ public class Order implements Serializable {
 	public static final int STATUS_FINISH = 7;
 	/**8订单过期**/
 	public static final int STATUS_EXPIRE = 8;
+	/**9删除订单（逻辑删除）**/
+	public static final int STATUS_DEL = 9;
 	
 	private int id;
 	@JSONField(format = "yyyy/HH/dd hh:mm")

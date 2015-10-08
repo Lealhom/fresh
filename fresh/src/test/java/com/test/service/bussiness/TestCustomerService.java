@@ -59,9 +59,7 @@ public class TestCustomerService extends AbstractTest{
 	
 	@Test
 	public void testLogin(){
-		boolean b1 = customerService.login("username", "password");
-		boolean b2 = customerService.login("username1", "password");
-		System.out.println(b1);
-		System.out.println(b2);
+		customerService.login("username", "password");
+		customerService.login("username1", "password");
 	}
 }
