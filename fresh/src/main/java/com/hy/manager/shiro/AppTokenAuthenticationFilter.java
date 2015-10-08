@@ -15,15 +15,19 @@ public class AppTokenAuthenticationFilter extends AbstractAppAuthenticationFilte
 
 	@Override
 	public boolean isAccess(HttpServletRequest request, HttpServletResponse response) {
-//		String token = "";
-//		String nextToken = "";
-//		String password = "";
+		String token = "";
+		String nextToken = "";
+		String password = "";
 //
 //		Cookie[] cookies = request.getCookies();
 //		
 //		if (null == cookies || cookies.length == 0) {
 //			return false;
 //		}
+//		
+		token = request.getHeader("token");
+		nextToken = request.getHeader("next");
+		password = request.getHeader("time");
 //		
 //		for (Cookie cookie : cookies) {
 //			if (cookie.getName().equals("token")) {
@@ -42,11 +46,14 @@ public class AppTokenAuthenticationFilter extends AbstractAppAuthenticationFilte
 //		Date now = new Date(System.currentTimeMillis());
 //		token = TokenUtils.getToken(password, now);
 //		nextToken = TokenUtils.getToken(password, TokenUtils.getNextHour(now));
+		
+//		response.setHeader("token", token);
+//		response.setHeader("next", nextToken);
 //		Cookie tokenCookie = new Cookie("token", token);
 //		tokenCookie.setPath("/");
 //		Cookie nextTokenCookie = new Cookie("next", nextToken);
 //		nextTokenCookie.setPath("/");
-		//将两个新token发给客户端
+////		将两个新token发给客户端
 //		response.addCookie(tokenCookie);
 //		response.addCookie(nextTokenCookie);
 		return true;

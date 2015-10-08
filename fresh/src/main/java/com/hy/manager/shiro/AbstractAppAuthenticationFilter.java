@@ -20,6 +20,7 @@ public abstract class AbstractAppAuthenticationFilter extends AuthenticationFilt
 			ServletResponse response) throws Exception {
 		logger.debug("App用户进入校验!" + getLoginUrl());
 		HttpServletRequest req = (HttpServletRequest) request;
+		System.out.println(req.getRequestURI());
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.setHeader("Access-Control-Allow-Origin", "*");
 		res.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
