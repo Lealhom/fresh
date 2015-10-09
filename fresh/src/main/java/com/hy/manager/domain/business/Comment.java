@@ -17,12 +17,11 @@ public class Comment implements Serializable {
 	private int id;
 	private int customerId;
 	private int orderId;
-	private int productId;//关联的产品
+	private int skuId;//关联的SKU
 	@JSONField(format = "yyyy-HH-dd hh:mm:ss")
 	private Date createTime;
 	private String content;
-	private int rank;//评分
-	
+	private int score;//评分
 	
 	private String username;
 	
@@ -46,12 +45,13 @@ public class Comment implements Serializable {
 		return orderId;
 	}
 
-	public int getProductId() {
-		return productId;
+
+	public int getSkuId() {
+		return skuId;
 	}
 
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setSkuId(int skuId) {
+		this.skuId = skuId;
 	}
 
 	public void setOrderId(int orderId) {
@@ -74,13 +74,6 @@ public class Comment implements Serializable {
 		this.content = content;
 	}
 
-	public int getRank() {
-		return rank;
-	}
-
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
 
 	public String getUsername() {
 		return username;
@@ -88,6 +81,14 @@ public class Comment implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 }

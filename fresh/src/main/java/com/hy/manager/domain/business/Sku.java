@@ -14,7 +14,7 @@ public class Sku implements Serializable {
 	private double discountPrice;//折扣价
 	private String standard;//规格
 	private int quantity;//库存数量
-
+	private double avgScore;//该sku的平均评分
 	public int getId() {
 		return id;
 	}
@@ -86,5 +86,14 @@ public class Sku implements Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public double getAvgScore() {
+		return avgScore;
+	}
+
+	public void setAvgScore(double avgScore) {
+		this.avgScore = avgScore;
+	}
+
 
 }

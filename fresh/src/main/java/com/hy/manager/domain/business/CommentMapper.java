@@ -11,5 +11,5 @@ public interface CommentMapper extends AbstractMapper {
 
 	public List<Map<String, Object>> listByOrderId(@Param("orderId") int orderId);
 
-	public List<Map<String, Object>> listByProductId(@Param("productId") int productId);
+	public List<Map<String, Object>> listBySkuId(@Param("skuId") int skuId);
 }

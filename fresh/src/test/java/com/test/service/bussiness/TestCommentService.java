@@ -26,7 +26,7 @@ public class TestCommentService extends AbstractTest{
 		comment.setOrderId(1);
 		comment.setContent("苹果很吵吃，下次还来买");
 		comment.setCreateTime(new Date());
-		comment.setRank(1);
+		comment.setScore(1);
 		int i = commentService.insert(comment);
 		Assert.assertEquals(1, i);
 	}

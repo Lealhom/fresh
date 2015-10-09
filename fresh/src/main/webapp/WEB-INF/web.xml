@@ -7,10 +7,6 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:/applicationContext.xml</param-value>
 	</context-param>
-<!-- 	<context-param>
-		<param-name>quartz</param-name>
-		<param-value>classpath*:/spring-quartz.xml</param-value>
-	</context-param> -->
 		<!--  log4j设置 ——开始   -->
 		<!-- 设置log4j.properties中的webapp.root，设置webAppRootKey，防止两个或两个以上项目都是用这种方式记录日志时，webapp.root被重用的问题
 			   如果不在web.xml中定义 webAppRootKey参数，那么属性名就是缺省的"webapp.root"，如果有两个项目都这样配置的话，就会出现两个都为webapp.root的webAppRootKey

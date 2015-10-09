@@ -138,7 +138,7 @@ public class ApiController {
 		comment.setOrderId(orderId);
 		comment.setContent(content);
 		comment.setCreateTime(new Date());
-		comment.setRank(rank);
+		comment.setScore(rank);
 		this.commentService.insert(comment);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("评论成功!");

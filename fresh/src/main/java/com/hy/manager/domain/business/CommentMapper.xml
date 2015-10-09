@@ -4,16 +4,16 @@
 <mapper namespace="com.hy.manager.domain.business.CommentMapper">
 	<insert id="insert" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
 		insert into t_comment
-		(customerId,orderId,productId,createTime,content,rank)
+		(customerId,orderId,skuId,createTime,content,score)
 		values
-		(#{customerId},#{orderId},#{productId},#{createTime},#{content},#{rank})
+		(#{customerId},#{orderId},#{skuId},#{createTime},#{content},#{score})
 	</insert>
 	
 	<update id="update" parameterType="Comment">
 		update t_comment
 		<set>
 			content=#{content},
-			rank=#{rank}
+			score=#{score}
 		</set>
 		where id = #{id}
 	</update>
@@ -31,8 +31,8 @@
 	<select id="selectById" resultType="Comment">
 		select * from t_comment where id=#{id}
 	</select>
-	<select id="listByProductId" resultType="map">
-		select * from t_comment where productId=#{productId}
+	<select id="listBySkuId" resultType="map">
+		select * from t_comment where skuId=#{skuId}
 	</select>
 	<select id="listByOrderId" resultType="map">
 		select * from t_comment where orderId=#{orderId}
@@ -45,7 +45,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Comment">
-		select c.id,c.customerId,c.orderId,c.createTime,c.content,c.rank,u.username
+		select c.id,c.customerId,c.orderId,c.createTime,c.content,c.score,u.username
 		<include refid="gridWhere"/>
 		limit #{start},#{rows}
 	</select>

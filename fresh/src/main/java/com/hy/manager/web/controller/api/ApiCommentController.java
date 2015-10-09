@@ -27,13 +27,13 @@ public class ApiCommentController {
 	 * 添加评论
 	 * @return
 	 */
-	@RequestMapping(value = "add/{orderId}/{productId}")
+	@RequestMapping(value = "add/{orderId}/{skuId}")
 	@ResponseBody
-	public ResponseMessage add(Comment comment,@PathVariable int orderId,@PathVariable int productId){
+	public ResponseMessage add(Comment comment,@PathVariable int orderId,@PathVariable int skuId){
 		int customerId = 1;
 		comment.setCustomerId(customerId);
 		comment.setOrderId(orderId);
-		comment.setProductId(productId);
+		comment.setSkuId(skuId);
 		comment.setCreateTime(new Date());
 		this.commentService.insert(comment);
 		
@@ -46,13 +46,13 @@ public class ApiCommentController {
 		return message;
 	}
 	/**
-	 * 根据产品ID获取评论
+	 * 根据skuId获取评论
 	 * @return
 	 */
-	@RequestMapping(value = "list_by_productId/{productId}")
+	@RequestMapping(value = "list_by_skuId/{skuId}")
 	@ResponseBody
-	public ResponseMessage listByProductId(@PathVariable int productId){
-		List<Map<String,Object>> list = this.commentService.listByProductId(productId);
+	public ResponseMessage listBySkuId(@PathVariable int skuId){
+		List<Map<String,Object>> list = this.commentService.listBySkuId(skuId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

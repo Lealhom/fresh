@@ -8,4 +8,6 @@ import com.hy.manager.domain.AbstractMapper;
 
 public interface SkuMapper extends AbstractMapper {
 	public List<Sku> selectByOrderId(@Param("orderId") int orderId);
+
+	public void updateSkuScore();
 }

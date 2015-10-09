@@ -30,8 +30,8 @@ public class CommentService extends AbstractService<Comment> {
 		return this.commentMapper.listByOrderId(orderId);
 	}
 
-	public List<Map<String, Object>> listByProductId(int productId) {
-		return this.commentMapper.listByProductId(productId);
+	public List<Map<String, Object>> listBySkuId(int skuId) {
+		return this.commentMapper.listBySkuId(skuId);
 	}
 
 }
