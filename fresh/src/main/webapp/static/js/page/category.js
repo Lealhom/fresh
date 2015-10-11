@@ -1,4 +1,4 @@
-define('page/category', ['crud'], function(CRUD) {
+define('page/category', ['crud', 'fileuploader'], function(CRUD, Fileuploader) {
 	var category = {
 		grid: null,
 		init: function() {
@@ -34,8 +34,6 @@ define('page/category', ['crud'], function(CRUD) {
 					handler: function() {
 						CRUD.add({
 							title: '添加品类',
-							width:420,
-							height:420,
 							href: 'category/add'
 						}, function() {
 							the.loaded();

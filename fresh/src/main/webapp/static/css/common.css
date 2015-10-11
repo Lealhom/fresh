@@ -12,10 +12,15 @@ body {
 	background: #fff;
 	text-align: center;
 }
+
+.hide {
+	display: none !important;
+}
+
 .index_title {
 	margin-top: 12px;
 	margin-left: 20px;
-	font-family: »ªÎÄÐÐ¿¬;
+	font-family: ï¿½ï¿½ï¿½ï¿½ï¿½Ð¿ï¿½;
 	font-size: 25px !important;
 	color: #000080;
 }
@@ -48,15 +53,6 @@ body {
 	width: 90%;
 	min-height: 150px;
 }
-
-/*2015-09-25 fileuploader*/
-
-/* .show_item {
-	border: 1px solid #fff;
-}
-.show_item:HOVER {
-	border: 1px solid #ccc;
-} */
 
 .fileuploader-filecontainer {
 	border: 1px solid #ccc;

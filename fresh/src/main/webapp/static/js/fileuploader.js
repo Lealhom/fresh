@@ -8,22 +8,17 @@ define("fileuploader", [], function() {
 			initialPreview: [],
 			templateElement: null,
 			template: '<div><div class="fileuploader-filecontainer hide"></div><div class="input-group">' +
-//							'<input type="password" class="form-control">' +
 							'<div class="input-group-btn">' +
-							'<div class="btn blue select-file" type="button">选择</div>' +
+							'<button class="select-file" type="button">选择</button>' +
 							'</div>' +
 						'</div></div>',
 			uploadExtraData: null
 		};
-		console.log(options)
 		this.options = $.extend(defaultOptions, options);
 		this.options.templateElement = $(this.options.template);
-		console.log(this.options.element)
 		this.options.multiple = this.options.element.prop("multiple");
-		console.log(this.options.multiple)
 		this.options.element.replaceWith(this.options.templateElement);
 		this.options.templateElement.append(this.options.element.hide());
-		console.log(this.options.templateElement)
 		this.files = {};
 		this.createInitialPreview();
 		
@@ -46,7 +41,7 @@ define("fileuploader", [], function() {
 		htmls.push('<div class="file-item-footer">');
 		htmls.push('<label>' + filename + '</label>');
 		htmls.push('<div class="file-item-actions">');
-		htmls.push('<button title="删除" class="btn btn-xs btn-default file-remove" type="button"><i class="glyphicon glyphicon-trash text-danger"></i></button>');
+		htmls.push('<button class="btn btn-xs btn-default file-remove" type="button">删除</button>');
 		htmls.push('</div></div></div>');
 		this.options.templateElement.find(".fileuploader-filecontainer").append(htmls.join("")).removeClass("hide");
 	};

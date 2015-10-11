@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form method="post" action="category/add">
+<form method="post" action="category/add" enctype="multipart/form-data">
 	<table class="formtable">
 		<tr>
 			<td class="form-title">名称</td>
@@ -22,6 +22,12 @@
 					field:'name',title:'名称',width:122
 				}]]
 			">
+			</td>
+		</tr>
+		<tr>
+			<td class="form-title">图片</td>
+			<td class="form-input">
+				<input type="file" name="file">
 			</td>
 		</tr>
 	</table>

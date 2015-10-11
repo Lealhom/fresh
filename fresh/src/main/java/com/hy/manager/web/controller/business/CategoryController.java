@@ -1,11 +1,14 @@
 package com.hy.manager.web.controller.business;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hy.manager.domain.business.Category;
@@ -42,7 +45,7 @@ public class CategoryController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Category category) {
+	public ResponseMessage add(Category category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		if("".equals(category.getParentId())){
 			category.setLevel(1);

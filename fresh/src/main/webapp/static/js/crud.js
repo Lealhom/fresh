@@ -23,10 +23,10 @@ define('crud', ['data'], function(DATA) {
 								msg: msg,
 								showType: 'show'
 							});
-							dialog.dialog('close');
-							dialog.dialog('destroy');
 							
 							if (saveCallback) saveCallback.call(this);
+							dialog.dialog('close');
+							dialog.dialog('destroy');
 						}
 					});
 				}
@@ -42,7 +42,34 @@ define('crud', ['data'], function(DATA) {
 				if (loadCallback) loadCallback.call(this);
 			}
 		}, options));
-	}
+	};
+	
+	function dialogWithFiles(options, loadCallback, saveCallback) {
+		var dialog = $('<div></div>').appendTo('body').dialog($.extend({
+			title: '',
+			width: 700,
+			height: 500,
+			modal: true,
+			resizable: true,
+			buttons: [{
+				text: '确定',
+				iconCls: 'icon-save',
+				handler: function() {
+					console.log(dialog.find('form'));
+				}
+			}, {
+				text: '关闭',
+				iconCls: 'icon-clear',
+				handler: function() {
+					dialog.dialog('close');
+					dialog.dialog('destroy');
+				}
+			}],
+			onLoad: function() {
+				if (loadCallback) loadCallback.call(this);
+			}
+		}, options));
+	};
 	
 	var crud = {
 		add: function(options, loadCallback, saveCallback) {
@@ -52,6 +79,14 @@ define('crud', ['data'], function(DATA) {
 			};
 			options = $.extend(defaultOptions, options);
 			dialog(options, loadCallback, saveCallback);
+		},
+		addWithFiles: function(options, loadCallback, saveCallback) {
+			var defaultOptions = {
+				iconCls: 'icon-add',
+				cache: true
+			};
+			options = $.extend(defaultOptions, options);
+			dialogWithFiles(options, loadCallback, saveCallback);
 		},
 		edit: function(options, loadCallback, saveCallback) {
 			var defaultOptions = {
