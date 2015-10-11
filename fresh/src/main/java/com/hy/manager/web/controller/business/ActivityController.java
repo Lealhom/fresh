@@ -1,15 +1,21 @@
 package com.hy.manager.web.controller.business;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hy.manager.domain.File;
 import com.hy.manager.domain.business.Activity;
+import com.hy.manager.service.FileService;
 import com.hy.manager.service.business.ActivityService;
+import com.hy.manager.util.FileUploadUtil;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
@@ -21,7 +27,8 @@ public class ActivityController extends BasicController {
 
 	@Autowired
 	private ActivityService activityService;
-
+	@Autowired
+	private FileService fileService;
 	@RequestMapping(value = "page")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView("activity/page");
@@ -42,8 +49,15 @@ public class ActivityController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Activity activity) {
+	public ResponseMessage add(Activity activity, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
+		File f = FileUploadUtil.upload(file, request);
+		if(f==null){
+			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			return message;
+		}
+		fileService.insert(f);
+		activity.setImgUuid(f.getUuid());
 		activityService.insert(activity);
 		//添加产品与活动的关联关系
 		activityService.addProductIds(activity.getId(),activity.getProductIds());

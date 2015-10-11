@@ -4,15 +4,25 @@
 <mapper namespace="com.hy.manager.domain.business.ProductMapper">
 	<insert id="insert" parameterType="Product" useGeneratedKeys="true" keyProperty="id">
 		insert into t_product
-		(name,status,createTime,updateTime,fileId,brandId,bornPlace, description)
+		(name,status,createTime,updateTime,mainImgUuid,brandId,bornPlace, description)
 		values
-		(#{name},#{status},#{createTime},#{updateTime},#{fileId},#{brandId},#{bornPlace},#{description})
+		(#{name},#{status},#{createTime},#{updateTime},#{mainImgUuid},#{brandId},#{bornPlace},#{description})
 	</insert>
 	<insert id="addCategoryId">
 		insert into t_category_product 
 		(productId,categoryId)
 		values
 		(#{productId},#{categoryId})
+	</insert>
+	<delete id="delCategoryIds">
+		delete from t_category_product
+		where productId = #{productId}
+	</delete>
+	<insert id="addViceImgUuid">
+		insert into t_product_file 
+		(productId,imgUuid,orderNum,type)
+		values
+		(#{productId},#{viceImgUuid},#{orderNum},1)
 	</insert>
 	<insert id="addCollection">
 		insert into t_collection 
@@ -29,9 +39,7 @@
 		<set>
 			name=#{name},
 			status=#{status},
-			createTime=#{createTime},
 			updateTime=#{updateTime},
-			fileId=#{fileId},
 			brandId=#{brandId},
 			bornPlace=#{bornPlace},
 			description=#{description}
@@ -64,10 +72,13 @@
 		#{id}
 		</foreach>
 	</delete>
+	<select id="findViceImgs" resultType="string">
+		select imgUuid from t_product_file where type = 1 and productId = #{productId} order by orderNum
+	</select>
 	<select id="detail" resultType="map">
 		SELECT 
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,
-			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.fileId
+			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid
 		FROM fresh.t_sku t1 
 		left join t_product t2
 		on t1.productId = t2.id
@@ -76,7 +87,7 @@
 	<select id="search" resultType="map">
 		SELECT 
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,
-			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.fileId 
+			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid 
 		FROM fresh.t_sku t1 
 		left join t_product t2
 		on t1.productId = t2.id
@@ -85,7 +96,7 @@
 	<select id="listHotProduct" resultType="map">
 		SELECT 
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,
-			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.fileId
+			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid
 		FROM fresh.t_sku t1 
 		left join t_product t2
 		on t1.productId = t2.id
@@ -94,7 +105,7 @@
 	<select id="listByActivityId" resultType="map">
 		SELECT 
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,
-			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.fileId 
+			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid 
 		FROM fresh.t_sku t1 
 		left join t_product t2 on t1.productId = t2.id
 		left join t_activity_product t3 on t2.id = t3.productId
@@ -103,17 +114,16 @@
 	<select id="listByCategoryId" resultType="map">
 		SELECT 
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,
-			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.fileId
+			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid
 		FROM fresh.t_sku t1 
 		left join t_product t2 on t1.productId = t2.id
 		left join t_category_product t3 on t2.id = t3.productId
 		where t3.categoryId = #{categoryId}
 	</select>
 	<select id="selectById" resultType="Product">
-		select t1.id,t1.name,t1.description,t1.status,t1.createTime,t1.updateTime,t1.bornPlace,
-			   t2.path filePath,t3.name	brandName,t3.id brandId,group_concat(t5.id) categoryIds
+		select t1.id,t1.name,t1.description,t1.status,t1.createTime,t1.updateTime,t1.bornPlace,t1.mainImgUuid,
+			   t3.name	brandName,t3.id brandId,group_concat(t5.id) categoryNames
 		from t_product t1 
-		left join t_file t2 on t1.fileId = t2.id
 		left join t_brand t3 on t1.brandId = t3.id
 		left join t_category_product t4 on t1.id = t4.productId
 		left join t_category t5 on t4.categoryId = t5.id
@@ -133,10 +143,9 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Product">
-		select t1.id,t1.name,t1.description,t1.status,t1.hot,t1.createTime,t1.updateTime,t1.bornPlace,
-			   t2.path filePath,t3.name	brandName,group_concat(t5.name) categoryNames
+		select t1.id,t1.name,t1.description,t1.status,t1.hot,t1.createTime,t1.updateTime,t1.bornPlace,t1.mainImgUuid,
+			   t3.name	brandName,group_concat(t5.name) categoryNames
 		from t_product t1 
-		left join t_file t2 on t1.fileId = t2.id
 		left join t_brand t3 on t1.brandId = t3.id
 		left join t_category_product t4 on t1.id = t4.productId
 		left join t_category t5 on t4.categoryId = t5.id

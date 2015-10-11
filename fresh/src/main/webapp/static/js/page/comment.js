@@ -15,11 +15,9 @@ define('page/comment', ['crud'], function(CRUD) {
 				}, {
 					field: 'orderId', title: '订单ID', width: 150
 				}, {
-					field: 'carteId', title: '菜单ID', width: 150
-				}, {
 					field: 'createTime', title: '创建时间', width: 200
 				}, {
-					field: 'rank', title: '评分等级', width: 150
+					field: 'score', title: '评分等级', width: 150
 				}, {
 					field: 'content', title: '评论内容', width: 200
 				}]],

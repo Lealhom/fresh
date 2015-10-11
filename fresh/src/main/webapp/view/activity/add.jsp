@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form method="post" action="activity/add">
+<form method="post" action="activity/add" enctype="multipart/form-data">
 	<table class="formtable">
 		<tr>
 			<td>名称</td>
@@ -42,6 +42,12 @@
 			</select></td>
 			<td class="form-title">序号</td>
 			<td class="form-input"><input name="orderNum" class="easyui-numberspinner" data-options="value:1,min:1"></td>
+		</tr>
+		<tr>
+			<td class="form-title">图片</td>
+			<td class="form-input">
+				<input type="file" name="file">
+			</td>
 		</tr>
 		<tr>
 			<td>描述</td>

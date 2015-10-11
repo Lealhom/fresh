@@ -1,6 +1,8 @@
 package com.hy.manager.web.controller.business;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,14 +25,6 @@ import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 import com.hy.manager.web.controller.BasicController;
 
-/**
- * @author Administrator
- *
- */
-/**
- * @author Administrator
- *
- */
 /**
  * @author Administrator
  *
@@ -69,19 +63,30 @@ public class ProductController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Product product,@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request) {
+	public ResponseMessage add(Product product,@RequestParam("mainImg") CommonsMultipartFile mainImg, @RequestParam("viceImgs") CommonsMultipartFile[] viceImgs,HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
-		File f = FileUploadUtil.upload(file, request);
+		File f = FileUploadUtil.upload(mainImg, request);
 		if(f==null){
 			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
 			return message;
 		}
+		List<String> viceImgUuids = new ArrayList<String>();
+		for(CommonsMultipartFile file:viceImgs){
+			File viceImg = FileUploadUtil.upload(file, request);
+			if(viceImg==null){
+				message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+				return message;
+			}
+			viceImgUuids.add(viceImg.getUuid());
+		}
 		fileService.insert(f);
+		product.setMainImgUuid(f.getUuid());
 		product.setCreateTime(new Date());
-		product.setFileId(f.getId());
 		productService.insert(product);
-		//添加品类跟品牌的关联关系
+		//添加产品跟品类的关联关系
 		productService.addCategoryIds(product.getId(),product.getCategoryIds());
+		//添加产品跟副图的关联关系
+		productService.addViceImgUuids(product.getId(),viceImgUuids);
 		return message;
 	}
 
@@ -97,7 +102,12 @@ public class ProductController extends BasicController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseMessage update(Product product) {
 		ResponseMessage message = new ResponseMessage();
+		product.setUpdateTime(new Date());
 		productService.update(product);
+		//先删除掉跟品类的关联关系
+		productService.delCategoryIds(product.getId());
+		//然后再添加产品跟品类的关联关系
+		productService.addCategoryIds(product.getId(),product.getCategoryIds());
 		return message;
 	}
 

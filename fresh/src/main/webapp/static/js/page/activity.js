@@ -10,10 +10,10 @@ define('page/activity', ['crud'], function(CRUD) {
 				pagination: true,
 				columns: [[
 				           {field: 'id', title: 'ID', checkbox: true}, 
-				           {field: 'imgPath', title: '图片', width: 90,
+				           {field: 'imgUuid', title: '图片', width: 90,
 								formatter:function(value){
 									if(value){
-										var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+										var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
 										return s;
 									}else{
 										return '';
@@ -43,7 +43,8 @@ define('page/activity', ['crud'], function(CRUD) {
 							the.saveOrUpdate();
 						});
 					}
-				}, {
+				}, 
+				/*{
 					text: '修改',
 					iconCls: 'icon-edit',
 					handler: function() {
@@ -59,7 +60,8 @@ define('page/activity', ['crud'], function(CRUD) {
 							});
 						}
 					}
-				}, {
+				}, */
+				{
 					text: '删除',
 					iconCls: 'icon-remove',
 					handler: function() {

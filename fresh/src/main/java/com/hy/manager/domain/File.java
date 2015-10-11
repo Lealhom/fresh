@@ -13,12 +13,12 @@ public class File implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String name;
-	private String path;
+	private String name;//真实文件名
+	private String type;//文件类型， jpg,mpg,png等等
+	private String uuid;//文件唯一标识
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date uploadTime;
 	private int typeId;
-	private String typeName;
 
 	public int getId() {
 		return id;
@@ -51,19 +51,20 @@ public class File implements Serializable {
 		this.typeId = typeId;
 	}
 
-	public String getTypeName() {
-		return typeName;
+	public String getType() {
+		return type;
 	}
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public String getPath() {
-		return path;
+	public String getUuid() {
+		return uuid;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
+	
 }

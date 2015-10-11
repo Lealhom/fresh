@@ -14,12 +14,12 @@ public class Customer implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String imgPath;//头像
 	private String username;
 	private String password;
 	private String showname;
 	private String phone;
 	private String email;
+	private String imgUuid;//头像
 
 	public int getId() {
 		return id;
@@ -27,14 +27,6 @@ public class Customer implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getImgPath() {
-		return imgPath;
-	}
-
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
 	}
 
 	public String getUsername() {
@@ -75,6 +67,14 @@ public class Customer implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getImgUuid() {
+		return imgUuid;
+	}
+
+	public void setImgUuid(String imgUuid) {
+		this.imgUuid = imgUuid;
 	}
 
 }

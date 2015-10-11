@@ -24,7 +24,7 @@ define('page/sku', ['crud'], function(CRUD) {
 					iconCls: 'icon-add',
 					handler: function() {
 						CRUD.add({
-							title: '添加品牌',
+							title: '添加SKU',
 							href: 'sku/add'
 						}, function() {
 							the.loaded();
@@ -39,7 +39,7 @@ define('page/sku', ['crud'], function(CRUD) {
 						var checkRow = the.grid.datagrid('getChecked');
 						if (CRUD.onlyCheckedOne(checkRow)) {
 							CRUD.edit({
-								title: '编辑品牌--' + checkRow[0].name,
+								title: '编辑SKU--' + checkRow[0].name,
 								href: 'sku/update?id=' + checkRow[0].id
 							}, function() {
 								the.loaded();

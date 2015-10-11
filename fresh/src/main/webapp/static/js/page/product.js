@@ -11,9 +11,9 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
 				},{
-					field: 'filePath', title: '图片', width: 90,
+					field: 'mainImgUuid', title: '主图', width: 90,
 					formatter:function(value){
-						var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+						var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
 						return s;
 					}
 				}, {
@@ -78,20 +78,6 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 								the.reload();
 							});
 						}
-					}
-				},{
-					text: '添加图片',
-					iconCls: 'icon-add',
-					handler: function() {
-						CRUD.add({
-							title: '添加商品',
-							href: 'product/upload'
-						}, function() {
-							the.loaded();
-						}, function() {
-							the.saveOrUpdate();
-						});
-						
 					}
 				},{
 					text: '设为热销',

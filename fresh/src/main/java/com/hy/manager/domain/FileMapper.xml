@@ -4,8 +4,8 @@
 <mapper namespace="com.hy.manager.domain.FileMapper">
 	<insert id="insert" parameterType="File" useGeneratedKeys="true" keyProperty="id">
 		insert into t_file
-		(name,typeId,path,uploadTime) values
-		(#{name},#{typeId},#{path},#{uploadTime})
+		(name,typeId,type,uuid,uploadTime) values
+		(#{name},#{typeId},#{type},#{uuid},#{uploadTime})
 	</insert>
 	
 	<update id="update" parameterType="File">
@@ -13,7 +13,8 @@
 		<set>
 			name=#{name},
 			typeId=#{typeId},
-			path=#{path},
+			type=#{type},
+			uuid=#{uuid},
 			uploadTime=#{uploadTime}
 		</set>
 		where id = #{id}

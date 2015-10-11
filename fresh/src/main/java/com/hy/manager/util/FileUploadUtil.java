@@ -17,9 +17,13 @@ public class FileUploadUtil {
 		if(file.getSize() > MAX_SIZE*(1024*1024)){
 			return null;
 		}
-		String uuidFileName = UUID.randomUUID()+"_"+file.getOriginalFilename();
-		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuidFileName;
-		String reletivePath = "static/upload/" + uuidFileName;
+		String uuid = UUID.randomUUID().toString();
+		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuid;
+//		String reletivePath = "static/upload/" + uuidFileName;
+		String fileName = file.getOriginalFilename();
+		int index = fileName.lastIndexOf(".");
+		fileName = fileName.substring(0, index);
+		String fileType = file.getContentType();
 		if (!file.isEmpty()) {
 			java.io.File localFile = new java.io.File(realPath);
 			try {
@@ -31,8 +35,9 @@ public class FileUploadUtil {
 			}
 		}
 		File f = new File();
-		f.setName(file.getOriginalFilename());
-		f.setPath(reletivePath);
+		f.setName(fileName);
+		f.setType(fileType);
+		f.setUuid(uuid);
 		f.setUploadTime(new Date());
 		return f;
 	}

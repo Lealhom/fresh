@@ -33,7 +33,17 @@ public class ProductService extends AbstractService<Product> {
 			this.addCategoryId(productId,s);
 		}
 	}
-
+	public void delCategoryIds(int productId) {
+		this.productMapper.delCategoryIds(productId);
+	}
+	public void addViceImgUuid(int productId, String viceImgUuid,int orderNum) {
+		this.productMapper.addViceImgUuid(Integer.toString(productId),viceImgUuid,orderNum);
+	}
+	public void addViceImgUuids(int productId, List<String> viceImgUuids) {
+		for(int i=0;i<viceImgUuids.size();i++){
+			this.addViceImgUuid(productId, viceImgUuids.get(i),(i+1));
+		}
+	}
 	public void setHot(int[] ids) {
 		this.productMapper.setHot(ids);
 	}
@@ -69,8 +79,12 @@ public class ProductService extends AbstractService<Product> {
 		return this.productMapper.search(name);
 	}
 
-	public List<Map<String, Object>> detail(int productId,int skuId) {
+	public Map<String, Object> detail(int productId,int skuId) {
 		return this.productMapper.detail(productId,skuId);
+	}
+
+	public List<String> findViceImgs(int productId) {
+		return this.productMapper.findViceImgs(productId);
 	}
 
 }

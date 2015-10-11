@@ -4,17 +4,18 @@
 <mapper namespace="com.hy.manager.domain.business.CategoryMapper">
 	<insert id="insert" parameterType="Category" useGeneratedKeys="true" keyProperty="id">
 		insert into t_category
-		(name,level,parentId)
+		(name,level,parentId,imgUuid)
 		values
-		(#{name},#{level},#{parentId})
+		(#{name},#{level},#{parentId},#{imgUuid})
 	</insert>
 	
 	<update id="update" parameterType="Category">
 		update t_category
 		<set>
-			name=#{name},
-			level=#{level},
-			parentId=#{parentId}
+			<if test="name!=null">name=#{name},</if>
+			<if test="level!=null">level=#{level},</if>
+			<if test="imgUuid!=null">imgUuid=#{imgUuid},</if>
+			<if test="parentId!=null">parentId=#{parentId}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -42,7 +43,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Category">
-		select t1.id,t1.name,t1.level,t1.imgPath,t2.name parentName
+		select t1.id,t1.name,t1.level,t1.imgUuid,t2.name parentName
 		from t_category t1
 		left join t_category t2 on t1.parentId = t2.id 
 		<if test="rows > 0">
@@ -57,7 +58,7 @@
 	select * from t_category
 	</select>
 	<select id="listCategoryMap" resultMap="categoryMap">
-		select b.id,b.name,b.imgPath,a.id id2,a.name name2, a.imgPath imgPath2 
+		select b.id,b.name,b.imgUuid,a.id id2,a.name name2, a.imgUuid imgUuid2 
 		from t_category a
 		left join t_category b on a.parentId=b.id 
 		where a.level = 2
@@ -65,11 +66,11 @@
 	<resultMap type="hashmap" id="categoryMap">
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
-		<result property="imgPath" column="imgPath"/>
+		<result property="imgUuid" column="imgUuid"/>
 		<collection property="children" ofType="hashmap"  >
 			<id property="id" column="id2"/>
 			<result property="name" column="name2"/>
-			<result property="imgPath" column="imgPath2"/>
+			<result property="imgUuid" column="imgUuid2"/>
 		</collection>
 	</resultMap>
 </mapper>

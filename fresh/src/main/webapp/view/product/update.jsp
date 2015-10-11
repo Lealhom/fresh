@@ -14,7 +14,8 @@
 		<tr>
 			<td class="form-title">品类</td>
 			<td class="form-input">
-				<input id = "xxx" name="categoryIds" class="easyui-combogrid" style="width: 220px;" data-options="
+				<input id = "categoryIds" name="categoryIds" value="${product.categoryNames}" class="easyui-combogrid" style="width: 220px;" data-options="
+				required:true,
 				panelWidth: 220,
 				idField: 'id',
 				textField: 'name',

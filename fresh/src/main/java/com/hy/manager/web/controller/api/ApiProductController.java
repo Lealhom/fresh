@@ -77,9 +77,11 @@ public class ApiProductController {
 	@RequestMapping(value = "detail/{productId}/{skuId}")
 	@ResponseBody
 	public ResponseMessage detail(@PathVariable int productId,@PathVariable int skuId){
-		List<Map<String,Object>> list = this.productService.detail(productId,skuId);
+		Map<String,Object> map = this.productService.detail(productId,skuId);
+		List<String> viceImgs = this.productService.findViceImgs(productId);//得到副图
+		map.put("viceImgs", viceImgs);
 		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
+		message.setData(map);
 		return message;
 	}
 	

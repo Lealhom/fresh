@@ -8,4 +8,6 @@ public interface CustomerMapper extends AbstractMapper {
 
 	public Customer login(@Param("username") String username,@Param("password") String password);
 
+	public void updateHeadPhoto(@Param("customerId") int customerId, @Param("imgUuid") String imgUuid);
+
 }
