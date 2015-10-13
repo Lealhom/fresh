@@ -18,6 +18,10 @@
 		delete from t_category_product
 		where productId = #{productId}
 	</delete>
+	<delete id="delViceImgUuids">
+		delete from t_product_file
+		where productId = #{productId}
+	</delete>
 	<insert id="addViceImgUuid">
 		insert into t_product_file 
 		(productId,imgUuid,orderNum,type)
@@ -37,12 +41,13 @@
 	<update id="update" parameterType="Product">
 		update t_product
 		<set>
-			name=#{name},
-			status=#{status},
-			updateTime=#{updateTime},
-			brandId=#{brandId},
-			bornPlace=#{bornPlace},
-			description=#{description}
+			<if test="name!=null">name=#{name},</if>
+			<if test="status!=0">status=#{status},</if>
+			<if test="updateTime!=null">updateTime=#{updateTime},</if>
+			<if test="brandId!=0">brandId=#{brandId},</if>
+			<if test="bornPlace!=null">bornPlace=#{bornPlace},</if>
+			<if test="mainImgUuid!=null">mainImgUuid=#{mainImgUuid},</if>
+			<if test="description!=null">description=#{description}</if>
 		</set>
 		where id = #{id}
 	</update>

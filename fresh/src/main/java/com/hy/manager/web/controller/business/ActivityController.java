@@ -76,10 +76,39 @@ public class ActivityController extends BasicController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseMessage update(Activity activity) {
 		ResponseMessage message = new ResponseMessage();
+		//先删除产品与活动的关联关系
+		activityService.delProductIds(activity.getId());
+		//添加产品与活动的关联关系
+		activityService.addProductIds(activity.getId(),activity.getProductIds());
 		activityService.update(activity);
 		return message;
 	}
-
+	/**
+	 * 弹出更换图片窗口
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "updateImg", method = RequestMethod.GET)
+	public ModelAndView updateImgPage(int id) {
+		ModelAndView mav = new ModelAndView("activity/updateImg");
+		Activity activity = activityService.selectById(id);
+		mav.addObject("activity", activity);
+		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value = "updateImg", method = RequestMethod.POST)
+	public ResponseMessage updateImgPage(Activity category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+		ResponseMessage message = new ResponseMessage();
+		File f = FileUploadUtil.upload(file, request);
+		if(f==null){
+			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			return message;
+		}
+		fileService.insert(f);
+		category.setImgUuid(f.getUuid());
+		activityService.update(category);
+		return message;
+	}
 	@ResponseBody
 	@RequestMapping(value = "del", method = RequestMethod.POST)
 	public ResponseMessage del(@RequestParam("ids[]") int[] ids) {

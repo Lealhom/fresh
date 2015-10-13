@@ -44,7 +44,7 @@ define('page/activity', ['crud'], function(CRUD) {
 						});
 					}
 				}, 
-				/*{
+				{
 					text: '修改',
 					iconCls: 'icon-edit',
 					handler: function() {
@@ -60,7 +60,7 @@ define('page/activity', ['crud'], function(CRUD) {
 							});
 						}
 					}
-				}, */
+				}, 
 				{
 					text: '删除',
 					iconCls: 'icon-remove',
@@ -73,6 +73,24 @@ define('page/activity', ['crud'], function(CRUD) {
 								data: {ids: ids}
 							}, function() {
 								the.reload();
+							});
+						}
+					}
+				},{
+					text: '更换图片',
+					iconCls: 'icon-large-picture',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换活动图片--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'activity/updateImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
 							});
 						}
 					}

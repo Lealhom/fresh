@@ -16,7 +16,7 @@ define('page/order', ['crud'], function(CRUD) {
 				           {field: 'id', title: 'ID', checkbox: true}, 
 				           {field: 'username', title: '用户名', width: 100}, 
 				           {field: 'showname', title: '昵称', width: 100}, 
-				           {field: 'status', title: '状态', width: 50}, 
+				           {field: 'statusInfo', title: '状态', width: 50}, 
 				           {field: 'price', title: '订单总价格', width: 100}, 
 				           {field: 'discountPrice', title: '订单折后价', width: 100}, 
 				           {field: 'address', title: '收货地址', width: 250}, 
@@ -82,7 +82,7 @@ define('page/order', ['crud'], function(CRUD) {
 		sendGoods: function(ids) {
 			var the = this;
 			CRUD.operate({
-				url: 'order/sendGoods',
+				url: 'order/send',
 				data: {ids: ids}
 			},
 			'确认发货？',
@@ -93,7 +93,7 @@ define('page/order', ['crud'], function(CRUD) {
 		refund: function(ids) {
 			var the = this;
 			CRUD.operate({
-				url: 'order/refund',
+				url: 'order/refunded',
 				data: {ids: ids}
 			},
 			'确认退款？',

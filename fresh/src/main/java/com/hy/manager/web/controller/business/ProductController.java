@@ -71,6 +71,7 @@ public class ProductController extends BasicController {
 			return message;
 		}
 		List<String> viceImgUuids = new ArrayList<String>();
+		List<File> viceImgFle =  new ArrayList<File>();
 		for(CommonsMultipartFile file:viceImgs){
 			File viceImg = FileUploadUtil.upload(file, request);
 			if(viceImg==null){
@@ -78,8 +79,12 @@ public class ProductController extends BasicController {
 				return message;
 			}
 			viceImgUuids.add(viceImg.getUuid());
+			viceImgFle.add(viceImg);
 		}
 		fileService.insert(f);
+		for(File file:viceImgFle){
+			fileService.insert(file);
+		}
 		product.setMainImgUuid(f.getUuid());
 		product.setCreateTime(new Date());
 		productService.insert(product);
@@ -97,7 +102,71 @@ public class ProductController extends BasicController {
 		mav.addObject("product", product);
 		return mav;
 	}
-
+	/**
+	 * 弹出更换图片窗口
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "updateMainImg", method = RequestMethod.GET)
+	public ModelAndView updateMainImgPage(int id) {
+		ModelAndView mav = new ModelAndView("product/updateMainImg");
+		Product product = productService.selectById(id);
+		mav.addObject("product", product);
+		return mav;
+	}
+	@RequestMapping(value = "updateViceImg", method = RequestMethod.GET)
+	public ModelAndView updateViceImgPage(int id) {
+		ModelAndView mav = new ModelAndView("product/updateViceImg");
+		Product product = productService.selectById(id);
+		mav.addObject("product", product);
+		return mav;
+	}
+	/**
+	 * 更换图片
+	 * @param category
+	 * @param file
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "updateMainImg", method = RequestMethod.POST)
+	public ResponseMessage updateMainImg(Product product, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+		ResponseMessage message = new ResponseMessage();
+		File f = FileUploadUtil.upload(file, request);
+		if(f==null){
+			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			return message;
+		}
+		fileService.insert(f);
+		product.setUpdateTime(new Date());
+		product.setMainImgUuid(f.getUuid());
+		productService.update(product);
+		return message;
+	}
+	@ResponseBody
+	@RequestMapping(value = "updateViceImg", method = RequestMethod.POST)
+	public ResponseMessage updateViceImg(Product product, @RequestParam("file") CommonsMultipartFile viceImgs[], HttpServletRequest request) {
+		ResponseMessage message = new ResponseMessage();
+		List<String> viceImgUuids = new ArrayList<String>();
+		List<File> viceImgFle =  new ArrayList<File>();
+		for(CommonsMultipartFile file:viceImgs){
+			File viceImg = FileUploadUtil.upload(file, request);
+			if(viceImg==null){
+				message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+				return message;
+			}
+			viceImgUuids.add(viceImg.getUuid());
+			viceImgFle.add(viceImg);
+		}
+		for(File file:viceImgFle){
+			fileService.insert(file);
+		}
+		//删除产品跟副图的关联关系
+		productService.delViceImgUuids(product.getId());
+		//添加产品跟副图的关联关系
+		productService.addViceImgUuids(product.getId(),viceImgUuids);
+		return message;
+	}
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseMessage update(Product product) {

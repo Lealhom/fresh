@@ -42,4 +42,8 @@ public class ActivityService extends AbstractService<Activity> {
 		return this.activityMapper.listActivity();
 	}
 
+	public void delProductIds(int activityId) {
+		activityMapper.delProductIds(activityId);
+	}
+
 }

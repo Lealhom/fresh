@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.domain.business.OrderMapper;
+import com.hy.manager.domain.business.SkuDTO;
 import com.hy.manager.service.AbstractService;
 
 @Service
@@ -44,4 +45,21 @@ public class OrderService extends AbstractService<Order> {
 	public void updateStatus(int[] ids,int status) {
 		this.orderMapper.updateStatus(ids,status);
 	}
+
+	public void addSkus(int orderId, SkuDTO[] skuDTOS) {
+		for(SkuDTO o:skuDTOS){
+			this.addSku(orderId, o);
+		}
+	}
+	public void addSku(int orderId, SkuDTO o) {
+		o.setOrderId(Integer.toString(orderId));
+		this.orderMapper.addSku(o);
+	}
+
+	public void decreaseSkusQuantity(SkuDTO[] skuDTOS) {
+		for(SkuDTO o:skuDTOS){
+			this.orderMapper.decreaseSkuQuantity(o.getSkuId(),o.getQuantity());
+		}
+	}
+	
 }

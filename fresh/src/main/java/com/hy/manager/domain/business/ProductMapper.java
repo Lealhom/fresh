@@ -14,6 +14,8 @@ public interface ProductMapper extends AbstractMapper {
 	
 	public void addViceImgUuid(@Param("productId") String productId,@Param("viceImgUuid")  String viceImgUuid,@Param("orderNum") int orderNum);
 
+	public void delViceImgUuids(@Param("productId") int productId);
+
 	public void setHot(@Param("ids") Object ids);
 
 	public void cancelHot(@Param("ids") Object ids);
@@ -35,6 +37,5 @@ public interface ProductMapper extends AbstractMapper {
 	public Map<String, Object> detail(@Param("productId")int productId,@Param("skuId")int skuId);
 
 	public List<String> findViceImgs(@Param("productId") int productId);
-
 
 }

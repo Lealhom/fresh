@@ -5,9 +5,11 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.manager.domain.business.Order;
+import com.hy.manager.domain.business.SkuDTO;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.web.ResponseMessage;
 
@@ -23,7 +25,7 @@ public class ApiOrderController {
 	 */
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ResponseMessage add(Order order){
+	public ResponseMessage add(Order order,@RequestParam("skuDTOS[]") SkuDTO[] skuDTOS){
 		order.setCreateTime(new Date());//设置订单创建时间
 		//设置订单编号
 		long l = System.currentTimeMillis();
@@ -31,6 +33,10 @@ public class ApiOrderController {
 		order.setNo(no);
 		order.setStatus(Order.STATUS_NON_PAYMENT);//待付款
 		orderService.insert(order);
+		//添加订单中的sku相关信息，包括购买的数量，购买时的价格等等
+		orderService.addSkus(order.getId(),skuDTOS);
+		//减少各个SKU的库存量
+		orderService.decreaseSkusQuantity(skuDTOS);
 		ResponseMessage message = new ResponseMessage();
 		message.setData("下单成功!");
 		return message;

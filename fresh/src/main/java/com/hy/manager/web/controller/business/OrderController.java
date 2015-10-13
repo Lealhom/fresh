@@ -50,6 +50,7 @@ public class OrderController extends BasicController {
 	 * @param ids
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping(value = "refunded", method = RequestMethod.POST)
 	public ResponseMessage refund(@RequestParam("ids[]") int[] ids) {
 		ResponseMessage message = new ResponseMessage();

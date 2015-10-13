@@ -113,6 +113,42 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 							});
 						}
 					}
+				},{
+					text: '更换主图',
+					iconCls: 'icon-large-picture',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换主图--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'product/updateMainImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
+							});
+						}
+					}
+				},{
+					text: '更换副图',
+					iconCls: 'icon-large-clipart',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换副图--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'product/updateViceImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
+							});
+						}
+					}
 				}]
 			});
 		},

@@ -87,4 +87,8 @@ public class ProductService extends AbstractService<Product> {
 		return this.productMapper.findViceImgs(productId);
 	}
 
+	public void delViceImgUuids(int productId) {
+		productMapper.delViceImgUuids(productId);
+	}
+
 }

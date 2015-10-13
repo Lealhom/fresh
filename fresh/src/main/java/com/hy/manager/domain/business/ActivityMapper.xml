@@ -14,16 +14,21 @@
 		values
 		(#{activityId},#{productId})
 	</insert>
+	<delete id="delProductIds">
+		delete from t_activity_product 
+		where activityId = #{activityId}
+	</delete>
 	<update id="update" parameterType="Activity">
 		update t_activity
 		<set>
-			name=#{name},
-			orderNum=#{orderNum},
-			status=#{status},
-			banner=#{banner},
-			description=#{description},
-			startTime=#{startTime},
-			endTime=#{endTime}
+			<if test="name!=null">name=#{name},</if>
+			<if test="orderNum!=null">orderNum=#{orderNum},</if>
+			<if test="status!=0">status=#{status},</if>
+			<if test="banner!=0">banner=#{banner},</if>
+			<if test="description!=null">description=#{description},</if>
+			<if test="startTime!=null">startTime=#{startTime},</if>
+			<if test="imgUuid!=null">imgUuid=#{imgUuid},</if>
+			<if test="endTime!=null">endTime=#{endTime}</if>
 		</set>
 		where id = #{id}
 	</update>
@@ -40,7 +45,13 @@
 	</delete>
 	
 	<select id="selectById" resultType="Activity">
-		select * from t_activity where id=#{id}
+		select t1.id,t1.name,t1.description,t1.status,t1.banner,t1.startTime,t1.endTime,t1.imgUuid,t1.orderNum,
+			   group_concat(t3.id) productNames
+		from t_activity t1 
+		left join t_activity_product t2 on t1.id = t2.activityId
+		left join t_product t3 on t2.productId = t3.id
+		where t1.id=#{id}
+		group by t1.id
 	</select>
 	<select id="listAll" resultType="Activity">
 		SELECT * FROM t_activity 
@@ -50,12 +61,12 @@
 	<select id="listActivity" resultType="map">
 		SELECT id,imgUuid FROM t_activity 
 		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 0 order by orderNum 
+		and status = 1 and banner = 1 order by orderNum 
 	</select>
 	<select id="listBanner" resultType="map">
 		SELECT id,imgUuid FROM t_activity 
 		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 1 order by orderNum 
+		and status = 1 and banner = 2 order by orderNum 
 	</select>
 	<sql id="gridWhere">
 		from t_activity u
