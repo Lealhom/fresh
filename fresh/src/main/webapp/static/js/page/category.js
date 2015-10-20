@@ -11,10 +11,10 @@ define('page/category', ['crud', 'fileuploader'], function(CRUD, Fileuploader) {
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
 				}, {
-					field: 'imgPath', title: '图片', width: 90,
+					field: 'imgUuid', title: '图片', width: 90,
 					formatter:function(value){
 						if(value){
-							var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+							var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
 							return s;
 						}else{
 							return '';
@@ -34,6 +34,8 @@ define('page/category', ['crud', 'fileuploader'], function(CRUD, Fileuploader) {
 					handler: function() {
 						CRUD.add({
 							title: '添加品类',
+							width:420,
+							height:420,
 							href: 'category/add'
 						}, function() {
 							the.loaded();
@@ -71,6 +73,24 @@ define('page/category', ['crud', 'fileuploader'], function(CRUD, Fileuploader) {
 								data: {ids: ids}
 							}, function() {
 								the.reload();
+							});
+						}
+					}
+				},{
+					text: '更换图片',
+					iconCls: 'icon-large-picture',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换品类图片--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'category/updateImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
 							});
 						}
 					}

@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hy.manager.domain.File;
 import com.hy.manager.domain.business.Category;
+import com.hy.manager.service.FileService;
 import com.hy.manager.service.business.CategoryService;
+import com.hy.manager.util.FileUploadUtil;
 import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
@@ -24,6 +27,8 @@ public class CategoryController extends BasicController {
 
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private FileService fileService;
 
 	@RequestMapping(value = "page")
 	public ModelAndView index() {
@@ -47,6 +52,13 @@ public class CategoryController extends BasicController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseMessage add(Category category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
+		File f = FileUploadUtil.upload(file, request);
+		if(f==null){
+			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			return message;
+		}
+		fileService.insert(f);
+		category.setImgUuid(f.getUuid());
 		if("".equals(category.getParentId())){
 			category.setLevel(1);
 		}else{
@@ -64,13 +76,36 @@ public class CategoryController extends BasicController {
 		mav.addObject("category", category);
 		return mav;
 	}
-
+	/**
+	 * 弹出更换图片窗口
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "updateImg", method = RequestMethod.GET)
+	public ModelAndView updateImgPage(int id) {
+		ModelAndView mav = new ModelAndView("category/updateImg");
+		Category category = categoryService.selectById(id);
+		mav.addObject("category", category);
+		return mav;
+	}
+	/**
+	 * 更换图片
+	 * @param category
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public ResponseMessage update(Category category) {
+	@RequestMapping(value = "updateImg", method = RequestMethod.POST)
+	public ResponseMessage updateImgPage(Category category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
-		Category parentCategory = categoryService.selectById(category.getParentId());
-		category.setLevel(parentCategory.getLevel()+1);
+		File f = FileUploadUtil.upload(file, request);
+		if(f==null){
+			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			return message;
+		}
+		fileService.insert(f);
+		category.setImgUuid(f.getUuid());
 		categoryService.update(category);
 		return message;
 	}

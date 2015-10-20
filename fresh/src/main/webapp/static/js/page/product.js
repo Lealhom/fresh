@@ -11,9 +11,9 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
 				},{
-					field: 'filePath', title: '图片', width: 90,
+					field: 'mainImgUuid', title: '主图', width: 90,
 					formatter:function(value){
-						var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+						var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
 						return s;
 					}
 				}, {
@@ -80,20 +80,6 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 						}
 					}
 				},{
-					text: '添加图片',
-					iconCls: 'icon-add',
-					handler: function() {
-						CRUD.add({
-							title: '添加商品',
-							href: 'product/upload'
-						}, function() {
-							the.loaded();
-						}, function() {
-							the.saveOrUpdate();
-						});
-						
-					}
-				},{
 					text: '设为热销',
 					iconCls: 'icon-add',
 					handler: function() {
@@ -124,6 +110,42 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 							'确认取消热销产品？',
 							function() {
 								the.reload();
+							});
+						}
+					}
+				},{
+					text: '更换主图',
+					iconCls: 'icon-large-picture',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换主图--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'product/updateMainImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
+							});
+						}
+					}
+				},{
+					text: '更换副图',
+					iconCls: 'icon-large-clipart',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换副图--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'product/updateViceImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
 							});
 						}
 					}

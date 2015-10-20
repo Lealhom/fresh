@@ -13,7 +13,8 @@
 		<tr>
 			<td class="form-title">品类</td>
 			<td class="form-input">
-				<input id = "xxx" name="categoryIds" class="easyui-combogrid" style="width: 220px;" data-options="
+				<input id = "xxx" name="categoryIds"  class="easyui-combogrid" style="width: 220px;" data-options="
+				required:true,
 				panelWidth: 220,
 				idField: 'id',
 				textField: 'name',
@@ -44,8 +45,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="form-title">图片</td>
-			<td class="form-input" colspan="3"><input name="file" class="easyui-filebox" data-options="required:true" style="width: 300px;"></td>
+			<td class="form-title">主图</td>
+			<td class="form-input" colspan="3"><input name="mainImg" type="file" data-options="required:true" style="width: 300px;"></td>
+		</tr>
+		<tr>
+			<td class="form-title">副图</td>
+			<td class="form-input" colspan="3"><input name="viceImgs" type="file" multiple="multiple" data-options="required:true" style="width: 300px;"></td>
 		</tr>
 		<tr>
 			<td class="form-title">产地</td>

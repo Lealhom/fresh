@@ -18,6 +18,12 @@
 			#{discountPrice},#{freight},#{message},#{payType},#{logisticsNo}
 		)
 	</insert>
+	<insert id="addSku" parameterType="SkuDTO" useGeneratedKeys="true" keyProperty="id">
+		insert into t_order_sku
+		(orderId,skuId,quantity,unitPrice)
+		values
+		(#{orderId},#{skuId},#{quantity},#{unitPrice})
+	</insert>
 	<update id="updateStatus" parameterType="Order">
 		update t_order
 		<set>
@@ -27,6 +33,9 @@
 		<foreach collection="ids" item="id" open="(" close=")" separator=",">
 		#{id}
 		</foreach>
+	</update>
+	<update id="decreaseSkuQuantity">
+		update set t_sku set quantity = (quantity-#{quantity}) where id = #{skuId}
 	</update>
 	<update id="update" parameterType="Order">
 		update t_order

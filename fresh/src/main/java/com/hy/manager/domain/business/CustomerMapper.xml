@@ -20,7 +20,13 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+	<update id="updateHeadPhoto">
+		update t_customer
+		<set>
+			imgUuid=#{imgUuid}
+		</set>
+		where id = #{customerId}
+	</update>
 	<delete id="deleteById" parameterType="int">
 		delete from t_customer where id=#{id}
 	</delete>
@@ -44,7 +50,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Customer">
-		select id,username,showname,phone,email,imgPath
+		select id,username,showname,phone,email,imgUuid
 		<include refid="gridWhere"/>
 		limit #{start},#{rows}
 	</select>

@@ -50,7 +50,7 @@ public class Order implements Serializable {
 	private String message;//给卖家留言 
 	private int payType;//付款方式
 	private String logisticsNo;//物流编号（在卖家发货后，输入物流编号，方便消费者在相应的物流官网上进行查询）
-	
+	private String skuIds[];//关联的SKU
 	public int getId() {
 		return id;
 	}
@@ -68,6 +68,36 @@ public class Order implements Serializable {
 	}
 	public void setPayTime(Date payTime) {
 		this.payTime = payTime;
+	}
+	public String getStatusInfo(){
+		if(status == Order.STATUS_CANCEL){
+			return "已取消";
+		}
+		if(status==Order.STATUS_DEL){
+			return "已删除";
+		}
+		if(status==Order.STATUS_FINISH){
+			return "已评价";
+		}
+		if(status==Order.STATUS_NON_PAYMENT){
+			return "待付款";
+		}
+		if(status==Order.STATUS_PAYMENT){
+			return "已付款";
+		}
+		if(status==Order.STATUS_RECEIVE){
+			return "已收货";
+		}
+		if(status==Order.STATUS_REFUNDED){
+			return "已退款";
+		}
+		if(status==Order.STATUS_REFUNDING){
+			return "待退款";
+		}
+		if(status==Order.STATUS_SEND){
+			return "已发货";
+		}
+		return String.valueOf(status);
 	}
 	public int getStatus() {
 		return status;
@@ -158,6 +188,12 @@ public class Order implements Serializable {
 	}
 	public void setLogisticsNo(String logisticsNo) {
 		this.logisticsNo = logisticsNo;
+	}
+	public String[] getSkuIds() {
+		return skuIds;
+	}
+	public void setSkuIds(String[] skuIds) {
+		this.skuIds = skuIds;
 	}
 	
 }

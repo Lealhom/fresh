@@ -20,8 +20,7 @@ public class Product implements Serializable {
 	private Date updateTime;//最后更新时间
 	private String description;//产品描述
 	private String bornPlace;//产地
-	private int fileId;//记录主图的id
-	private String filePath;//记录主图的存储路径
+	private String mainImgUuid;//主图的uuid
 	private int brandId;//品牌id
 	private String brandName;//品牌名称
 	private String categoryIds[];//接收添加商品是，前端传回来的参数
@@ -59,20 +58,13 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 
-	public int getFileId() {
-		return fileId;
+
+	public String getMainImgUuid() {
+		return mainImgUuid;
 	}
 
-	public void setFileId(int fileId) {
-		this.fileId = fileId;
-	}
-
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
+	public void setMainImgUuid(String mainImgUuid) {
+		this.mainImgUuid = mainImgUuid;
 	}
 
 	public int getBrandId() {

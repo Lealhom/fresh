@@ -10,10 +10,10 @@ define('page/customer', ['crud'], function(CRUD) {
 				pagination: true,
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
-				},{field: 'imgPath', title: '头像', width: 90,
+				},{field: 'imgUuid', title: '头像', width: 90,
 					formatter:function(value){
 						if(value){
-							var s='<a href="javascript:void(0)"><img src="'+value+'" style="width:80px;height:80px;"/></a>';
+							var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
 							return s;
 						}else{
 							return '';

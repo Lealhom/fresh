@@ -15,7 +15,6 @@ public class Activity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private int status;
-	private String imgPath;//活动图片
 	private String name;
 	private String description;
 	private String startTime;
@@ -24,6 +23,7 @@ public class Activity implements Serializable {
 	private String productIds[];
 	private String productNames;
 	private int orderNum;//序号
+	private String imgUuid;//活动图片uuid
 	public int getId() {
 		return id;
 	}
@@ -38,14 +38,6 @@ public class Activity implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public String getImgPath() {
-		return imgPath;
-	}
-
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
 	}
 
 	public String getName() {
@@ -112,4 +104,11 @@ public class Activity implements Serializable {
 		this.orderNum = orderNum;
 	}
 
+	public String getImgUuid() {
+		return imgUuid;
+	}
+
+	public void setImgUuid(String imgUuid) {
+		this.imgUuid = imgUuid;
+	}
 }
