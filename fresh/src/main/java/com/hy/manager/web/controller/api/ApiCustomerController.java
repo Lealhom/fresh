@@ -1,10 +1,13 @@
 package com.hy.manager.web.controller.api;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +21,13 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiCustomerController {
 	@Autowired
 	private CustomerService customerService;
+	
+	@ModelAttribute
+	public void setVaryResponseHeader(HttpServletResponse response) {
+	    response.setHeader("Access-Control-Allow-Origin", "*");
+	    response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+	}
+	
 	/**
 	 * app端登录
 	 * @return
