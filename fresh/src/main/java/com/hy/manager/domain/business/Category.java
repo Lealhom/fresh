@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 品类
+ * 
  * @author huoyao
  *
  */
@@ -19,6 +20,7 @@ public class Category implements Serializable {
 	private String parentId;
 	private String parentName;
 	private String imgUuid;
+
 	public int getId() {
 		return id;
 	}
@@ -38,7 +40,6 @@ public class Category implements Serializable {
 	public int getLevel() {
 		return level;
 	}
-
 
 	public void setLevel(int level) {
 		this.level = level;

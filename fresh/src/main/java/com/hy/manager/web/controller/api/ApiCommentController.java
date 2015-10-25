@@ -23,48 +23,56 @@ public class ApiCommentController {
 	private CommentService commentService;
 	@Autowired
 	private OrderService orderService;
+
 	/**
 	 * 添加评论
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "add/{orderId}/{skuId}")
 	@ResponseBody
-	public ResponseMessage add(Comment comment,@PathVariable int orderId,@PathVariable int skuId){
+	public ResponseMessage add(Comment comment, @PathVariable int orderId,
+			@PathVariable int skuId) {
 		int customerId = 1;
 		comment.setCustomerId(customerId);
 		comment.setOrderId(orderId);
 		comment.setSkuId(skuId);
 		comment.setCreateTime(new Date());
 		this.commentService.insert(comment);
-		
+
 		Order order = orderService.selectById(orderId);
-		order.setStatus(Order.STATUS_FINISH);//已评价
+		order.setStatus(Order.STATUS_FINISH);// 已评价
 		orderService.update(order);
-		
+
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("评论成功!");
 		return message;
 	}
+
 	/**
 	 * 根据skuId获取评论
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list_by_skuId/{skuId}")
 	@ResponseBody
-	public ResponseMessage listBySkuId(@PathVariable int skuId){
-		List<Map<String,Object>> list = this.commentService.listBySkuId(skuId);
+	public ResponseMessage listBySkuId(@PathVariable int skuId) {
+		List<Map<String, Object>> list = this.commentService.listBySkuId(skuId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
 	}
+
 	/**
 	 * 根据订单ID获取评论
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list_by_orderId/{orderId}")
 	@ResponseBody
-	public ResponseMessage listByOrderId(@PathVariable int orderId){
-		List<Map<String,Object>> list = this.commentService.listByOrderId(orderId);
+	public ResponseMessage listByOrderId(@PathVariable int orderId) {
+		List<Map<String, Object>> list = this.commentService
+				.listByOrderId(orderId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

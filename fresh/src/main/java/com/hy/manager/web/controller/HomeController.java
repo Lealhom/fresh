@@ -41,7 +41,7 @@ public class HomeController extends BasicController {
 		ModelAndView mav = new ModelAndView("unauthorized");
 		return mav;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@RequestMapping("loginout")
 	public String loginout(HttpServletRequest request) {

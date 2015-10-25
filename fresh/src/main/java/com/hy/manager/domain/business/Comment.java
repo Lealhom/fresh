@@ -7,6 +7,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * 评论
+ * 
  * @author huoyao
  *
  */
@@ -17,22 +18,22 @@ public class Comment implements Serializable {
 	private int id;
 	private int customerId;
 	private int orderId;
-	private int skuId;//关联的SKU
+	private int skuId;// 关联的SKU
 	@JSONField(format = "yyyy-HH-dd hh:mm:ss")
 	private Date createTime;
 	private String content;
-	private int score;//评分
-	
+	private int score;// 评分
+
 	private String username;
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -44,7 +45,6 @@ public class Comment implements Serializable {
 	public int getOrderId() {
 		return orderId;
 	}
-
 
 	public int getSkuId() {
 		return skuId;
@@ -69,11 +69,10 @@ public class Comment implements Serializable {
 	public String getContent() {
 		return content;
 	}
-	
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 
 	public String getUsername() {
 		return username;

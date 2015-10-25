@@ -25,7 +25,7 @@ public class CommentService extends AbstractService<Comment> {
 	public AbstractMapper getAbstractMapper() {
 		return commentMapper;
 	}
-	
+
 	public List<Map<String, Object>> listByOrderId(int orderId) {
 		return this.commentMapper.listByOrderId(orderId);
 	}

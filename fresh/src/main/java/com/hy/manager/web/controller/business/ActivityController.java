@@ -29,6 +29,7 @@ public class ActivityController extends BasicController {
 	private ActivityService activityService;
 	@Autowired
 	private FileService fileService;
+
 	@RequestMapping(value = "page")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView("activity/page");
@@ -49,18 +50,21 @@ public class ActivityController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Activity activity, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+	public ResponseMessage add(Activity activity,
+			@RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(file, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		fileService.insert(f);
 		activity.setImgUuid(f.getUuid());
 		activityService.insert(activity);
-		//添加产品与活动的关联关系
-		activityService.addProductIds(activity.getId(),activity.getProductIds());
+		// 添加产品与活动的关联关系
+		activityService.addProductIds(activity.getId(),
+				activity.getProductIds());
 		return message;
 	}
 
@@ -76,15 +80,18 @@ public class ActivityController extends BasicController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseMessage update(Activity activity) {
 		ResponseMessage message = new ResponseMessage();
-		//先删除产品与活动的关联关系
+		// 先删除产品与活动的关联关系
 		activityService.delProductIds(activity.getId());
-		//添加产品与活动的关联关系
-		activityService.addProductIds(activity.getId(),activity.getProductIds());
+		// 添加产品与活动的关联关系
+		activityService.addProductIds(activity.getId(),
+				activity.getProductIds());
 		activityService.update(activity);
 		return message;
 	}
+
 	/**
 	 * 弹出更换图片窗口
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -95,13 +102,16 @@ public class ActivityController extends BasicController {
 		mav.addObject("activity", activity);
 		return mav;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "updateImg", method = RequestMethod.POST)
-	public ResponseMessage updateImgPage(Activity category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+	public ResponseMessage updateImgPage(Activity category,
+			@RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(file, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		fileService.insert(f);
@@ -109,6 +119,7 @@ public class ActivityController extends BasicController {
 		activityService.update(category);
 		return message;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "del", method = RequestMethod.POST)
 	public ResponseMessage del(@RequestParam("ids[]") int[] ids) {

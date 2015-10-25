@@ -55,6 +55,7 @@ public class ProductController extends BasicController {
 		ModelAndView mav = new ModelAndView("product/add");
 		return mav;
 	}
+
 	@RequestMapping(value = "upload", method = RequestMethod.GET)
 	public ModelAndView upload() {
 		ModelAndView mav = new ModelAndView("product/upload");
@@ -63,35 +64,39 @@ public class ProductController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Product product,@RequestParam("mainImg") CommonsMultipartFile mainImg, @RequestParam("viceImgs") CommonsMultipartFile[] viceImgs,HttpServletRequest request) {
+	public ResponseMessage add(Product product,
+			@RequestParam("mainImg") CommonsMultipartFile mainImg,
+			@RequestParam("viceImgs") CommonsMultipartFile[] viceImgs,
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(mainImg, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		List<String> viceImgUuids = new ArrayList<String>();
-		List<File> viceImgFle =  new ArrayList<File>();
-		for(CommonsMultipartFile file:viceImgs){
+		List<File> viceImgFle = new ArrayList<File>();
+		for (CommonsMultipartFile file : viceImgs) {
 			File viceImg = FileUploadUtil.upload(file, request);
-			if(viceImg==null){
-				message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			if (viceImg == null) {
+				message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 				return message;
 			}
 			viceImgUuids.add(viceImg.getUuid());
 			viceImgFle.add(viceImg);
 		}
 		fileService.insert(f);
-		for(File file:viceImgFle){
+		for (File file : viceImgFle) {
 			fileService.insert(file);
 		}
 		product.setMainImgUuid(f.getUuid());
 		product.setCreateTime(new Date());
 		productService.insert(product);
-		//添加产品跟品类的关联关系
-		productService.addCategoryIds(product.getId(),product.getCategoryIds());
-		//添加产品跟副图的关联关系
-		productService.addViceImgUuids(product.getId(),viceImgUuids);
+		// 添加产品跟品类的关联关系
+		productService
+				.addCategoryIds(product.getId(), product.getCategoryIds());
+		// 添加产品跟副图的关联关系
+		productService.addViceImgUuids(product.getId(), viceImgUuids);
 		return message;
 	}
 
@@ -102,8 +107,10 @@ public class ProductController extends BasicController {
 		mav.addObject("product", product);
 		return mav;
 	}
+
 	/**
 	 * 弹出更换图片窗口
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -114,6 +121,7 @@ public class ProductController extends BasicController {
 		mav.addObject("product", product);
 		return mav;
 	}
+
 	@RequestMapping(value = "updateViceImg", method = RequestMethod.GET)
 	public ModelAndView updateViceImgPage(int id) {
 		ModelAndView mav = new ModelAndView("product/updateViceImg");
@@ -121,8 +129,10 @@ public class ProductController extends BasicController {
 		mav.addObject("product", product);
 		return mav;
 	}
+
 	/**
 	 * 更换图片
+	 * 
 	 * @param category
 	 * @param file
 	 * @param request
@@ -130,11 +140,13 @@ public class ProductController extends BasicController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "updateMainImg", method = RequestMethod.POST)
-	public ResponseMessage updateMainImg(Product product, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+	public ResponseMessage updateMainImg(Product product,
+			@RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(file, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		fileService.insert(f);
@@ -143,40 +155,45 @@ public class ProductController extends BasicController {
 		productService.update(product);
 		return message;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "updateViceImg", method = RequestMethod.POST)
-	public ResponseMessage updateViceImg(Product product, @RequestParam("file") CommonsMultipartFile viceImgs[], HttpServletRequest request) {
+	public ResponseMessage updateViceImg(Product product,
+			@RequestParam("file") CommonsMultipartFile viceImgs[],
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		List<String> viceImgUuids = new ArrayList<String>();
-		List<File> viceImgFle =  new ArrayList<File>();
-		for(CommonsMultipartFile file:viceImgs){
+		List<File> viceImgFle = new ArrayList<File>();
+		for (CommonsMultipartFile file : viceImgs) {
 			File viceImg = FileUploadUtil.upload(file, request);
-			if(viceImg==null){
-				message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+			if (viceImg == null) {
+				message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 				return message;
 			}
 			viceImgUuids.add(viceImg.getUuid());
 			viceImgFle.add(viceImg);
 		}
-		for(File file:viceImgFle){
+		for (File file : viceImgFle) {
 			fileService.insert(file);
 		}
-		//删除产品跟副图的关联关系
+		// 删除产品跟副图的关联关系
 		productService.delViceImgUuids(product.getId());
-		//添加产品跟副图的关联关系
-		productService.addViceImgUuids(product.getId(),viceImgUuids);
+		// 添加产品跟副图的关联关系
+		productService.addViceImgUuids(product.getId(), viceImgUuids);
 		return message;
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ResponseMessage update(Product product) {
 		ResponseMessage message = new ResponseMessage();
 		product.setUpdateTime(new Date());
 		productService.update(product);
-		//先删除掉跟品类的关联关系
+		// 先删除掉跟品类的关联关系
 		productService.delCategoryIds(product.getId());
-		//然后再添加产品跟品类的关联关系
-		productService.addCategoryIds(product.getId(),product.getCategoryIds());
+		// 然后再添加产品跟品类的关联关系
+		productService
+				.addCategoryIds(product.getId(), product.getCategoryIds());
 		return message;
 	}
 
@@ -187,8 +204,10 @@ public class ProductController extends BasicController {
 		productService.deleteByIds(ids);
 		return message;
 	}
+
 	/**
 	 * 设置为热销产品
+	 * 
 	 * @param ids
 	 * @return
 	 */
@@ -199,8 +218,10 @@ public class ProductController extends BasicController {
 		productService.setHot(ids);
 		return message;
 	}
+
 	/**
 	 * 取消热销产品
+	 * 
 	 * @param ids
 	 * @return
 	 */

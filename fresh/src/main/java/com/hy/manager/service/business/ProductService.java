@@ -25,25 +25,33 @@ public class ProductService extends AbstractService<Product> {
 	public AbstractMapper getAbstractMapper() {
 		return productMapper;
 	}
-	public void addCategoryId(int productId,String categoryId){
-		this.productMapper.addCategoryId(Integer.toString(productId),categoryId);
+
+	public void addCategoryId(int productId, String categoryId) {
+		this.productMapper.addCategoryId(Integer.toString(productId),
+				categoryId);
 	}
-	public void addCategoryIds(int productId,String categoryIds[]){
-		for(String s:categoryIds){
-			this.addCategoryId(productId,s);
+
+	public void addCategoryIds(int productId, String categoryIds[]) {
+		for (String s : categoryIds) {
+			this.addCategoryId(productId, s);
 		}
 	}
+
 	public void delCategoryIds(int productId) {
 		this.productMapper.delCategoryIds(productId);
 	}
-	public void addViceImgUuid(int productId, String viceImgUuid,int orderNum) {
-		this.productMapper.addViceImgUuid(Integer.toString(productId),viceImgUuid,orderNum);
+
+	public void addViceImgUuid(int productId, String viceImgUuid, int orderNum) {
+		this.productMapper.addViceImgUuid(Integer.toString(productId),
+				viceImgUuid, orderNum);
 	}
+
 	public void addViceImgUuids(int productId, List<String> viceImgUuids) {
-		for(int i=0;i<viceImgUuids.size();i++){
-			this.addViceImgUuid(productId, viceImgUuids.get(i),(i+1));
+		for (int i = 0; i < viceImgUuids.size(); i++) {
+			this.addViceImgUuid(productId, viceImgUuids.get(i), (i + 1));
 		}
 	}
+
 	public void setHot(int[] ids) {
 		this.productMapper.setHot(ids);
 	}
@@ -51,23 +59,24 @@ public class ProductService extends AbstractService<Product> {
 	public void cancelHot(int[] ids) {
 		this.productMapper.cancelHot(ids);
 	}
-	
-	public List<Map<String,Object>> listHotProduct(){
+
+	public List<Map<String, Object>> listHotProduct() {
 		return this.productMapper.listHotProduct();
 	}
-	
+
 	public void addCollection(int customerId, int productId) {
-		this.productMapper.addCollection(customerId,productId);
+		this.productMapper.addCollection(customerId, productId);
 	}
+
 	public void delCollection(int customerId, int productId) {
-		this.productMapper.delCollection(customerId,productId);
+		this.productMapper.delCollection(customerId, productId);
 	}
 
 	public List<Product> listCollection(int customerId) {
 		return this.productMapper.listCollection(customerId);
 	}
-	
-	public List<Map<String,Object>> listByActivityId(int activityId) {
+
+	public List<Map<String, Object>> listByActivityId(int activityId) {
 		return this.productMapper.listByActivityId(activityId);
 	}
 
@@ -79,8 +88,8 @@ public class ProductService extends AbstractService<Product> {
 		return this.productMapper.search(name);
 	}
 
-	public Map<String, Object> detail(int productId,int skuId) {
-		return this.productMapper.detail(productId,skuId);
+	public Map<String, Object> detail(int productId, int skuId) {
+		return this.productMapper.detail(productId, skuId);
 	}
 
 	public List<String> findViceImgs(int productId) {

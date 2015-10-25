@@ -21,7 +21,7 @@ public class UserService extends AbstractService<User> {
 	public AbstractMapper getAbstractMapper() {
 		return userMapper;
 	}
-	
+
 	public User findByUsername(String username) {
 		return this.userMapper.findByUsername(username);
 	}

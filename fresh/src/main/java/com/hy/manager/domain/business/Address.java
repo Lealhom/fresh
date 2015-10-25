@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 收货地址
+ * 
  * @author huoyao
  *
  */
@@ -11,14 +12,15 @@ public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private int customerId;//消费者ID
+	private int customerId;// 消费者ID
 	private String phone;
 	private String address;
 	private int sex;
-	private String consignee;//收件人
-	private double longitude;//经度
-	private double latitude;//维度
-	private boolean defaultFlag;//是否为默认地址 
+	private String consignee;// 收件人
+	private double longitude;// 经度
+	private double latitude;// 维度
+	private boolean defaultFlag;// 是否为默认地址
+
 	public int getId() {
 		return id;
 	}
@@ -26,7 +28,7 @@ public class Address implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -34,7 +36,7 @@ public class Address implements Serializable {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}

@@ -26,7 +26,7 @@ public class CategoryService extends AbstractService<Category> {
 		return categoryMapper;
 	}
 
-	public List<Map<String,Object>> categoryList() {
+	public List<Map<String, Object>> categoryList() {
 		return categoryMapper.categoryList();
 	}
 
@@ -34,7 +34,7 @@ public class CategoryService extends AbstractService<Category> {
 		return categoryMapper.selectByParentId(parentId);
 	}
 
-	public List<Map<String,Object>> listCategoryMap() {
+	public List<Map<String, Object>> listCategoryMap() {
 		return categoryMapper.listCategoryMap();
 	}
 

@@ -33,8 +33,10 @@ public class OrderController extends BasicController {
 	public GridData listPaged(Parameter parameter) {
 		return orderService.listPaged(parameter);
 	}
+
 	/**
 	 * 卖家发货
+	 * 
 	 * @param ids
 	 * @return
 	 */
@@ -42,11 +44,13 @@ public class OrderController extends BasicController {
 	@RequestMapping(value = "send", method = RequestMethod.POST)
 	public ResponseMessage sendGoods(@RequestParam("ids[]") int[] ids) {
 		ResponseMessage message = new ResponseMessage();
-		orderService.updateStatus(ids,Order.STATUS_SEND);//已发货
+		orderService.updateStatus(ids, Order.STATUS_SEND);// 已发货
 		return message;
 	}
+
 	/**
 	 * 卖家退款
+	 * 
 	 * @param ids
 	 * @return
 	 */
@@ -54,7 +58,7 @@ public class OrderController extends BasicController {
 	@RequestMapping(value = "refunded", method = RequestMethod.POST)
 	public ResponseMessage refund(@RequestParam("ids[]") int[] ids) {
 		ResponseMessage message = new ResponseMessage();
-		orderService.updateStatus(ids,Order.STATUS_REFUNDED);
+		orderService.updateStatus(ids, Order.STATUS_REFUNDED);
 		return message;
 	}
 }

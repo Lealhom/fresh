@@ -10,15 +10,17 @@ import com.hy.manager.domain.business.Address;
 import com.hy.manager.service.business.AddressService;
 import com.test.service.abs.AbstractTest;
 
-public class TestAddressService extends AbstractTest{
+public class TestAddressService extends AbstractTest {
 	AddressService addressService;
+
 	@Before
-	public void init(){
-		addressService	 = (AddressService) applicationContext.getBean("addressService");
+	public void init() {
+		addressService = (AddressService) applicationContext
+				.getBean("addressService");
 	}
-	
+
 	@Test
-	public void testAdd(){
+	public void testAdd() {
 		Address entity = new Address();
 		entity.setAddress("华新下街");
 		entity.setConsignee("李良洪");
@@ -31,19 +33,22 @@ public class TestAddressService extends AbstractTest{
 		int i = addressService.insert(entity);
 		Assert.assertEquals(1, i);
 	}
+
 	@Test
-	public void testList(){
+	public void testList() {
 		List<Address> list = addressService.addressList(1);
-		for(Address a : list){
+		for (Address a : list) {
 			System.out.println(a.getAddress());
 		}
 	}
+
 	@Test
-	public void testDelete(){
+	public void testDelete() {
 		addressService.deleteById(1);
 	}
+
 	@Test
-	public void testUpdate(){
+	public void testUpdate() {
 		Address entity = addressService.selectById(1);
 		entity.setAddress("华新下街111");
 		entity.setConsignee("李良洪111");
@@ -55,5 +60,5 @@ public class TestAddressService extends AbstractTest{
 		entity.setSex(0);
 		addressService.update(entity);
 	}
-	
+
 }

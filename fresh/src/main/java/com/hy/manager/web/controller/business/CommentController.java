@@ -32,7 +32,7 @@ public class CommentController extends BasicController {
 	public GridData listPaged(Parameter parameter) {
 		return commentService.listPaged(parameter);
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "del", method = RequestMethod.POST)
 	public ResponseMessage del(@RequestParam("ids[]") int[] ids) {

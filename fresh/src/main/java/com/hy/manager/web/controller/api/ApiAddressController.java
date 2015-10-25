@@ -16,10 +16,10 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiAddressController {
 	@Autowired
 	private AddressService addressService;
-	
-	
+
 	/**
 	 * 地址列表
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list")
@@ -31,8 +31,10 @@ public class ApiAddressController {
 		message.setData(list);
 		return message;
 	}
+
 	/**
 	 * 添加
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "add")
@@ -43,8 +45,10 @@ public class ApiAddressController {
 		message.setMessage("添加成功!");
 		return message;
 	}
+
 	/**
 	 * 修改
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "update")
@@ -55,8 +59,10 @@ public class ApiAddressController {
 		message.setMessage("修改成功!");
 		return message;
 	}
+
 	/**
 	 * 删除
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "del")

@@ -9,13 +9,13 @@ import com.hy.manager.domain.AbstractMapper;
 
 public interface ActivityMapper extends AbstractMapper {
 
-	public void addProductId(@Param("activityId") String activityId, @Param("productId") String productId);
+	public void addProductId(@Param("activityId") String activityId,
+			@Param("productId") String productId);
 
 	public void delProductIds(@Param("activityId") int activityId);
 
-	public List<Map<String,Object>> listBanner();
+	public List<Map<String, Object>> listBanner();
 
-	public List<Map<String,Object>> listActivity();
-
+	public List<Map<String, Object>> listActivity();
 
 }

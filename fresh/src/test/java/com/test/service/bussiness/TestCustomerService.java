@@ -10,15 +10,17 @@ import com.hy.manager.web.GridData;
 import com.hy.manager.web.Parameter;
 import com.test.service.abs.AbstractTest;
 
-public class TestCustomerService extends AbstractTest{
+public class TestCustomerService extends AbstractTest {
 	CustomerService customerService;
+
 	@Before
-	public void init(){
-		customerService	 = (CustomerService) applicationContext.getBean("customerService");
+	public void init() {
+		customerService = (CustomerService) applicationContext
+				.getBean("customerService");
 	}
-	
+
 	@Test
-	public void testAdd(){
+	public void testAdd() {
 		Customer customer = new Customer();
 		customer.setUsername("username");
 		customer.setPassword("password");
@@ -28,37 +30,41 @@ public class TestCustomerService extends AbstractTest{
 		int i = customerService.insert(customer);
 		Assert.assertEquals(1, i);
 	}
+
 	@Test
-	public void testList(){
+	public void testList() {
 		Parameter parameter = new Parameter();
 		parameter.setPage(1);
 		parameter.setRows(10);
 		GridData data = customerService.listPaged(parameter);
-		if(data.getRows()!=null && data.getRows().size()>0){
-			for(int i=0;i<data.getRows().size();i++){
-				Customer c = (Customer)data.getRows().get(i);
+		if (data.getRows() != null && data.getRows().size() > 0) {
+			for (int i = 0; i < data.getRows().size(); i++) {
+				Customer c = (Customer) data.getRows().get(i);
 				System.out.println(c.getShowname());
 			}
 		}
 	}
+
 	@Test
-	public void testDelete(){
+	public void testDelete() {
 		customerService.deleteById(1);
 	}
+
 	@Test
-	public void testUpdate(){
+	public void testUpdate() {
 		Customer entity = customerService.selectById(2);
 		entity.setPhone("110");
 		customerService.update(entity);
 	}
+
 	@Test
-	public void testSelectOne(){
+	public void testSelectOne() {
 		Customer entity = customerService.selectById(2);
 		System.out.println(entity);
 	}
-	
+
 	@Test
-	public void testLogin(){
+	public void testLogin() {
 		customerService.login("username", "password");
 		customerService.login("username1", "password");
 	}

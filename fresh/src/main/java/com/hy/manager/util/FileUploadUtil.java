@@ -13,13 +13,17 @@ import com.hy.manager.domain.File;
 
 public class FileUploadUtil {
 	public static int MAX_SIZE = 5;
-	public static File upload(CommonsMultipartFile file,HttpServletRequest request){
-		if(file.getSize() > MAX_SIZE*(1024*1024)){
+
+	public static File upload(CommonsMultipartFile file,
+			HttpServletRequest request) {
+		if (file.getSize() > MAX_SIZE * (1024 * 1024)) {
 			return null;
 		}
 		String uuid = UUID.randomUUID().toString();
-		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuid;
-//		String reletivePath = "static/upload/" + uuidFileName;
+		String realPath = request.getSession().getServletContext()
+				.getRealPath("/")
+				+ "/static/upload/" + uuid;
+		// String reletivePath = "static/upload/" + uuidFileName;
 		String fileName = file.getOriginalFilename();
 		int index = fileName.lastIndexOf(".");
 		fileName = fileName.substring(0, index);
@@ -27,7 +31,8 @@ public class FileUploadUtil {
 		if (!file.isEmpty()) {
 			java.io.File localFile = new java.io.File(realPath);
 			try {
-				FileUtils.copyInputStreamToFile(file.getInputStream(), localFile);
+				FileUtils.copyInputStreamToFile(file.getInputStream(),
+						localFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {

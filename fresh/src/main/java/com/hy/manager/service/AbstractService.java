@@ -56,13 +56,16 @@ public abstract class AbstractService<T> {
 	public T selectById(Object id) {
 		return getAbstractMapper().selectById(id);
 	}
+
 	/**
 	 * 查询所有
+	 * 
 	 * @return
 	 */
 	public List<T> listAll() {
 		return getAbstractMapper().listAll();
 	}
+
 	/**
 	 * 分页
 	 * 

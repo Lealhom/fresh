@@ -46,18 +46,19 @@ public class ApiController {
 	private CustomerService customerService;
 	@Autowired
 	private ActivityService activityService;
-	
+
 	@ModelAttribute
 	public void setVaryResponseHeader(HttpServletResponse response) {
-	    response.setHeader("Access-Control-Allow-Origin", "*");
-	    response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Headers", "X-Requested-With");
 	}
-	
+
 	/**
 	 * 获取用户个人信息
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "user/info", method = {RequestMethod.POST})
+	@RequestMapping(value = "user/info", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage userInfo() {
 		ResponseMessage message = new ResponseMessage();
@@ -66,43 +67,49 @@ public class ApiController {
 		message.setData(c);
 		return message;
 	}
+
 	/**
 	 * 提交订单
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "order/add", method = {RequestMethod.POST})
+	@RequestMapping(value = "order/add", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage addOrder(Order order) {
-		order.setCreateTime(new Date());//设置订单创建时间
-		//设置订单编号
+		order.setCreateTime(new Date());// 设置订单创建时间
+		// 设置订单编号
 		long l = System.currentTimeMillis();
-		String no = l+""+order.getCustomerId();
+		String no = l + "" + order.getCustomerId();
 		order.setNo(no);
 		orderService.insert(order);
 		ResponseMessage message = new ResponseMessage();
 		message.setData("下单成功!");
 		return message;
 	}
+
 	/**
 	 * 更新订单
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "order/update", method = {RequestMethod.POST})
+	@RequestMapping(value = "order/update", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage updateOrder(Order order) {
-		if(order.getStatus()==Order.STATUS_PAYMENT){
-			order.setPayTime(new Date());//设置订单付款时间
+		if (order.getStatus() == Order.STATUS_PAYMENT) {
+			order.setPayTime(new Date());// 设置订单付款时间
 		}
 		orderService.update(order);
 		ResponseMessage message = new ResponseMessage();
 		message.setData("操作订单成功!");
 		return message;
 	}
+
 	/**
 	 * 获得订单列表
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "user/order", method = {RequestMethod.POST})
+	@RequestMapping(value = "user/order", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage orderList() {
 		int customerId = 1;
@@ -114,24 +121,28 @@ public class ApiController {
 
 	/**
 	 * 获得评论列表
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "comment/{orderId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "comment/{orderId}", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage listComment(@PathVariable int orderId) {
 		ResponseMessage message = new ResponseMessage();
-		List<Map<String, Object>> list = this.commentService.listByOrderId(orderId);
+		List<Map<String, Object>> list = this.commentService
+				.listByOrderId(orderId);
 		message.setData(list);
 		return message;
 	}
 
 	/**
 	 * 评论
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "comment/{orderId}/{rank}/{content}", method = {RequestMethod.POST})
+	@RequestMapping(value = "comment/{orderId}/{rank}/{content}", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage addComment(@PathVariable int orderId, @PathVariable int rank, @PathVariable String content) {
+	public ResponseMessage addComment(@PathVariable int orderId,
+			@PathVariable int rank, @PathVariable String content) {
 		int customerId = 1;
 		Comment comment = new Comment();
 		comment.setCustomerId(customerId);
@@ -144,13 +155,14 @@ public class ApiController {
 		message.setMessage("评论成功!");
 		return message;
 	}
-	
+
 	/**
 	 * 通過用戶ID获得地址列表
+	 * 
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "user/address", method = {RequestMethod.POST})
+	@RequestMapping(value = "user/address", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage listAddress() {
 		int customerId = 1;
@@ -162,10 +174,11 @@ public class ApiController {
 
 	/**
 	 * 查询地址
+	 * 
 	 * @param addressId
 	 * @return
 	 */
-	@RequestMapping(value = "find/address/{addressId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "find/address/{addressId}", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage findAddress(@PathVariable int addressId) {
 		Address address = this.addressService.selectById(addressId);
@@ -173,13 +186,14 @@ public class ApiController {
 		message.setData(address);
 		return message;
 	}
-	
+
 	/**
 	 * 编辑地址
+	 * 
 	 * @param address
 	 * @return
 	 */
-	@RequestMapping(value = "edit/address", method = {RequestMethod.POST})
+	@RequestMapping(value = "edit/address", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage editAddress(Address address) {
 		if (address.getId() > 0) {
@@ -191,13 +205,14 @@ public class ApiController {
 		message.setMessage("编辑成功!");
 		return message;
 	}
-	
+
 	/**
 	 * 删除地址
+	 * 
 	 * @param address
 	 * @return
 	 */
-	@RequestMapping(value = "del/address/{addressId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "del/address/{addressId}", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage delAddress(@PathVariable int addressId) {
 		this.addressService.deleteById(addressId);
@@ -205,39 +220,45 @@ public class ApiController {
 		message.setMessage("删除成功!");
 		return message;
 	}
+
 	/**
 	 * 添加收藏
+	 * 
 	 * @param productId
 	 * @return
 	 */
-	@RequestMapping(value = "collection/add/{productId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "collection/add/{productId}", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage addCollection(@PathVariable int productId) {
 		int customerId = 1;
-		productService.addCollection(customerId,productId);
+		productService.addCollection(customerId, productId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("添加收藏成功!");
 		return message;
 	}
+
 	/**
 	 * 取消收藏
+	 * 
 	 * @param productId
 	 * @return
 	 */
-	@RequestMapping(value = "collection/del/{productId}", method = {RequestMethod.POST})
+	@RequestMapping(value = "collection/del/{productId}", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage delCollection(@PathVariable int productId) {
 		int customerId = 1;
-		productService.delCollection(customerId,productId);
+		productService.delCollection(customerId, productId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("取消收藏成功!");
 		return message;
 	}
+
 	/**
 	 * 展示我的收藏
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "collection/list", method = {RequestMethod.POST})
+	@RequestMapping(value = "collection/list", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage listCollection() {
 		int customerId = 1;

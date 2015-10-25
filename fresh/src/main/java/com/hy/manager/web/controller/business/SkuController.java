@@ -72,7 +72,7 @@ public class SkuController extends BasicController {
 		skuService.deleteByIds(ids);
 		return message;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "selectByorderId/{orderId}", method = RequestMethod.POST)
 	public GridData selectByOrderId(@PathVariable int orderId) {

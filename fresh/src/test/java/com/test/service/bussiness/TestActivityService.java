@@ -9,16 +9,18 @@ import com.hy.manager.domain.business.Activity;
 import com.hy.manager.service.business.ActivityService;
 import com.test.service.abs.AbstractTest;
 
-public class TestActivityService extends AbstractTest{
+public class TestActivityService extends AbstractTest {
 	ActivityService activityService;
+
 	@Before
-	public void init(){
-		activityService	 = (ActivityService) applicationContext.getBean("activityService");
+	public void init() {
+		activityService = (ActivityService) applicationContext
+				.getBean("activityService");
 	}
-	
+
 	@Test
-	public void testListAll(){
-		List<Activity> list= activityService.listAll();
+	public void testListAll() {
+		List<Activity> list = activityService.listAll();
 		System.out.println(list);
 	}
 }

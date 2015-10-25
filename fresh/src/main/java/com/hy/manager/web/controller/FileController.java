@@ -42,7 +42,7 @@ public class FileController extends BasicController {
 		}
 		return null;
 	}
-	
+
 	@Autowired
 	private FileService fileService;
 	@Autowired
@@ -59,7 +59,7 @@ public class FileController extends BasicController {
 	public GridData listPaged(Parameter parameter) {
 		return fileService.listPaged(parameter);
 	}
-	
+
 	@RequestMapping(value = "tree_filetype")
 	@ResponseBody
 	public List<Filetype> treeFiletype(String id) {
@@ -77,11 +77,12 @@ public class FileController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(@RequestParam("file") CommonsMultipartFile file,HttpServletRequest request,File entity) {
+	public ResponseMessage add(@RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request, File entity) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(file, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		fileService.insert(entity);

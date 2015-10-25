@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 活动
+ * 
  * @author huoyao
  *
  */
@@ -19,19 +20,20 @@ public class Activity implements Serializable {
 	private String description;
 	private String startTime;
 	private String endTime;
-	private int banner;//是否为banner
+	private int banner;// 是否为banner
 	private String productIds[];
 	private String productNames;
-	private int orderNum;//序号
-	private String imgUuid;//活动图片uuid
+	private int orderNum;// 序号
+	private String imgUuid;// 活动图片uuid
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public int getStatus() {
 		return status;
 	}
@@ -43,19 +45,19 @@ public class Activity implements Serializable {
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public String getStartTime() {
 		return startTime;
 	}

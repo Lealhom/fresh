@@ -5,7 +5,6 @@ import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-
 public class File implements Serializable {
 
 	/**
@@ -13,9 +12,9 @@ public class File implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String name;//真实文件名
-	private String type;//文件类型， jpg,mpg,png等等
-	private String uuid;//文件唯一标识
+	private String name;// 真实文件名
+	private String type;// 文件类型， jpg,mpg,png等等
+	private String uuid;// 文件唯一标识
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date uploadTime;
 	private int typeId;
@@ -35,6 +34,7 @@ public class File implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public Date getUploadTime() {
 		return uploadTime;
 	}
@@ -66,5 +66,5 @@ public class File implements Serializable {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-	
+
 }

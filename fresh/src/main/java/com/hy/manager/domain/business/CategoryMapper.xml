@@ -67,7 +67,7 @@
 		<id property="id" column="id"/>
 		<result property="name" column="name"/>
 		<result property="imgUuid" column="imgUuid"/>
-		<collection property="children" ofType="hashmap"  >
+		<collection property="children" ofType="hashmap" javaType="ArrayList">
 			<id property="id" column="id2"/>
 			<result property="name" column="name2"/>
 			<result property="imgUuid" column="imgUuid2"/>

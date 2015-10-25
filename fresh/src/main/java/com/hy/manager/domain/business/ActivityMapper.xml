@@ -59,14 +59,14 @@
 		and status = 1
 	</select>
 	<select id="listActivity" resultType="map">
-		SELECT id,imgUuid FROM t_activity 
-		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 1 order by orderNum 
-	</select>
-	<select id="listBanner" resultType="map">
-		SELECT id,imgUuid FROM t_activity 
+		SELECT id,name,imgUuid FROM t_activity 
 		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
 		and status = 1 and banner = 2 order by orderNum 
+	</select>
+	<select id="listBanner" resultType="map">
+		SELECT id,name,imgUuid FROM t_activity 
+		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
+		and status = 1 and banner = 1 order by orderNum 
 	</select>
 	<sql id="gridWhere">
 		from t_activity u

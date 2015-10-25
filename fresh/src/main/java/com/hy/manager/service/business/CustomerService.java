@@ -22,12 +22,12 @@ public class CustomerService extends AbstractService<Customer> {
 	public AbstractMapper getAbstractMapper() {
 		return customerMapper;
 	}
-	
-	public Customer login(String username, String password){
-		return this.customerMapper.login(username,password);
+
+	public Customer login(String username, String password) {
+		return this.customerMapper.login(username, password);
 	}
 
 	public void updateHeadPhoto(int customerId, String imgUuid) {
-		this.customerMapper.updateHeadPhoto(customerId,imgUuid);
+		this.customerMapper.updateHeadPhoto(customerId, imgUuid);
 	}
 }

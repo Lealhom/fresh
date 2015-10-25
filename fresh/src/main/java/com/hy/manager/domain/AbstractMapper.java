@@ -19,10 +19,9 @@ public interface AbstractMapper {
 	public <T> T selectById(@Param("id") Object id);
 
 	public <T> List<T> listAll();
-	
+
 	public <T> List<T> listPaged(Parameter parameter);
 
 	public long count();
-
 
 }

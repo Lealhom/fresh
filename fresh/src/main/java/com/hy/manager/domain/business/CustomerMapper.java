@@ -6,8 +6,10 @@ import com.hy.manager.domain.AbstractMapper;
 
 public interface CustomerMapper extends AbstractMapper {
 
-	public Customer login(@Param("username") String username,@Param("password") String password);
+	public Customer login(@Param("username") String username,
+			@Param("password") String password);
 
-	public void updateHeadPhoto(@Param("customerId") int customerId, @Param("imgUuid") String imgUuid);
+	public void updateHeadPhoto(@Param("customerId") int customerId,
+			@Param("imgUuid") String imgUuid);
 
 }

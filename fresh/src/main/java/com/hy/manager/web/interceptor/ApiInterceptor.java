@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 public class ApiInterceptor implements HandlerInterceptor {
-	
+
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
@@ -20,14 +20,15 @@ public class ApiInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response,
-			Object arg2, ModelAndView mav) throws Exception {
+	public void postHandle(HttpServletRequest request,
+			HttpServletResponse response, Object arg2, ModelAndView mav)
+			throws Exception {
 
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request,
+			HttpServletResponse response, Object arg2) throws Exception {
 		return false;
 	}
 

@@ -1,8 +1,10 @@
 package com.hy.manager.domain.business;
 
 import java.io.Serializable;
+
 /**
  * 订单下面的各个SKU信息
+ * 
  * @author Administrator
  *
  */
@@ -12,8 +14,9 @@ public class SkuDTO implements Serializable {
 	private int id;
 	private String orderId;
 	private String skuId;
-	private int quantity;//购买数量
-	private double unitPrice;//单价
+	private int quantity;// 购买数量
+	private double unitPrice;// 单价
+
 	public int getId() {
 		return id;
 	}
@@ -53,7 +56,5 @@ public class SkuDTO implements Serializable {
 	public void setUnitPrice(double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
-
-
 
 }

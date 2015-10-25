@@ -23,9 +23,9 @@ public class FiletypeService extends AbstractService<Filetype> {
 	public AbstractMapper getAbstractMapper() {
 		return filetypeMapper;
 	}
-	
+
 	public List<Filetype> selectByParentId(int parentId) {
-		return	this.filetypeMapper.selectByParentId(parentId);
+		return this.filetypeMapper.selectByParentId(parentId);
 	}
 
 }

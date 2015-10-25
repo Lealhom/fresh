@@ -33,6 +33,7 @@ public class SkuService extends AbstractService<Sku> {
 		data.setTotal(skus.size());
 		return data;
 	}
+
 	/**
 	 * 更新sku的评分
 	 */

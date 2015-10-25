@@ -9,7 +9,8 @@ import org.apache.shiro.web.filter.authc.AuthenticationFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractAppAuthenticationFilter extends AuthenticationFilter {
+public abstract class AbstractAppAuthenticationFilter extends
+		AuthenticationFilter {
 
 	public static final String TOKEN = "token";
 	public static final String NEXT_TOKEN = "nextToken";
@@ -18,7 +19,6 @@ public abstract class AbstractAppAuthenticationFilter extends AuthenticationFilt
 	@Override
 	protected boolean onAccessDenied(ServletRequest request,
 			ServletResponse response) throws Exception {
-		logger.debug("App用户进入校验!" + getLoginUrl());
 		HttpServletRequest req = (HttpServletRequest) request;
 		System.out.println(req.getRequestURI());
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -32,26 +32,32 @@ public abstract class AbstractAppAuthenticationFilter extends AuthenticationFilt
 
 	/**
 	 * 判断合法性
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public abstract boolean isAccess(HttpServletRequest request, HttpServletResponse response);
+	public abstract boolean isAccess(HttpServletRequest request,
+			HttpServletResponse response);
 
 	/**
 	 * 认证成功进行的操作处理
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public abstract boolean onAccessSuccess(HttpServletRequest request, HttpServletResponse response);
+	public abstract boolean onAccessSuccess(HttpServletRequest request,
+			HttpServletResponse response);
 
 	/**
 	 * 认证失败时处理结果
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	public abstract boolean onAccessFail(HttpServletRequest request, HttpServletResponse response);
+	public abstract boolean onAccessFail(HttpServletRequest request,
+			HttpServletResponse response);
 
 }

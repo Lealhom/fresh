@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 品牌
+ * 
  * @author huoyao
  *
  */

@@ -19,43 +19,44 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiCategoryController {
 	@Autowired
 	private CategoryService categoryService;
-	
-	
+
 	@RequestMapping(value = "list_category_map")
 	@ResponseBody
 	public ResponseMessage listCategoryMap() {
-		List<Map<String,Object>> list = categoryService.listCategoryMap();
+		List<Map<String, Object>> list = categoryService.listCategoryMap();
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
 	}
+
 	/**
 	 * 获得品类列表
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list")
 	@ResponseBody
 	public ResponseMessage listCategory() {
-		List<Map<String,Object>> list = categoryService.categoryList();
-		List<Map<String,Object>> listLevel1 = new ArrayList<Map<String,Object>>(); 
-		List<Map<String,Object>> listLevel2 = new ArrayList<Map<String,Object>>();
-		for(Map<String,Object> c:list){
-			if("1".equals(c.get("level").toString())){
+		List<Map<String, Object>> list = categoryService.categoryList();
+		List<Map<String, Object>> listLevel1 = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> listLevel2 = new ArrayList<Map<String, Object>>();
+		for (Map<String, Object> c : list) {
+			if ("1".equals(c.get("level").toString())) {
 				listLevel1.add(c);
-			}else if("2".equals(c.get("level").toString())){
+			} else if ("2".equals(c.get("level").toString())) {
 				listLevel2.add(c);
 			}
 		}
-		for(Map<String,Object> c1:listLevel1){
-			List<Map<String,Object>> children = new ArrayList<Map<String,Object>>();
-			for(Map<String,Object> c2:listLevel2){
+		for (Map<String, Object> c1 : listLevel1) {
+			List<Map<String, Object>> children = new ArrayList<Map<String, Object>>();
+			for (Map<String, Object> c2 : listLevel2) {
 				String id = c1.get("id").toString();
 				String parentId = c2.get("parentId").toString();
-				if(id.equals(parentId)){
+				if (id.equals(parentId)) {
 					children.add(c2);
 				}
 			}
-			if(children.size()!=0){
+			if (children.size() != 0) {
 				c1.put("children", children);
 			}
 		}
@@ -63,8 +64,10 @@ public class ApiCategoryController {
 		message.setData(listLevel1);
 		return message;
 	}
+
 	/**
 	 * 根据某个一级品类的ID，得到它的子品类
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list_children/{parentId}")

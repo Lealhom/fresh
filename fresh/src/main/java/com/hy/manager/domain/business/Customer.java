@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 顾客
+ * 
  * @author huoyao
  *
  */
@@ -19,7 +20,7 @@ public class Customer implements Serializable {
 	private String showname;
 	private String phone;
 	private String email;
-	private String imgUuid;//头像
+	private String imgUuid;// 头像
 
 	public int getId() {
 		return id;

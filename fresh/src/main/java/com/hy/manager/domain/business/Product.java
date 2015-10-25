@@ -15,17 +15,18 @@ public class Product implements Serializable {
 	private String name;
 	private int status;
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
-	private Date createTime;//创建时间
+	private Date createTime;// 创建时间
 	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
-	private Date updateTime;//最后更新时间
-	private String description;//产品描述
-	private String bornPlace;//产地
-	private String mainImgUuid;//主图的uuid
-	private int brandId;//品牌id
-	private String brandName;//品牌名称
-	private String categoryIds[];//接收添加商品是，前端传回来的参数
-	private String categoryNames;//接收数据库返回回来的品类名称
-	private int hot;//是否为热销商品
+	private Date updateTime;// 最后更新时间
+	private String description;// 产品描述
+	private String bornPlace;// 产地
+	private String mainImgUuid;// 主图的uuid
+	private int brandId;// 品牌id
+	private String brandName;// 品牌名称
+	private String categoryIds[];// 接收添加商品是，前端传回来的参数
+	private String categoryNames;// 接收数据库返回回来的品类名称
+	private int hot;// 是否为热销商品
+
 	public int getId() {
 		return id;
 	}
@@ -57,7 +58,6 @@ public class Product implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public String getMainImgUuid() {
 		return mainImgUuid;

@@ -24,9 +24,10 @@ public class AddressService extends AbstractService<Address> {
 	public AbstractMapper getAbstractMapper() {
 		return addressMapper;
 	}
-	
+
 	/**
 	 * 获得地址列表
+	 * 
 	 * @return
 	 */
 	public List<Address> addressList(int userId) {

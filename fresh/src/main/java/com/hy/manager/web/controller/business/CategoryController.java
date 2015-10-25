@@ -50,20 +50,23 @@ public class CategoryController extends BasicController {
 
 	@ResponseBody
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public ResponseMessage add(Category category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+	public ResponseMessage add(Category category,
+			@RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(file, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		fileService.insert(f);
 		category.setImgUuid(f.getUuid());
-		if("".equals(category.getParentId())){
+		if ("".equals(category.getParentId())) {
 			category.setLevel(1);
-		}else{
-			Category parentCategory = categoryService.selectById(category.getParentId());
-			category.setLevel(parentCategory.getLevel()+1);
+		} else {
+			Category parentCategory = categoryService.selectById(category
+					.getParentId());
+			category.setLevel(parentCategory.getLevel() + 1);
 		}
 		categoryService.insert(category);
 		return message;
@@ -76,8 +79,10 @@ public class CategoryController extends BasicController {
 		mav.addObject("category", category);
 		return mav;
 	}
+
 	/**
 	 * 弹出更换图片窗口
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -88,8 +93,10 @@ public class CategoryController extends BasicController {
 		mav.addObject("category", category);
 		return mav;
 	}
+
 	/**
 	 * 更换图片
+	 * 
 	 * @param category
 	 * @param file
 	 * @param request
@@ -97,11 +104,13 @@ public class CategoryController extends BasicController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "updateImg", method = RequestMethod.POST)
-	public ResponseMessage updateImgPage(Category category, @RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) {
+	public ResponseMessage updateImgPage(Category category,
+			@RequestParam("file") CommonsMultipartFile file,
+			HttpServletRequest request) {
 		ResponseMessage message = new ResponseMessage();
 		File f = FileUploadUtil.upload(file, request);
-		if(f==null){
-			message.setMessage("上传文件大小不能超过"+FileUploadUtil.MAX_SIZE+"M");
+		if (f == null) {
+			message.setMessage("上传文件大小不能超过" + FileUploadUtil.MAX_SIZE + "M");
 			return message;
 		}
 		fileService.insert(f);

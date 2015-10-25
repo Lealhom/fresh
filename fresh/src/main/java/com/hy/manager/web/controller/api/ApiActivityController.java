@@ -16,27 +16,30 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiActivityController {
 	@Autowired
 	private ActivityService activityService;
-	
+
 	/**
 	 * 获取banner活动
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list_banner")
 	@ResponseBody
 	public ResponseMessage listBanner() {
-		List<Map<String,Object>> list = activityService.listBanner();
+		List<Map<String, Object>> list = activityService.listBanner();
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
 	}
+
 	/**
 	 * 获取普通活动
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "list_activity")
 	@ResponseBody
 	public ResponseMessage listActivity() {
-		List<Map<String,Object>> list = activityService.listActivity();
+		List<Map<String, Object>> list = activityService.listActivity();
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
