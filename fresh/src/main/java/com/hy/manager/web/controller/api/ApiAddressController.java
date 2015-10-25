@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,7 +34,19 @@ public class ApiAddressController extends ApiBasicController {
 		message.setData(list);
 		return message;
 	}
-
+	/**
+	 * 根据ID得到地址
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "find/{addressId}")
+	@ResponseBody
+	public ResponseMessage find(@PathVariable int addressId) {
+		ResponseMessage message = new ResponseMessage();
+		Address address = this.addressService.selectById(addressId);
+		message.setData(address);
+		return message;
+	}
 	/**
 	 * 添加
 	 * 

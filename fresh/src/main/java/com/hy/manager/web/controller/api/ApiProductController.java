@@ -3,6 +3,8 @@ package com.hy.manager.web.controller.api;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +16,7 @@ import com.hy.manager.web.ResponseMessage;
 
 @Controller
 @RequestMapping(value = "api/product")
-public class ApiProductController {
+public class ApiProductController  extends ApiBasicController {
 	@Autowired
 	private ProductService productService;
 
@@ -100,8 +102,8 @@ public class ApiProductController {
 	 */
 	@RequestMapping(value = "add_collection/{productId}")
 	@ResponseBody
-	public ResponseMessage addCollection(@PathVariable int productId) {
-		int customerId = 1;
+	public ResponseMessage addCollection(HttpServletRequest request,@PathVariable int productId) {
+		int customerId = this.getUid(request);
 		productService.addCollection(customerId, productId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("添加收藏成功!");
@@ -115,8 +117,8 @@ public class ApiProductController {
 	 */
 	@RequestMapping(value = "del_collection/{productId}")
 	@ResponseBody
-	public ResponseMessage delCollection(@PathVariable int productId) {
-		int customerId = 1;
+	public ResponseMessage delCollection(HttpServletRequest request,@PathVariable int productId) {
+		int customerId = this.getUid(request);
 		productService.delCollection(customerId, productId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("取消收藏成功!");
