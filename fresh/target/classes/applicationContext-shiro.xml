@@ -28,16 +28,23 @@
 	            <entry key="authc" value-ref="captchaFormAuthenticationFilter"/>
 	            <entry key="logout" value-ref="customLogoutFilter"/>
 	            <entry key="app" value-ref="appTokenAuthenticationFilter"></entry>
+	            <entry key="appno" value-ref="appNoAuthenticationFilter"></entry>
 	        </map>
         </property>
 		<property name="filterChainDefinitions">
 			<value>
 				/Captcha.jpg = anon
 				/static/** = anon
-				/api/app_login = anon
+				/api/customer/app_login = appno
 				/login = authc
 				/logout = logout
-				/api/** = app
+				/api/activity/** = appno
+				/api/product/** = appno
+				/api/category/** = appno
+				/api/address/** = app
+				/api/comment/** = app
+				/api/customer/** = app
+				/api/order/** = app
 		    	/** = user
 		 	</value>
 		</property>
@@ -54,4 +61,5 @@
 	<bean id="customLogoutFilter" class="com.hy.manager.shiro.CustomLogoutFilter"></bean>
 	<bean id="captchaFormAuthenticationFilter" class="com.hy.manager.shiro.CaptchaFormAuthenticationFilter"/>
 	<bean id="appTokenAuthenticationFilter" class="com.hy.manager.shiro.AppTokenAuthenticationFilter"/>
+	<bean id="appNoAuthenticationFilter" class="com.hy.manager.shiro.AppNoAuthenticationFilter"/>
 </beans>
