@@ -97,7 +97,7 @@ public class ApiCustomerController extends ApiBasicController {
 			return message;
 		}
 		fileService.insert(f);
-		int customerId = 1;// 用户Id
+		int customerId = this.getUid(request);;// 用户Id
 		customerService.updateHeadPhoto(customerId, f.getUuid());
 		return message;
 	}
@@ -109,8 +109,8 @@ public class ApiCustomerController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "myorder", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage myorder() {
-		int customerId = 1;
+	public ResponseMessage myorder(HttpServletRequest request) {
+		int customerId = this.getUid(request);
 		List<Order> list = orderService.orderList(customerId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);

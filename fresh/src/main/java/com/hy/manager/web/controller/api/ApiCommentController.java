@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,7 @@ import com.hy.manager.web.ResponseMessage;
 
 @Controller
 @RequestMapping(value = "api/comment")
-public class ApiCommentController {
+public class ApiCommentController  extends ApiBasicController{
 	@Autowired
 	private CommentService commentService;
 	@Autowired
@@ -32,8 +34,8 @@ public class ApiCommentController {
 	@RequestMapping(value = "add/{orderId}/{skuId}")
 	@ResponseBody
 	public ResponseMessage add(Comment comment, @PathVariable int orderId,
-			@PathVariable int skuId) {
-		int customerId = 1;
+			@PathVariable int skuId,HttpServletRequest request) {
+		int customerId = this.getUid(request);
 		comment.setCustomerId(customerId);
 		comment.setOrderId(orderId);
 		comment.setSkuId(skuId);
