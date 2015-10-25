@@ -9,6 +9,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +23,7 @@ import com.hy.manager.domain.business.Product;
 import com.hy.manager.service.FileService;
 import com.hy.manager.service.business.CustomerService;
 import com.hy.manager.service.business.OrderService;
+import com.hy.manager.service.business.ProductService;
 import com.hy.manager.util.FileUploadUtil;
 import com.hy.manager.web.ResponseMessage;
 
@@ -34,6 +36,8 @@ public class ApiCustomerController extends ApiBasicController {
 	private FileService fileService;
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private ProductService productService;
 
 	/**
 	 * app端登录
@@ -114,6 +118,22 @@ public class ApiCustomerController extends ApiBasicController {
 		List<Order> list = orderService.orderList(customerId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
+		return message;
+	}
+	
+
+	/**
+	 * 添加收藏
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "add_collection/{productId}")
+	@ResponseBody
+	public ResponseMessage addCollection(HttpServletRequest request,@PathVariable int productId) {
+		int customerId = this.getUid(request);
+		productService.addCollection(customerId, productId);
+		ResponseMessage message = new ResponseMessage();
+		message.setMessage("添加收藏成功!");
 		return message;
 	}
 }

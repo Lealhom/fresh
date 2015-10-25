@@ -96,21 +96,6 @@ public class ApiProductController  extends ApiBasicController {
 	}
 
 	/**
-	 * 添加收藏
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "add_collection/{productId}")
-	@ResponseBody
-	public ResponseMessage addCollection(HttpServletRequest request,@PathVariable int productId) {
-		int customerId = this.getUid(request);
-		productService.addCollection(customerId, productId);
-		ResponseMessage message = new ResponseMessage();
-		message.setMessage("添加收藏成功!");
-		return message;
-	}
-
-	/**
 	 * 取消收藏
 	 * 
 	 * @return
