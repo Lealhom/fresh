@@ -6,7 +6,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hy.manager.domain.business.Product;
 import com.hy.manager.service.business.ProductService;
 import com.test.service.abs.AbstractTest;
 
@@ -33,7 +32,7 @@ public class TestProductService extends AbstractTest {
 
 	@Test
 	public void testListCollection() {
-		List<Product> list = productService.listCollection(1);
+		List<Map<String, Object>> list = productService.listCollection(1);
 		System.out.println(list);
 	}
 

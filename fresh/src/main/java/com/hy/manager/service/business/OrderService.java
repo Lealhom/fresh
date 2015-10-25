@@ -26,8 +26,8 @@ public class OrderService extends AbstractService<Order> {
 		return orderMapper;
 	}
 
-	public List<Order> orderList(int userId) {
-		return this.orderMapper.orderList(userId);
+	public List<Order> orderList(int customerId) {
+		return this.orderMapper.orderList(customerId);
 	}
 
 	/**

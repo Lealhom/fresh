@@ -135,7 +135,7 @@
 		where t1.id = #{id}
 		group by t1.id 
 	</select>
-	<select id="listCollection" resultType="Product">
+	<select id="listCollection" resultType="map">
 		select t1.id,t1.name,t1.description,t3.name brandName 
 		from t_product t1
 		left join t_collection t2 on t1.id = t2.productId

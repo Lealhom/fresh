@@ -18,7 +18,6 @@ import com.hy.manager.domain.business.Address;
 import com.hy.manager.domain.business.Comment;
 import com.hy.manager.domain.business.Customer;
 import com.hy.manager.domain.business.Order;
-import com.hy.manager.domain.business.Product;
 import com.hy.manager.service.business.ActivityService;
 import com.hy.manager.service.business.AddressService;
 import com.hy.manager.service.business.CategoryService;
@@ -250,21 +249,6 @@ public class ApiController {
 		productService.delCollection(customerId, productId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("取消收藏成功!");
-		return message;
-	}
-
-	/**
-	 * 展示我的收藏
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "collection/list", method = { RequestMethod.POST })
-	@ResponseBody
-	public ResponseMessage listCollection() {
-		int customerId = 1;
-		List<Product> list = productService.listCollection(customerId);
-		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
 		return message;
 	}
 }

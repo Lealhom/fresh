@@ -72,7 +72,7 @@ public class ProductService extends AbstractService<Product> {
 		this.productMapper.delCollection(customerId, productId);
 	}
 
-	public List<Product> listCollection(int customerId) {
+	public List<Map<String, Object>> listCollection(int customerId) {
 		return this.productMapper.listCollection(customerId);
 	}
 

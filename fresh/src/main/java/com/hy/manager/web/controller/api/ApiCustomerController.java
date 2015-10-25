@@ -1,6 +1,7 @@
 package com.hy.manager.web.controller.api;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -120,7 +121,20 @@ public class ApiCustomerController extends ApiBasicController {
 		message.setData(list);
 		return message;
 	}
-	
+	/**
+	 * 获得我的收藏
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "my_collection", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseMessage myCollection(HttpServletRequest request) {
+		int customerId = this.getUid(request);
+		List<Map<String, Object>> list = productService.listCollection(customerId);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
+	}
 
 	/**
 	 * 添加收藏
