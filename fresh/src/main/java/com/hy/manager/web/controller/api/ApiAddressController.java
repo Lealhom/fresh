@@ -2,6 +2,8 @@ package com.hy.manager.web.controller.api;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +15,7 @@ import com.hy.manager.web.ResponseMessage;
 
 @Controller
 @RequestMapping(value = "api/address")
-public class ApiAddressController {
+public class ApiAddressController extends ApiBasicController {
 	@Autowired
 	private AddressService addressService;
 
@@ -24,8 +26,8 @@ public class ApiAddressController {
 	 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public ResponseMessage list() {
-		int customerId = 1;
+	public ResponseMessage list(HttpServletRequest request) {
+		int customerId = this.getUid(request);
 		List<Address> list = this.addressService.addressList(customerId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
@@ -39,7 +41,9 @@ public class ApiAddressController {
 	 */
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ResponseMessage add(Address address) {
+	public ResponseMessage add(HttpServletRequest request, Address address) {
+		int customerId = this.getUid(request);
+		address.setCustomerId(customerId);
 		this.addressService.insert(address);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("添加成功!");

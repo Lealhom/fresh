@@ -35,7 +35,7 @@
 			<value>
 				/Captcha.jpg = anon
 				/static/** = anon
-				/api/app_login = anon
+				/api/customer/app_login = appno
 				/login = authc
 				/logout = logout
 				/api/activity/** = appno

@@ -1,14 +1,11 @@
 package com.hy.manager.shiro;
 
 import java.io.IOException;
-import java.util.Date;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.hy.manager.util.TokenUtils;
 import com.hy.manager.web.ResponseMessage;
 
 public class AppTokenAuthenticationFilter extends
@@ -17,9 +14,13 @@ public class AppTokenAuthenticationFilter extends
 	@Override
 	public boolean isAccess(HttpServletRequest request,
 			HttpServletResponse response) {
-		String token = "";
-		String nextToken = "";
-		String password = "";
+		String uidStr = request.getParameter("uid");
+		if (uidStr == null) {
+			return false;
+		}
+//		String token = "";
+//		String nextToken = "";
+//		String password = "";
 		//
 		// Cookie[] cookies = request.getCookies();
 		//
@@ -27,9 +28,9 @@ public class AppTokenAuthenticationFilter extends
 		// return false;
 		// }
 		//
-		token = request.getHeader("token");
-		nextToken = request.getHeader("next");
-		password = request.getHeader("time");
+//		token = request.getHeader("token");
+//		nextToken = request.getHeader("next");
+//		password = request.getHeader("time");
 		//
 		// for (Cookie cookie : cookies) {
 		// if (cookie.getName().equals("token")) {
@@ -74,6 +75,7 @@ public class AppTokenAuthenticationFilter extends
 			HttpServletResponse response) {
 		ResponseMessage message = new ResponseMessage();
 		message.setStatus(ResponseMessage.STATUS_UNAUTHORIZED);
+		message.setAction(ResponseMessage.ACTION_LOGIN);
 		message.setMessage("请登录");
 		try {
 			JSON.writeJSONStringTo(message, response.getWriter());

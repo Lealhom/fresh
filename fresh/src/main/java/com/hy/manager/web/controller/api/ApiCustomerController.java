@@ -27,7 +27,7 @@ import com.hy.manager.web.ResponseMessage;
 
 @Controller
 @RequestMapping(value = "api/customer")
-public class ApiCustomerController {
+public class ApiCustomerController extends ApiBasicController {
 	@Autowired
 	private CustomerService customerService;
 	@Autowired
@@ -47,13 +47,14 @@ public class ApiCustomerController {
 		Customer customer = customerService.login(username, password);
 		if (customer != null) {
 			message.setMessage("登录成功");
-			message.setData(true);
+			message.setData(customer);
 
 			Subject subject = SecurityUtils.getSubject();
 			Session session = subject.getSession();
 			session.setAttribute("customerId", customer.getId());
 
 		} else {
+			message.setStatus(ResponseMessage.STATUS_ERROR);
 			message.setMessage("用户名密码错误");
 			message.setData(false);
 		}
@@ -68,11 +69,13 @@ public class ApiCustomerController {
 	 */
 	@RequestMapping(value = "info", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage userInfo() {
+	public ResponseMessage userInfo(HttpServletRequest request) {
+		
+		int customerId = this.getUid(request);
+		
 		ResponseMessage message = new ResponseMessage();
-		int customerId = 1;
-		Customer c = customerService.selectById(customerId);
-		message.setData(c);
+		Customer customer = customerService.selectById(customerId);
+		message.setData(customer);
 		return message;
 	}
 

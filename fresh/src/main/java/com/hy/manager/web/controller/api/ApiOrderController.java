@@ -2,6 +2,8 @@ package com.hy.manager.web.controller.api;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,7 @@ import com.hy.manager.web.ResponseMessage;
 
 @Controller
 @RequestMapping(value = "api/order")
-public class ApiOrderController {
+public class ApiOrderController extends ApiBasicController {
 	@Autowired
 	private OrderService orderService;
 
@@ -26,8 +28,11 @@ public class ApiOrderController {
 	 */
 	@RequestMapping(value = "add")
 	@ResponseBody
-	public ResponseMessage add(Order order,
-			@RequestParam("skuDTOS[]") SkuDTO[] skuDTOS) {
+	public ResponseMessage add(HttpServletRequest request, Order order, @RequestParam("skus[]") SkuDTO[] skus) {
+		
+		int uid = this.getUid(request);
+		order.setCustomerId(uid);
+		
 		order.setCreateTime(new Date());// 设置订单创建时间
 		// 设置订单编号
 		long l = System.currentTimeMillis();
@@ -36,9 +41,9 @@ public class ApiOrderController {
 		order.setStatus(Order.STATUS_NON_PAYMENT);// 待付款
 		orderService.insert(order);
 		// 添加订单中的sku相关信息，包括购买的数量，购买时的价格等等
-		orderService.addSkus(order.getId(), skuDTOS);
+		orderService.addSkus(order.getId(), skus);
 		// 减少各个SKU的库存量
-		orderService.decreaseSkusQuantity(skuDTOS);
+		orderService.decreaseSkusQuantity(skus);
 		ResponseMessage message = new ResponseMessage();
 		message.setData("下单成功!");
 		return message;
