@@ -131,7 +131,8 @@ public class ApiCustomerController extends ApiBasicController {
 	@ResponseBody
 	public ResponseMessage addCollection(HttpServletRequest request,@PathVariable int productId) {
 		int customerId = this.getUid(request);
-		productService.addCollection(customerId, productId);
+		productService.delCollection(customerId, productId);//先删除，防止出现多次收藏，出现重复数据
+		productService.addCollection(customerId, productId);//然后再添加收藏
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("添加收藏成功!");
 		return message;
