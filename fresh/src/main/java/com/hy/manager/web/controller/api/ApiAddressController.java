@@ -57,6 +57,9 @@ public class ApiAddressController extends ApiBasicController {
 	public ResponseMessage add(HttpServletRequest request, Address address) {
 		int customerId = this.getUid(request);
 		address.setCustomerId(customerId);
+		if(address.isDefaultFlag()){//如果勾选了“设置为默认地址”，则先把改用户下的所有地址设为“非默认”
+			this.addressService.cancelDefaultFlag(customerId);//取消默认地址
+		}
 		this.addressService.insert(address);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("添加成功!");
@@ -70,7 +73,11 @@ public class ApiAddressController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "update")
 	@ResponseBody
-	public ResponseMessage update(Address address) {
+	public ResponseMessage update(HttpServletRequest request, Address address) {
+		int customerId = this.getUid(request);
+		if(address.isDefaultFlag()){//如果勾选了“设置为默认地址”，则先把改用户下的所有地址设为“非默认”
+			this.addressService.cancelDefaultFlag(customerId);//取消默认地址
+		}
 		this.addressService.update(address);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("修改成功!");

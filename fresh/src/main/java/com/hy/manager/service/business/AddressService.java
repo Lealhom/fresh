@@ -33,5 +33,9 @@ public class AddressService extends AbstractService<Address> {
 	public List<Address> addressList(int userId) {
 		return this.addressMapper.addressList(userId);
 	}
+	
+	public void cancelDefaultFlag(int customerId) {
+		this.addressMapper.cancelDefaultFlag(customerId);
+	}
 
 }

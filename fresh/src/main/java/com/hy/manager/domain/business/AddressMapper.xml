@@ -22,7 +22,9 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+	<update id="cancelDefaultFlag">
+		update t_address set defaultFlag=0 where customerId=#{customerId}
+	</update>
 	<delete id="deleteById" parameterType="int">
 		delete from t_address where id=#{id}
 	</delete>
