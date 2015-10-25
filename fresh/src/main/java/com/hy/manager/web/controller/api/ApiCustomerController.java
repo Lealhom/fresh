@@ -136,4 +136,19 @@ public class ApiCustomerController extends ApiBasicController {
 		message.setMessage("添加收藏成功!");
 		return message;
 	}
+	
+	/**
+	 * 取消收藏
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "del_collection/{productId}")
+	@ResponseBody
+	public ResponseMessage delCollection(HttpServletRequest request,@PathVariable int productId) {
+		int customerId = this.getUid(request);
+		productService.delCollection(customerId, productId);
+		ResponseMessage message = new ResponseMessage();
+		message.setMessage("取消收藏成功!");
+		return message;
+	}
 }

@@ -3,8 +3,6 @@ package com.hy.manager.web.controller.api;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -92,21 +90,6 @@ public class ApiProductController  extends ApiBasicController {
 		map.put("viceImgs", viceImgs);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(map);
-		return message;
-	}
-
-	/**
-	 * 取消收藏
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "del_collection/{productId}")
-	@ResponseBody
-	public ResponseMessage delCollection(HttpServletRequest request,@PathVariable int productId) {
-		int customerId = this.getUid(request);
-		productService.delCollection(customerId, productId);
-		ResponseMessage message = new ResponseMessage();
-		message.setMessage("取消收藏成功!");
 		return message;
 	}
 
