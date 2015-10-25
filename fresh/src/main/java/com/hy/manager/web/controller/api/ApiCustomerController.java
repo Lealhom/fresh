@@ -141,12 +141,12 @@ public class ApiCustomerController extends ApiBasicController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "add_collection/{productId}")
+	@RequestMapping(value = "add_collection/{skuId}")
 	@ResponseBody
-	public ResponseMessage addCollection(HttpServletRequest request,@PathVariable int productId) {
+	public ResponseMessage addCollection(HttpServletRequest request,@PathVariable int skuId) {
 		int customerId = this.getUid(request);
-		productService.delCollection(customerId, productId);//先删除，防止出现多次收藏，出现重复数据
-		productService.addCollection(customerId, productId);//然后再添加收藏
+		productService.delCollection(customerId, skuId);//先删除，防止出现多次收藏，出现重复数据
+		productService.addCollection(customerId, skuId);//然后再添加收藏
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("添加收藏成功!");
 		return message;
@@ -159,9 +159,9 @@ public class ApiCustomerController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "del_collection/{productId}")
 	@ResponseBody
-	public ResponseMessage delCollection(HttpServletRequest request,@PathVariable int productId) {
+	public ResponseMessage delCollection(HttpServletRequest request,@PathVariable int skuId) {
 		int customerId = this.getUid(request);
-		productService.delCollection(customerId, productId);
+		productService.delCollection(customerId, skuId);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("取消收藏成功!");
 		return message;

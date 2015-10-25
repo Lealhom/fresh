@@ -64,12 +64,12 @@ public class ProductService extends AbstractService<Product> {
 		return this.productMapper.listHotProduct();
 	}
 
-	public void addCollection(int customerId, int productId) {
-		this.productMapper.addCollection(customerId, productId);
+	public void addCollection(int customerId, int skuId) {
+		this.productMapper.addCollection(customerId, skuId);
 	}
 
-	public void delCollection(int customerId, int productId) {
-		this.productMapper.delCollection(customerId, productId);
+	public void delCollection(int customerId, int skuId) {
+		this.productMapper.delCollection(customerId, skuId);
 	}
 
 	public List<Map<String, Object>> listCollection(int customerId) {

@@ -24,10 +24,10 @@ public interface ProductMapper extends AbstractMapper {
 	public void cancelHot(@Param("ids") Object ids);
 
 	public void addCollection(@Param("customerId") int customerId,
-			@Param("productId") int productId);
+			@Param("skuId") int skuId);
 
 	public void delCollection(@Param("customerId") int customerId,
-			@Param("productId") int productId);
+			@Param("skuId") int skuId);
 
 	public List<Map<String, Object>> listCollection(@Param("customerId") int customerId);
 
