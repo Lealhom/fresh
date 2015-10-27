@@ -33,9 +33,15 @@
 	</select>
 	<select id="listBySkuId" resultType="map">
 		select * from t_comment where skuId=#{skuId}
+		<if test="rows > 0">
+		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="listByOrderId" resultType="map">
 		select * from t_comment where orderId=#{orderId}
+		<if test="rows > 0">
+		limit #{start},#{rows}
+		</if>
 	</select>
 	
 	<sql id="gridWhere">

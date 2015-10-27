@@ -95,6 +95,9 @@
 			t_product t4 on t1.productId = t4.id
 		where t3.customerId = #{customerId}
 		group by t3.id
+		<if test="rows > 0">
+		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="orderDetail" resultType="map">
 		select 
@@ -108,5 +111,8 @@
 				left join
 			t_product t4 on t1.productId = t4.id
 		where  t3.id = #{orderId}
+		<if test="rows > 0">
+		limit #{start},#{rows}
+		</if>
 	</select>
 </mapper>
