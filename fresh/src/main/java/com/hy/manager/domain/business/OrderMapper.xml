@@ -112,13 +112,11 @@
 		        left join
 		    t_product t5 ON t4.productId = t5.id
 	</select>
-	<select id="orderDetail" resultType="map">
+	<select id="orderDetail" resultMap="OrderDetailMap">
 		select  
-			t1.createTime,t1.payTime,t1.payType,t1.freight,t1.no,t1.status,
-			t2.phone,t2.address,t2.consignee,
-			t3.quantity,
-			t4.originalPrice,t4.discountPrice,t4.standard,
-			t5.name,t5.description,t5.mainImgUuid,t5.bornPlace,
+			t1.id,t1.createTime,t1.payTime,t1.payType,t1.freight,t1.no,t1.status,
+			t2.id addressId,t2.phone,t2.address,t2.consignee,
+			t3.quantity,t4.id skuId,t4.discountPrice,t4.standard,t5.mainImgUuid,
 			t6.createTime commetTime,t6.content
 		from t_order t1
 			left join t_address t2 on t1.addressId = t2.id
@@ -126,7 +124,7 @@
 			left join t_sku t4 on t3.skuId = t4.id
 			left join t_product t5 on t4.productid = t5.id
 			left join t_comment t6 on t1.id=t6.orderId
-		where  t3.id = #{orderId}
+		where t1.id = #{orderId}
 	</select>
 	
 	<resultMap type="hashmap" id="OrderListMap">
@@ -143,5 +141,32 @@
 			<result property="quantity" column="skuQuantity"/>
 			<result property="mainImgUuid" column="mainImgUuid"/>
 		</association>
+	</resultMap>
+	
+	<resultMap type="hashmap" id="OrderDetailMap">
+		<id property="id" column="id"/>
+		<result property="createTime" column="createTime"/>
+		<result property="payTime" column="payTime"/>
+		<result property="payType" column="payType"/>
+		<result property="freight" column="freight"/>
+		<result property="no" column="no"/>
+		<result property="status" column="status"/>
+		<association property="address" javaType="HashMap">
+			<result property="id" column="addressId"/>
+			<result property="phone" column="phone"/>
+			<result property="consignee" column="consignee"/>
+			<result property="address" column="address"/>
+		</association>
+		<association property="comment" javaType="HashMap">
+			<result property="createTime" column="commetTime"/>
+			<result property="content" column="content"/>
+		</association>
+		<collection property="skus" javaType="ArrayList" ofType="hashmap">
+			<result property="id" column="skuId"/>
+			<result property="quantity" column="quantity"/>
+			<result property="discountPrice" column="discountPrice"/>
+			<result property="standard" column="standard"/>
+			<result property="mainImgUuid" column="mainImgUuid"/>
+		</collection>
 	</resultMap>
 </mapper>
