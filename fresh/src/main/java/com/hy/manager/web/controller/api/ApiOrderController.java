@@ -2,13 +2,16 @@ package com.hy.manager.web.controller.api;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,6 +25,20 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiOrderController extends ApiBasicController {
 	@Autowired
 	private OrderService orderService;
+	
+	/**
+	 * 点击某个订单，进入订单详情
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "order_detail/{orderId}", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseMessage orderDetail(@PathVariable int orderId) {
+		List<Map<String,Object>> list = orderService.orderDetail(orderId);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
+	}
 
 	/**
 	 * 添加订单

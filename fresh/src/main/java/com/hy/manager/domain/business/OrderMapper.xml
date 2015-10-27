@@ -84,7 +84,7 @@
 	<select id="selectById" resultType="Order">
 		select * from t_order where id=#{id}
 	</select>
-	<select id="orderList" resultType="map">
+	<select id="orderList" resultMap="OrderListMap" >
 		select 
 		    t3.*, t4.name skuName, t4.standard, t5.mainImgUuid
 		from
@@ -114,7 +114,7 @@
 	</select>
 	<select id="orderDetail" resultType="map">
 		select  
-			t1.createTime,t1.payTime,t1.payType ,t1.freight,t1.no,t1.status,
+			t1.createTime,t1.payTime,t1.payType,t1.freight,t1.no,t1.status,
 			t2.phone,t2.address,t2.consignee,
 			t3.quantity,
 			t4.originalPrice,t4.discountPrice,t4.standard,
@@ -128,4 +128,20 @@
 			left join t_comment t6 on t1.id=t6.orderId
 		where  t3.id = #{orderId}
 	</select>
+	
+	<resultMap type="hashmap" id="OrderListMap">
+		<id property="id" column="id"/>
+		<result property="no" column="no"/>
+		<result property="status" column="status"/>
+		<result property="freight" column="freight"/>
+		<result property="discountPrice" column="discountPrice"/>
+		<result property="quantity" column="quantity"/>
+		<association property="sku" javaType="HashMap">
+			<result property="id" column="skuId"/>
+			<result property="name" column="skuName"/>
+			<result property="standard" column="standard"/>
+			<result property="quantity" column="skuQuantity"/>
+			<result property="mainImgUuid" column="mainImgUuid"/>
+		</association>
+	</resultMap>
 </mapper>
