@@ -16,6 +16,7 @@ import com.hy.manager.domain.business.Comment;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.OrderService;
+import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -58,8 +59,8 @@ public class ApiCommentController  extends ApiBasicController{
 	 */
 	@RequestMapping(value = "list_by_skuId/{skuId}")
 	@ResponseBody
-	public ResponseMessage listBySkuId(@PathVariable int skuId) {
-		List<Map<String, Object>> list = this.commentService.listBySkuId(skuId);
+	public ResponseMessage listBySkuId(@PathVariable int skuId, Parameter parameter) {
+		List<Map<String, Object>> list = this.commentService.listBySkuId(skuId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -72,9 +73,9 @@ public class ApiCommentController  extends ApiBasicController{
 	 */
 	@RequestMapping(value = "list_by_orderId/{orderId}")
 	@ResponseBody
-	public ResponseMessage listByOrderId(@PathVariable int orderId) {
+	public ResponseMessage listByOrderId(@PathVariable int orderId, Parameter parameter) {
 		List<Map<String, Object>> list = this.commentService
-				.listByOrderId(orderId);
+				.listByOrderId(orderId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import com.hy.manager.domain.business.Comment;
 import com.hy.manager.service.business.CommentService;
+import com.hy.manager.web.Parameter;
 import com.test.service.abs.AbstractTest;
 
 public class TestCommentService extends AbstractTest {
@@ -35,7 +36,7 @@ public class TestCommentService extends AbstractTest {
 
 	@Test
 	public void testListByOrderId() {
-		List<Map<String, Object>> list = this.commentService.listByOrderId(1);
+		List<Map<String, Object>> list = this.commentService.listByOrderId(1,new Parameter());
 		System.out.println(list.size());
 	}
 

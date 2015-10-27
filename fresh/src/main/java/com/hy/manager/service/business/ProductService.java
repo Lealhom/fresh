@@ -10,6 +10,7 @@ import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.domain.business.Product;
 import com.hy.manager.domain.business.ProductMapper;
 import com.hy.manager.service.AbstractService;
+import com.hy.manager.web.Parameter;
 
 @Service
 public class ProductService extends AbstractService<Product> {
@@ -60,8 +61,8 @@ public class ProductService extends AbstractService<Product> {
 		this.productMapper.cancelHot(ids);
 	}
 
-	public List<Map<String, Object>> listHotProduct() {
-		return this.productMapper.listHotProduct();
+	public List<Map<String, Object>> listHotProduct(Parameter parameter) {
+		return this.productMapper.listHotProduct(parameter);
 	}
 
 	public void addCollection(int customerId, int skuId) {
@@ -72,24 +73,24 @@ public class ProductService extends AbstractService<Product> {
 		this.productMapper.delCollection(customerId, skuId);
 	}
 
-	public List<Map<String, Object>> listCollection(int customerId) {
-		return this.productMapper.listCollection(customerId);
+	public List<Map<String, Object>> listCollection(int customerId, Parameter parameter) {
+		return this.productMapper.listCollection(customerId,parameter);
 	}
 
-	public List<Map<String, Object>> listByActivityId(int activityId) {
-		return this.productMapper.listByActivityId(activityId);
+	public List<Map<String, Object>> listByActivityId(int activityId, Parameter parameter) {
+		return this.productMapper.listByActivityId(activityId,parameter);
 	}
 
-	public List<Map<String, Object>> listByCategoryId(int categoryId) {
-		return this.productMapper.listByCategoryId(categoryId);
+	public List<Map<String, Object>> listByCategoryId(int categoryId, Parameter parameter) {
+		return this.productMapper.listByCategoryId(categoryId,parameter);
 	}
 
-	public List<Map<String, Object>> search(String name) {
-		return this.productMapper.search(name);
+	public List<Map<String, Object>> search(String name, Parameter parameter) {
+		return this.productMapper.search(name,parameter);
 	}
 
-	public Map<String, Object> detail(int productId, int skuId) {
-		return this.productMapper.detail(productId, skuId);
+	public Map<String, Object> detail(int productId, int skuId, Parameter parameter) {
+		return this.productMapper.detail(productId, skuId,parameter);
 	}
 
 	public List<String> findViceImgs(int productId) {

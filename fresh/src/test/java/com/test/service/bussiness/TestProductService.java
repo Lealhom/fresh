@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.hy.manager.service.business.ProductService;
+import com.hy.manager.web.Parameter;
 import com.test.service.abs.AbstractTest;
 
 public class TestProductService extends AbstractTest {
@@ -32,13 +33,13 @@ public class TestProductService extends AbstractTest {
 
 	@Test
 	public void testListCollection() {
-		List<Map<String, Object>> list = productService.listCollection(1);
+		List<Map<String, Object>> list = productService.listCollection(1,new Parameter());
 		System.out.println(list);
 	}
 
 	@Test
 	public void testListHotProduct() {
-		List<Map<String, Object>> list = productService.listHotProduct();
+		List<Map<String, Object>> list = productService.listHotProduct(new Parameter());
 		System.out.println(list.size());
 	}
 }

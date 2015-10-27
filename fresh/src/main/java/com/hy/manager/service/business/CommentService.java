@@ -10,6 +10,7 @@ import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.domain.business.Comment;
 import com.hy.manager.domain.business.CommentMapper;
 import com.hy.manager.service.AbstractService;
+import com.hy.manager.web.Parameter;
 
 @Service
 public class CommentService extends AbstractService<Comment> {
@@ -26,12 +27,12 @@ public class CommentService extends AbstractService<Comment> {
 		return commentMapper;
 	}
 
-	public List<Map<String, Object>> listByOrderId(int orderId) {
-		return this.commentMapper.listByOrderId(orderId);
+	public List<Map<String, Object>> listByOrderId(int orderId, Parameter parameter) {
+		return this.commentMapper.listByOrderId(orderId,parameter);
 	}
 
-	public List<Map<String, Object>> listBySkuId(int skuId) {
-		return this.commentMapper.listBySkuId(skuId);
+	public List<Map<String, Object>> listBySkuId(int skuId, Parameter parameter) {
+		return this.commentMapper.listBySkuId(skuId,parameter);
 	}
 
 }

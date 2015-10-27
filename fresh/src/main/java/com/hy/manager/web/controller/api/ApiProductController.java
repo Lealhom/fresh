@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.manager.service.business.ProductService;
+import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -25,8 +26,8 @@ public class ApiProductController  extends ApiBasicController {
 	 */
 	@RequestMapping(value = "hot")
 	@ResponseBody
-	public ResponseMessage listHotProduct() {
-		List<Map<String, Object>> list = this.productService.listHotProduct();
+	public ResponseMessage listHotProduct(Parameter parameter) {
+		List<Map<String, Object>> list = this.productService.listHotProduct(parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -39,9 +40,9 @@ public class ApiProductController  extends ApiBasicController {
 	 */
 	@RequestMapping(value = "list_by_activityId/{activityId}")
 	@ResponseBody
-	public ResponseMessage listByActivityId(@PathVariable int activityId) {
+	public ResponseMessage listByActivityId(@PathVariable int activityId, Parameter parameter) {
 		List<Map<String, Object>> list = this.productService
-				.listByActivityId(activityId);
+				.listByActivityId(activityId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -54,9 +55,9 @@ public class ApiProductController  extends ApiBasicController {
 	 */
 	@RequestMapping(value = "list_by_categoryId/{categoryId}")
 	@ResponseBody
-	public ResponseMessage listByCategoryId(@PathVariable int categoryId) {
+	public ResponseMessage listByCategoryId(@PathVariable int categoryId, Parameter parameter) {
 		List<Map<String, Object>> list = this.productService
-				.listByCategoryId(categoryId);
+				.listByCategoryId(categoryId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -69,8 +70,8 @@ public class ApiProductController  extends ApiBasicController {
 	 */
 	@RequestMapping(value = "search/{name}")
 	@ResponseBody
-	public ResponseMessage search(@PathVariable String name) {
-		List<Map<String, Object>> list = this.productService.search(name);
+	public ResponseMessage search(@PathVariable String name, Parameter parameter) {
+		List<Map<String, Object>> list = this.productService.search(name,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -84,8 +85,8 @@ public class ApiProductController  extends ApiBasicController {
 	@RequestMapping(value = "detail/{productId}/{skuId}")
 	@ResponseBody
 	public ResponseMessage detail(@PathVariable int productId,
-			@PathVariable int skuId) {
-		Map<String, Object> map = this.productService.detail(productId, skuId);
+			@PathVariable int skuId, Parameter parameter) {
+		Map<String, Object> map = this.productService.detail(productId, skuId,parameter);
 		List<String> viceImgs = this.productService.findViceImgs(productId);// 得到副图
 		map.put("viceImgs", viceImgs);
 		ResponseMessage message = new ResponseMessage();

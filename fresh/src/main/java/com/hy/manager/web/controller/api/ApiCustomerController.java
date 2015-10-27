@@ -25,6 +25,7 @@ import com.hy.manager.service.business.CustomerService;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.service.business.ProductService;
 import com.hy.manager.util.FileUploadUtil;
+import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -110,11 +111,11 @@ public class ApiCustomerController extends ApiBasicController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "myorder", method = { RequestMethod.POST })
+	@RequestMapping(value = "my_order", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage myorder(HttpServletRequest request) {
+	public ResponseMessage myorder(HttpServletRequest request,Parameter parameter) {
 		int customerId = this.getUid(request);
-		List<Map<String,Object>> list = orderService.orderList(customerId);
+		List<Map<String,Object>> list = orderService.orderList(customerId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -126,8 +127,8 @@ public class ApiCustomerController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "order_detail/{orderId}", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage orderDetail(@PathVariable int orderId) {
-		List<Map<String,Object>> list = orderService.orderDetail(orderId);
+	public ResponseMessage orderDetail(@PathVariable int orderId, Parameter parameter) {
+		List<Map<String,Object>> list = orderService.orderDetail(orderId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -139,9 +140,9 @@ public class ApiCustomerController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "my_collection", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage myCollection(HttpServletRequest request) {
+	public ResponseMessage myCollection(HttpServletRequest request,Parameter parameter) {
 		int customerId = this.getUid(request);
-		List<Map<String, Object>> list = productService.listCollection(customerId);
+		List<Map<String, Object>> list = productService.listCollection(customerId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

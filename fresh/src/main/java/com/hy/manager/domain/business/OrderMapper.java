@@ -6,10 +6,13 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.hy.manager.domain.AbstractMapper;
+import com.hy.manager.web.Parameter;
 
 public interface OrderMapper extends AbstractMapper {
 
-	public List<Map<String,Object>> orderList(@Param("customerId") int customerId);
+	public List<Map<String,Object>> orderList(@Param("customerId") int customerId, Parameter parameter);
+
+	public List<Map<String, Object>> orderDetail(@Param("orderId") int orderId, Parameter parameter);
 
 	public void updateExpireOrder();
 
@@ -23,5 +26,4 @@ public interface OrderMapper extends AbstractMapper {
 	public void decreaseSkuQuantity(@Param("skuId") String skuId,
 			@Param("quantity") int quantity);
 
-	public List<Map<String, Object>> orderDetail(@Param("orderId") int orderId);
 }

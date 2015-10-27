@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.hy.manager.domain.AbstractMapper;
+import com.hy.manager.web.Parameter;
 
 public interface ProductMapper extends AbstractMapper {
 	public void addCategoryId(@Param("productId") String productId,
@@ -29,20 +30,20 @@ public interface ProductMapper extends AbstractMapper {
 	public void delCollection(@Param("customerId") int customerId,
 			@Param("skuId") int skuId);
 
-	public List<Map<String, Object>> listCollection(@Param("customerId") int customerId);
+	public List<Map<String, Object>> listCollection(@Param("customerId") int customerId,Parameter parameter);
 
-	public List<Map<String, Object>> listHotProduct();
+	public List<Map<String, Object>> listHotProduct(Parameter parameter);
 
 	public List<Map<String, Object>> listByActivityId(
-			@Param("activityId") int activityId);
+			@Param("activityId") int activityId,Parameter parameter);
 
 	public List<Map<String, Object>> listByCategoryId(
-			@Param("categoryId") int categoryId);
+			@Param("categoryId") int categoryId,Parameter parameter);
 
-	public List<Map<String, Object>> search(@Param("name") String name);
+	public List<Map<String, Object>> search(@Param("name") String name,Parameter parameter);
 
 	public Map<String, Object> detail(@Param("productId") int productId,
-			@Param("skuId") int skuId);
+			@Param("skuId") int skuId,Parameter parameter);
 
 	public List<String> findViceImgs(@Param("productId") int productId);
 

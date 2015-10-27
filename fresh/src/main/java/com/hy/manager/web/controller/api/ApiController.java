@@ -25,6 +25,7 @@ import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.CustomerService;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.service.business.ProductService;
+import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -110,9 +111,9 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "user/order", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage orderList() {
+	public ResponseMessage orderList(Parameter parameter) {
 		int customerId = 1;
-		List<Map<String,Object>> list = orderService.orderList(customerId);
+		List<Map<String,Object>> list = orderService.orderList(customerId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -125,10 +126,10 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "comment/{orderId}", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage listComment(@PathVariable int orderId) {
+	public ResponseMessage listComment(@PathVariable int orderId,Parameter parameter) {
 		ResponseMessage message = new ResponseMessage();
 		List<Map<String, Object>> list = this.commentService
-				.listByOrderId(orderId);
+				.listByOrderId(orderId,parameter);
 		message.setData(list);
 		return message;
 	}

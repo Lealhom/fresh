@@ -11,6 +11,7 @@ import com.hy.manager.domain.business.Order;
 import com.hy.manager.domain.business.OrderMapper;
 import com.hy.manager.domain.business.SkuDTO;
 import com.hy.manager.service.AbstractService;
+import com.hy.manager.web.Parameter;
 
 @Service
 public class OrderService extends AbstractService<Order> {
@@ -27,8 +28,8 @@ public class OrderService extends AbstractService<Order> {
 		return orderMapper;
 	}
 
-	public List<Map<String,Object>> orderList(int customerId) {
-		return this.orderMapper.orderList(customerId);
+	public List<Map<String,Object>> orderList(int customerId, Parameter parameter) {
+		return this.orderMapper.orderList(customerId,parameter);
 	}
 
 	/**
@@ -66,8 +67,8 @@ public class OrderService extends AbstractService<Order> {
 		}
 	}
 
-	public List<Map<String, Object>> orderDetail(int orderId) {
-		return this.orderMapper.orderDetail(orderId);
+	public List<Map<String, Object>> orderDetail(int orderId, Parameter parameter) {
+		return this.orderMapper.orderDetail(orderId,parameter);
 	}
 
 }
