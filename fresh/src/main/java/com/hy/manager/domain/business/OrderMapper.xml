@@ -86,20 +86,31 @@
 	</select>
 	<select id="orderList" resultType="map">
 		select 
-		    t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t2.quantity buy_quantity,t2.unitPrice,t3.freight,t3.no,t3.status,t4.mainImgUuid
+		    t3.*, t4.name skuName, t4.standard, t5.mainImgUuid
 		from
-		    t_sku t1
+		    (select 
+		        t1.id,
+		            t1.no,
+		            t1.status,
+		            t1.freight,
+		            t1.discountPrice,
+		            sum(t2.quantity) quantity,
+		            t2.quantity skuQuantity,
+		            t2.skuId
+		    from
+		        t_order t1
+		    left join t_order_sku t2 ON t1.id = t2.orderId
+		    where
+		        t1.customerId = #{customerId}
+		    group by t1.id
+		    <if test="param.rows > 0">
+			limit #{param.start},#{param.rows}
+			</if>
+		    ) t3
 		        left join
-		    t_order_sku t2 ON t1.id = t2.skuId
-				left join
-			t_order t3 on t2.orderId = t3.id
-				left join
-			t_product t4 on t1.productId = t4.id
-		where t3.customerId = #{customerId}
-		group by t3.id
-		<if test="param.rows > 0">
-		limit #{param.start},#{param.rows}
-		</if>
+		    t_sku t4 ON t3.skuId = t4.id
+		        left join
+		    t_product t5 ON t4.productId = t5.id
 	</select>
 	<select id="orderDetail" resultType="map">
 		select  
