@@ -1,6 +1,8 @@
 package com.hy.manager.web.controller.api;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +47,15 @@ public class ApiOrderController extends ApiBasicController {
 		// 减少各个SKU的库存量
 		orderService.decreaseSkusQuantity(skus);
 		ResponseMessage message = new ResponseMessage();
-		message.setData("下单成功!");
+		message.setMessage("下单成功!");
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("orderNo", order.getNo());
+		result.put("orderId", order.getId());
+		result.put("orderStatus", order.getStatus());
+		result.put("orderStatusInfo", order.getStatusInfo());
+		
+		message.setData(result);
 		return message;
 	}
 
