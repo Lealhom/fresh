@@ -156,21 +156,6 @@ public class ApiController {
 		return message;
 	}
 
-	/**
-	 * 通過用戶ID获得地址列表
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	@RequestMapping(value = "user/address", method = { RequestMethod.POST })
-	@ResponseBody
-	public ResponseMessage listAddress() {
-		int customerId = 1;
-		List<Address> list = this.addressService.addressList(customerId);
-		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
-		return message;
-	}
 
 	/**
 	 * 查询地址

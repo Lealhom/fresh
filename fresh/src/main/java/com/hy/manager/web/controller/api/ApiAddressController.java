@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.manager.domain.business.Address;
 import com.hy.manager.service.business.AddressService;
+import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -27,9 +28,9 @@ public class ApiAddressController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "list")
 	@ResponseBody
-	public ResponseMessage list(HttpServletRequest request) {
+	public ResponseMessage list(HttpServletRequest request,Parameter parameter) {
 		int customerId = this.getUid(request);
-		List<Address> list = this.addressService.addressList(customerId);
+		List<Address> list = this.addressService.addressList(customerId,parameter);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.hy.manager.domain.business.Address;
 import com.hy.manager.service.business.AddressService;
+import com.hy.manager.web.Parameter;
 import com.test.service.abs.AbstractTest;
 
 public class TestAddressService extends AbstractTest {
@@ -36,7 +37,7 @@ public class TestAddressService extends AbstractTest {
 
 	@Test
 	public void testList() {
-		List<Address> list = addressService.addressList(1);
+		List<Address> list = addressService.addressList(1,new Parameter());
 		for (Address a : list) {
 			System.out.println(a.getAddress());
 		}

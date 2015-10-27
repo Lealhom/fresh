@@ -20,9 +20,8 @@ public class FileUploadUtil {
 			return null;
 		}
 		String uuid = UUID.randomUUID().toString();
-		String realPath = request.getSession().getServletContext()
-				.getRealPath("/")
-				+ "/static/upload/" + uuid;
+//		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuid;
+		String realPath = "E://a_upload/" + uuid;
 		// String reletivePath = "static/upload/" + uuidFileName;
 		String fileName = file.getOriginalFilename();
 		int index = fileName.lastIndexOf(".");

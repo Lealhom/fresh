@@ -9,6 +9,7 @@ import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.domain.business.Address;
 import com.hy.manager.domain.business.AddressMapper;
 import com.hy.manager.service.AbstractService;
+import com.hy.manager.web.Parameter;
 
 @Service
 public class AddressService extends AbstractService<Address> {
@@ -30,8 +31,8 @@ public class AddressService extends AbstractService<Address> {
 	 * 
 	 * @return
 	 */
-	public List<Address> addressList(int userId) {
-		return this.addressMapper.addressList(userId);
+	public List<Address> addressList(int userId,Parameter parameter) {
+		return this.addressMapper.addressList(userId,parameter);
 	}
 	
 	public void cancelDefaultFlag(int customerId) {

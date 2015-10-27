@@ -42,5 +42,8 @@
 
 	<select id="addressList" resultType="Address">
 		select * from t_address where customerId=#{customerId}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
+		</if>
 	</select>
 </mapper>

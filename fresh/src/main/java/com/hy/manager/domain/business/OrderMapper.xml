@@ -72,7 +72,9 @@
 		    t_customer b ON a.customerId = b.id
 		        left join
 		    t_address c ON a.addressId = c.id
+		<if test="rows > 0">
 		limit #{start},#{rows}
+		</if>
 	</select>
 	<select id="count" resultType="long">
 		select count(*)
@@ -96,7 +98,7 @@
 		where t3.customerId = #{customerId}
 		group by t3.id
 		<if test="param.rows > 0">
-		limit #{start},#{rows}
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<select id="orderDetail" resultType="map">
