@@ -153,10 +153,10 @@
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid 
 		FROM t_sku t1 
 		left join t_product t2 on t1.productId = t2.id
-		left join t_collection t3 on t1.id = t3.skuId
+		inner join t_collection t3 on t1.id = t3.skuId
 		where t3.customerId = #{customerId}
-		<if test="rows > 0">
-		limit #{start},#{rows}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<sql id="gridWhere">
