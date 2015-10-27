@@ -126,10 +126,10 @@ public class ApiController {
 	 */
 	@RequestMapping(value = "comment/{orderId}", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage listComment(@PathVariable int orderId,Parameter parameter) {
+	public ResponseMessage listComment(@PathVariable int orderId) {
 		ResponseMessage message = new ResponseMessage();
 		List<Map<String, Object>> list = this.commentService
-				.listByOrderId(orderId,parameter);
+				.listByOrderId(orderId);
 		message.setData(list);
 		return message;
 	}

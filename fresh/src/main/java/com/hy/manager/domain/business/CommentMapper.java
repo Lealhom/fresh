@@ -10,7 +10,7 @@ import com.hy.manager.web.Parameter;
 
 public interface CommentMapper extends AbstractMapper {
 
-	public List<Map<String, Object>> listByOrderId(@Param("orderId") int orderId, Parameter parameter);
+	public List<Map<String, Object>> listByOrderId(@Param("orderId") int orderId);
 
-	public List<Map<String, Object>> listBySkuId(@Param("skuId") int skuId, Parameter parameter);
+	public List<Map<String, Object>> listBySkuId(@Param("skuId") int skuId,@Param("param") Parameter parameter);
 }

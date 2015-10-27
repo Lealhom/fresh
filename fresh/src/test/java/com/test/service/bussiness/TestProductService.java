@@ -33,7 +33,10 @@ public class TestProductService extends AbstractTest {
 
 	@Test
 	public void testListCollection() {
-		List<Map<String, Object>> list = productService.listCollection(1,new Parameter());
+		Parameter p = new Parameter();
+		p.setPage(1);
+		p.setRows(10);
+		List<Map<String, Object>> list = productService.listCollection(1,p);
 		System.out.println(list);
 	}
 

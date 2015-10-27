@@ -73,9 +73,9 @@ public class ApiCommentController  extends ApiBasicController{
 	 */
 	@RequestMapping(value = "list_by_orderId/{orderId}")
 	@ResponseBody
-	public ResponseMessage listByOrderId(@PathVariable int orderId, Parameter parameter) {
+	public ResponseMessage listByOrderId(@PathVariable int orderId) {
 		List<Map<String, Object>> list = this.commentService
-				.listByOrderId(orderId,parameter);
+				.listByOrderId(orderId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

@@ -67,8 +67,8 @@ public class OrderService extends AbstractService<Order> {
 		}
 	}
 
-	public List<Map<String, Object>> orderDetail(int orderId, Parameter parameter) {
-		return this.orderMapper.orderDetail(orderId,parameter);
+	public List<Map<String, Object>> orderDetail(int orderId) {
+		return this.orderMapper.orderDetail(orderId);
 	}
 
 }

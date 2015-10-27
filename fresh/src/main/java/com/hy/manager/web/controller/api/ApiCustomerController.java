@@ -127,8 +127,8 @@ public class ApiCustomerController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "order_detail/{orderId}", method = { RequestMethod.POST })
 	@ResponseBody
-	public ResponseMessage orderDetail(@PathVariable int orderId, Parameter parameter) {
-		List<Map<String,Object>> list = orderService.orderDetail(orderId,parameter);
+	public ResponseMessage orderDetail(@PathVariable int orderId) {
+		List<Map<String,Object>> list = orderService.orderDetail(orderId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

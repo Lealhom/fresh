@@ -9,14 +9,11 @@ import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.web.Parameter;
 
 public interface ProductMapper extends AbstractMapper {
-	public void addCategoryId(@Param("productId") String productId,
-			@Param("categoryId") String categoryId);
+	public void addCategoryId(@Param("productId") String productId,@Param("categoryId") String categoryId);
 
 	public void delCategoryIds(@Param("productId") int productId);
 
-	public void addViceImgUuid(@Param("productId") String productId,
-			@Param("viceImgUuid") String viceImgUuid,
-			@Param("orderNum") int orderNum);
+	public void addViceImgUuid(@Param("productId") String productId,@Param("viceImgUuid") String viceImgUuid,@Param("orderNum") int orderNum);
 
 	public void delViceImgUuids(@Param("productId") int productId);
 
@@ -24,26 +21,21 @@ public interface ProductMapper extends AbstractMapper {
 
 	public void cancelHot(@Param("ids") Object ids);
 
-	public void addCollection(@Param("customerId") int customerId,
-			@Param("skuId") int skuId);
+	public void addCollection(@Param("customerId") int customerId,@Param("skuId") int skuId);
 
-	public void delCollection(@Param("customerId") int customerId,
-			@Param("skuId") int skuId);
+	public void delCollection(@Param("customerId") int customerId,@Param("skuId") int skuId);
 
 	public List<Map<String, Object>> listCollection(@Param("customerId") int customerId,@Param("param") Parameter parameter);
 
-	public List<Map<String, Object>> listHotProduct(Parameter parameter);
+	public List<Map<String, Object>> listHotProduct(@Param("param") Parameter parameter);
 
-	public List<Map<String, Object>> listByActivityId(
-			@Param("activityId") int activityId,Parameter parameter);
+	public List<Map<String, Object>> listByActivityId(@Param("activityId") int activityId,@Param("param") Parameter parameter);
 
-	public List<Map<String, Object>> listByCategoryId(
-			@Param("categoryId") int categoryId,Parameter parameter);
+	public List<Map<String, Object>> listByCategoryId(@Param("categoryId") int categoryId,@Param("param") Parameter parameter);
 
-	public List<Map<String, Object>> search(@Param("name") String name,Parameter parameter);
+	public List<Map<String, Object>> search(@Param("name") String name,@Param("param") Parameter parameter);
 
-	public Map<String, Object> detail(@Param("productId") int productId,
-			@Param("skuId") int skuId,Parameter parameter);
+	public Map<String, Object> detail(@Param("productId") int productId,@Param("skuId") int skuId,@Param("param") Parameter parameter);
 
 	public List<String> findViceImgs(@Param("productId") int productId);
 

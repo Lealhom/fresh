@@ -97,8 +97,8 @@
 		inner join t_product t2
 		on t1.productId = t2.id
 		where t2.name like '%${name}%'
-		<if test="rows > 0">
-		limit #{start},#{rows}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<select id="listHotProduct" resultType="map">
@@ -109,8 +109,8 @@
 		left join t_product t2
 		on t1.productId = t2.id
 		where t2.hot = 1
-		<if test="rows > 0">
-		limit #{start},#{rows}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<select id="listByActivityId" resultType="map">
@@ -121,8 +121,8 @@
 		left join t_product t2 on t1.productId = t2.id
 		left join t_activity_product t3 on t2.id = t3.productId
 		where t3.activityId = #{activityId}
-		<if test="rows > 0">
-		limit #{start},#{rows}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<select id="listByCategoryId" resultType="map">
@@ -133,8 +133,8 @@
 		left join t_product t2 on t1.productId = t2.id
 		left join t_category_product t3 on t2.id = t3.productId
 		where t3.categoryId = #{categoryId}
-		<if test="rows > 0">
-		limit #{start},#{rows}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<select id="selectById" resultType="Product">
