@@ -14,8 +14,7 @@ public class TestOrderService extends AbstractTest {
 
 	@Before
 	public void init() {
-		orderService = (OrderService) applicationContext
-				.getBean("orderService");
+		orderService = (OrderService) applicationContext.getBean("orderService");
 	}
 
 	@Test

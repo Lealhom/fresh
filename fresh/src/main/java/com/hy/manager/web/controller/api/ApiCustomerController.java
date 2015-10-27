@@ -19,7 +19,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.hy.manager.domain.File;
 import com.hy.manager.domain.business.Customer;
-import com.hy.manager.domain.business.Order;
 import com.hy.manager.domain.business.Product;
 import com.hy.manager.service.FileService;
 import com.hy.manager.service.business.CustomerService;
@@ -106,9 +105,8 @@ public class ApiCustomerController extends ApiBasicController {
 		customerService.updateHeadPhoto(customerId, f.getUuid());
 		return message;
 	}
-
 	/**
-	 * 获得订单列表
+	 * 获得我的订单列表
 	 * 
 	 * @return
 	 */
@@ -116,7 +114,20 @@ public class ApiCustomerController extends ApiBasicController {
 	@ResponseBody
 	public ResponseMessage myorder(HttpServletRequest request) {
 		int customerId = this.getUid(request);
-		List<Order> list = orderService.orderList(customerId);
+		List<Map<String,Object>> list = orderService.orderList(customerId);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
+	}
+	/**
+	 * 点击某个订单，进入订单详情
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "order_detail/{orderId}", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseMessage orderDetail(@PathVariable int orderId) {
+		List<Map<String,Object>> list = orderService.orderDetail(orderId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;

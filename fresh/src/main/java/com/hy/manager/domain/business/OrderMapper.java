@@ -1,6 +1,7 @@
 package com.hy.manager.domain.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -8,7 +9,7 @@ import com.hy.manager.domain.AbstractMapper;
 
 public interface OrderMapper extends AbstractMapper {
 
-	public List<Order> orderList(@Param("customerId") int customerId);
+	public List<Map<String,Object>> orderList(@Param("customerId") int customerId);
 
 	public void updateExpireOrder();
 
@@ -21,4 +22,6 @@ public interface OrderMapper extends AbstractMapper {
 
 	public void decreaseSkuQuantity(@Param("skuId") String skuId,
 			@Param("quantity") int quantity);
+
+	public List<Map<String, Object>> orderDetail(@Param("orderId") int orderId);
 }

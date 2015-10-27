@@ -1,6 +1,7 @@
 package com.hy.manager.service.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class OrderService extends AbstractService<Order> {
 		return orderMapper;
 	}
 
-	public List<Order> orderList(int customerId) {
+	public List<Map<String,Object>> orderList(int customerId) {
 		return this.orderMapper.orderList(customerId);
 	}
 
@@ -63,6 +64,10 @@ public class OrderService extends AbstractService<Order> {
 		for (SkuDTO o : skuDTOS) {
 			this.orderMapper.decreaseSkuQuantity(o.getSkuId(), o.getQuantity());
 		}
+	}
+
+	public List<Map<String, Object>> orderDetail(int orderId) {
+		return this.orderMapper.orderDetail(orderId);
 	}
 
 }

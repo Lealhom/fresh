@@ -112,7 +112,7 @@ public class ApiController {
 	@ResponseBody
 	public ResponseMessage orderList() {
 		int customerId = 1;
-		List<Order> list = orderService.orderList(customerId);
+		List<Map<String,Object>> list = orderService.orderList(customerId);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
