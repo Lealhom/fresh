@@ -21,8 +21,13 @@ public class FileUploadUtil {
 		}
 		String uuid = UUID.randomUUID().toString();
 //		String realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuid;
-		String realPath = "E://a_upload/" + uuid;
-		// String reletivePath = "static/upload/" + uuidFileName;
+		String realPath = "";
+		String osName = System.getProperty("os.name");
+		if(osName.contains("Windows")){//windows系统
+			realPath = request.getSession().getServletContext().getRealPath("/") + "/static/upload/" + uuid;
+		}else{
+			realPath = "/var/fresh/uploadFiles/" + uuid;
+		}
 		String fileName = file.getOriginalFilename();
 		int index = fileName.lastIndexOf(".");
 		fileName = fileName.substring(0, index);

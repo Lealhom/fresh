@@ -97,6 +97,8 @@
 		inner join t_product t2
 		on t1.productId = t2.id
 		where t2.name like '%${name}%'
+		and t1.status = 1
+		and t2.status = 1
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
@@ -109,6 +111,8 @@
 		left join t_product t2
 		on t1.productId = t2.id
 		where t2.hot = 1
+		and t1.status = 1
+		and t2.status = 1
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
@@ -121,6 +125,8 @@
 		left join t_product t2 on t1.productId = t2.id
 		left join t_activity_product t3 on t2.id = t3.productId
 		where t3.activityId = #{activityId}
+		and t1.status = 1
+		and t2.status = 1
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
@@ -133,6 +139,8 @@
 		left join t_product t2 on t1.productId = t2.id
 		left join t_category_product t3 on t2.id = t3.productId
 		where t3.categoryId = #{categoryId}
+		and t1.status = 1
+		and t2.status = 1
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>

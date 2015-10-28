@@ -79,7 +79,20 @@ public class CategoryController extends BasicController {
 		mav.addObject("category", category);
 		return mav;
 	}
-
+	@ResponseBody
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public ResponseMessage update(Category category) {
+		ResponseMessage message = new ResponseMessage();
+		if ("".equals(category.getParentId())) {
+			category.setLevel(1);
+		} else {
+			Category parentCategory = categoryService.selectById(category
+					.getParentId());
+			category.setLevel(parentCategory.getLevel() + 1);
+		}
+		categoryService.update(category);
+		return message;
+	}
 	/**
 	 * 弹出更换图片窗口
 	 * 
