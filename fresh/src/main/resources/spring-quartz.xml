@@ -23,11 +23,11 @@
 <!-- ======================== 调度触发器 ======================== -->
 <bean id="orderJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 	<property name="jobDetail" ref="orderJobDetail"></property>
-	<property name="cronExpression" value="0/5 * * * * ?"></property><!-- 每5秒执行一次，5秒只是为了方便测试，具体时间间隔到时候再商议 -->
+	<property name="cronExpression" value="0 */30 * * * ?"></property><!-- 检查订单是否过期，每30分钟执行一次检查 -->
 </bean>      
 <bean id="skuJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 	<property name="jobDetail" ref="skuJobDetail"></property>
-	<property name="cronExpression" value="0 38 21 * * ?"></property><!-- 每天凌晨两点执行 -->
+	<property name="cronExpression" value="0 0 4 * * ?"></property><!-- 更新sku的平均评分，每天凌晨4点执行 -->
 </bean>      
 <!-- ======================== 调度工厂 ======================== -->
 <bean id="SpringJobSchedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

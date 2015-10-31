@@ -41,7 +41,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="File">
-		select id,name,typeId,uploadTime
+		select id,name,typeId,uploadTime,type,uuid
 		<include refid="gridWhere"/>
 		<if test="rows > 0">
 		limit #{start},#{rows}

@@ -44,7 +44,20 @@ define('page/file', ['crud'], function(CRUD) {
 				columns: [[{
 					field: 'id', title: 'ID', checkbox: true
 				}, {
+					field: 'uuid', title: '图片', width: 90,
+					formatter:function(value){
+						if(value){
+							var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
+							return s;
+						}else{
+							return '';
+						}
+						
+					}
+				}, {
 					field: 'name', title: '名称', width: 150
+				}, {
+					field: 'type', title: '文件类型', width: 150
 				}, {
 					field: 'typeName', title: '文件分类', width: 150
 				}, {
