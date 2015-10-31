@@ -114,9 +114,9 @@
 	</select>
 	<select id="orderDetail" resultMap="OrderDetailMap">
 		select  
-			t1.id,t1.createTime,t1.payTime,t1.payType,t1.freight,t1.no,t1.status,
+			t1.id,t1.createTime,t1.payTime,t1.payType,t1.freight,t1.no,t1.status,t1.discountPrice,
 			t2.id addressId,t2.phone,t2.address,t2.consignee,
-			t3.quantity,t4.id skuId,t4.discountPrice,t4.standard,t5.mainImgUuid,
+			t3.quantity,t4.id skuId,t4.productId,t4.name skuName,t4.discountPrice skudiscountPrice,t4.standard,t5.mainImgUuid,
 			t6.createTime commetTime,t6.content
 		from t_order t1
 			left join t_address t2 on t1.addressId = t2.id
@@ -151,6 +151,7 @@
 		<result property="freight" column="freight"/>
 		<result property="no" column="no"/>
 		<result property="status" column="status"/>
+		<result property="discountPrice" column="discountPrice"/>
 		<association property="address" javaType="HashMap">
 			<result property="id" column="addressId"/>
 			<result property="phone" column="phone"/>
@@ -163,8 +164,10 @@
 		</association>
 		<collection property="skus" javaType="ArrayList" ofType="hashmap">
 			<result property="id" column="skuId"/>
+			<result property="productId" column="productId"/>
+			<result property="name" column="skuName"/>
 			<result property="quantity" column="quantity"/>
-			<result property="discountPrice" column="discountPrice"/>
+			<result property="discountPrice" column="skudiscountPrice"/>
 			<result property="standard" column="standard"/>
 			<result property="mainImgUuid" column="mainImgUuid"/>
 		</collection>

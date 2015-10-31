@@ -89,7 +89,7 @@
 		on t1.productId = t2.id
 		where t1.productId = #{productId} and t1.id = #{skuId}
 	</select>
-	<select id="search" resultType="map">
+	<select id="search" resultType="hashmap">
 		SELECT 
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot,t2.mainImgUuid 
@@ -99,9 +99,7 @@
 		where t2.name like '%${name}%'
 		and t1.status = 1
 		and t2.status = 1
-		<if test="param.rows > 0">
-		limit #{param.start},#{param.rows}
-		</if>
+		limit 20
 	</select>
 	<select id="listHotProduct" resultType="map">
 		SELECT 

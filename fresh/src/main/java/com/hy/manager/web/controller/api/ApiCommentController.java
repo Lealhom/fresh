@@ -16,7 +16,6 @@ import com.hy.manager.domain.business.Comment;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.OrderService;
-import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -49,20 +48,6 @@ public class ApiCommentController  extends ApiBasicController{
 
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("评论成功!");
-		return message;
-	}
-
-	/**
-	 * 根据skuId获取评论
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "list_by_skuId/{skuId}")
-	@ResponseBody
-	public ResponseMessage listBySkuId(@PathVariable int skuId, Parameter parameter) {
-		List<Map<String, Object>> list = this.commentService.listBySkuId(skuId,parameter);
-		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
 		return message;
 	}
 

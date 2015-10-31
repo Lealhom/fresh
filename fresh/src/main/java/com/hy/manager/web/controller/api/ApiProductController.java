@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.ProductService;
 import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
@@ -18,6 +19,8 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiProductController  extends ApiBasicController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private CommentService commentService;
 
 	/**
 	 * 获取热销产品
@@ -70,8 +73,8 @@ public class ApiProductController  extends ApiBasicController {
 	 */
 	@RequestMapping(value = "search/{name}")
 	@ResponseBody
-	public ResponseMessage search(@PathVariable String name, Parameter parameter) {
-		List<Map<String, Object>> list = this.productService.search(name,parameter);
+	public ResponseMessage search(@PathVariable String name) {
+		List<Map<String, Object>> list = this.productService.search(name);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(list);
 		return message;
@@ -91,6 +94,20 @@ public class ApiProductController  extends ApiBasicController {
 		map.put("viceImgs", viceImgs);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(map);
+		return message;
+	}
+	
+	/**
+	 * 根据skuId获取评论
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "list_by_skuId/{skuId}")
+	@ResponseBody
+	public ResponseMessage listBySkuId(@PathVariable int skuId, Parameter parameter) {
+		List<Map<String, Object>> list = this.commentService.listBySkuId(skuId,parameter);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
 		return message;
 	}
 

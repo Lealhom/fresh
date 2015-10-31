@@ -32,13 +32,22 @@
 		select * from t_comment where id=#{id}
 	</select>
 	<select id="listBySkuId" resultType="map">
-		select * from t_comment where skuId=#{skuId}
+		select a.createTime,a.content,a.score,b.username
+		from t_comment a
+		left join t_customer b on a.customerId=b.id
+		where skuId=#{skuId}
 		<if test="param.rows > 0">
-		limit #{start},#{rows}
+		limit #{param.start},#{param.rows}
 		</if>
 	</select>
 	<select id="listByOrderId" resultType="map">
-		select * from t_comment where orderId=#{orderId}
+		select a.createTime,a.content,a.score,b.username
+		from t_comment a
+		left join t_customer b on a.customerId=b.id
+		where orderId=#{orderId}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
+		</if>
 	</select>
 	
 	<sql id="gridWhere">

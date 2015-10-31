@@ -85,8 +85,8 @@ public class ProductService extends AbstractService<Product> {
 		return this.productMapper.listByCategoryId(categoryId,parameter);
 	}
 
-	public List<Map<String, Object>> search(String name, Parameter parameter) {
-		return this.productMapper.search(name,parameter);
+	public List<Map<String, Object>> search(String name) {
+		return this.productMapper.search(name);
 	}
 
 	public Map<String, Object> detail(int productId, int skuId, Parameter parameter) {

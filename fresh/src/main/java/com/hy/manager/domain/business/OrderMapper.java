@@ -12,7 +12,7 @@ public interface OrderMapper extends AbstractMapper {
 
 	public List<Map<String,Object>> orderList(@Param("customerId") int customerId,@Param("param") Parameter parameter);
 
-	public List<Map<String, Object>> orderDetail(@Param("orderId") int orderId);
+	public Map<String, Object> orderDetail(@Param("orderId") int orderId);
 
 	public void updateExpireOrder();
 

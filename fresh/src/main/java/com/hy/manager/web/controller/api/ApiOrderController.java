@@ -2,7 +2,6 @@ package com.hy.manager.web.controller.api;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,9 +33,9 @@ public class ApiOrderController extends ApiBasicController {
 	@RequestMapping(value = "order_detail/{orderId}", method = { RequestMethod.POST })
 	@ResponseBody
 	public ResponseMessage orderDetail(@PathVariable int orderId) {
-		List<Map<String,Object>> list = orderService.orderDetail(orderId);
+		Map<String,Object> data = orderService.orderDetail(orderId);
 		ResponseMessage message = new ResponseMessage();
-		message.setData(list);
+		message.setData(data);
 		return message;
 	}
 
