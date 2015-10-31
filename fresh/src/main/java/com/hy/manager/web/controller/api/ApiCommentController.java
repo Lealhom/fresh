@@ -16,6 +16,7 @@ import com.hy.manager.domain.business.Comment;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.OrderService;
+import com.hy.manager.service.business.SkuService;
 import com.hy.manager.web.ResponseMessage;
 
 @Controller
@@ -25,7 +26,8 @@ public class ApiCommentController  extends ApiBasicController{
 	private CommentService commentService;
 	@Autowired
 	private OrderService orderService;
-
+	@Autowired
+	private SkuService skuService;
 	/**
 	 * 添加评论
 	 * 
@@ -45,7 +47,10 @@ public class ApiCommentController  extends ApiBasicController{
 		Order order = orderService.selectById(orderId);
 		order.setStatus(Order.STATUS_FINISH);// 已评价
 		orderService.update(order);
-
+		
+		//根据评分，更新sku的好评数，中评数，差评数
+		int score = comment.getScore();
+		skuService.updateSkuComment(skuId,score);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("评论成功!");
 		return message;

@@ -111,6 +111,7 @@
 		    t_sku t4 ON t3.skuId = t4.id
 		        left join
 		    t_product t5 ON t4.productId = t5.id
+		    where t1.status!=9
 	</select>
 	<select id="orderDetail" resultMap="OrderDetailMap">
 		select  

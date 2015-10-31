@@ -10,4 +10,6 @@ public interface SkuMapper extends AbstractMapper {
 	public List<Sku> selectByOrderId(@Param("orderId") int orderId);
 
 	public void updateSkuScore();
+
+	public void updateSkuComment(@Param("skuId") int skuId,@Param("score") int score);
 }

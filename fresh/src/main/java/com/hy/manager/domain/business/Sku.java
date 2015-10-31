@@ -15,7 +15,9 @@ public class Sku implements Serializable {
 	private String standard;// 规格
 	private int quantity;// 库存数量
 	private double avgScore;// 该sku的平均评分
-
+	private int haopingQuantity;//好评数量
+	private int zhongpingQuantity;//好评数量
+	private int chapingQuantity;//好评数量
 	public int getId() {
 		return id;
 	}
@@ -94,6 +96,30 @@ public class Sku implements Serializable {
 
 	public void setAvgScore(double avgScore) {
 		this.avgScore = avgScore;
+	}
+
+	public int getHaopingQuantity() {
+		return haopingQuantity;
+	}
+
+	public void setHaopingQuantity(int haopingQuantity) {
+		this.haopingQuantity = haopingQuantity;
+	}
+
+	public int getZhongpingQuantity() {
+		return zhongpingQuantity;
+	}
+
+	public void setZhongpingQuantity(int zhongpingQuantity) {
+		this.zhongpingQuantity = zhongpingQuantity;
+	}
+
+	public int getChapingQuantity() {
+		return chapingQuantity;
+	}
+
+	public void setChapingQuantity(int chapingQuantity) {
+		this.chapingQuantity = chapingQuantity;
 	}
 
 }

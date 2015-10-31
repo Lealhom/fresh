@@ -28,6 +28,21 @@
 			on a.id = b.skuId
 		set a.avgScore =  b.avgScore
 	</update>
+	<update id="updateSkuComment">
+		update t_sku 
+		<choose>
+			<when test="score == 5">
+				set haopingQuantity = haopingQuantity+1
+			</when>
+			<when test="score == 3 or score == 4">
+				set zhongpingQuantity = zhongpingQuantity+1
+			</when>
+			<otherwise>
+				set chapingQuantity = chapingQuantity+1
+			</otherwise>
+		</choose>
+		where id=#{skuId}
+	</update>
 	<delete id="deleteById" parameterType="int">
 		delete from t_sku where id=#{id}
 	</delete>

@@ -40,5 +40,12 @@ public class SkuService extends AbstractService<Sku> {
 	public void updateSkuScore() {
 		this.skuMapper.updateSkuScore();
 	}
+	/**
+	 * 更新sku的好评数、中评数，差评数
+	 * @param score
+	 */
+	public void updateSkuComment(int skuId,int score) {
+		this.skuMapper.updateSkuComment(skuId,score);
+	}
 
 }
