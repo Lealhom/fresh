@@ -13,7 +13,7 @@ public class Order implements Serializable {
 	public static final int STATUS_NON_PAYMENT = 0;
 	/** 1订单取消 **/
 	public static final int STATUS_CANCEL = 1;
-	/** 2已付款 **/
+	/** 2已付款 待发货**/
 	public static final int STATUS_PAYMENT = 2;
 	/** 3已发货 **/
 	public static final int STATUS_SEND = 3;
