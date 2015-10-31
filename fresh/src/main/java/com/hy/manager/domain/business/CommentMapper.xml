@@ -36,6 +36,7 @@
 		from t_comment a
 		left join t_customer b on a.customerId=b.id
 		where skuId=#{skuId}
+		order by id desc
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
@@ -45,6 +46,7 @@
 		from t_comment a
 		left join t_customer b on a.customerId=b.id
 		where orderId=#{orderId}
+		order by id desc
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
