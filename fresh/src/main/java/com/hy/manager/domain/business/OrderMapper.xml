@@ -62,7 +62,7 @@
 		set a.quantity = a.quantity + b.quantity 
 	</update>
 	<update id="updateExpireOrder">
-		update t_order set status = 6   where createTime &lt; date_sub(now(),interval 1 day) and status = 0
+		update t_order set status = 8 where createTime &lt; date_sub(now(),interval 1 day) and status = 0
 	</update>
 	
 	<select id="listPaged" resultType="Order">
