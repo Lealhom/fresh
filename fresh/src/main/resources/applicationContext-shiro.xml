@@ -41,6 +41,7 @@
 				/api/activity/** = appno
 				/api/product/** = appno
 				/api/category/** = appno
+				/api/notify/** = appno
 				/api/address/** = app
 				/api/comment/** = app
 				/api/customer/** = app

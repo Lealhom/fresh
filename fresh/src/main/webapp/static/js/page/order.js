@@ -23,6 +23,9 @@ define('page/order', ['crud'], function(CRUD) {
 				           {field: 'consignee', title: '收件人', width: 100}, 
 				           {field: 'phone', title: '联系方式', width: 100}, 
 				           {field: 'message', title: '买家留言', width: 150}, 
+				           {field: 'buyeId', title: '买家支付宝用户号', width: 150}, 
+				           {field: 'buyerEmail', title: '买家支付宝账号', width: 150}, 
+				           {field: 'tradeNo', title: '支付宝交易号', width: 150}, 
 				           {field: 'createTime', title: '创建时间', width: 150}, 
 				           {field: 'payTime', title: '付款时间', width: 150}
 				          ]

@@ -51,7 +51,10 @@ public class Order implements Serializable {
 	private int payType;// 付款方式
 	private String logisticsNo;// 物流编号（在卖家发货后，输入物流编号，方便消费者在相应的物流官网上进行查询）
 	private String skuIds[];// 关联的SKU
-
+	private String buyeId;//买家支付宝用户号，买家支付宝账号对应的支付宝唯一用户号。以2088开头的纯16位数字。
+	private String buyerEmail;//买家支付宝账号，买家支付宝账号，可以是Email或手机号码。
+	private String tradeNo;//支付宝交易号,该交易在支付宝系统中的交易流水号。最短16位，最长64位。
+	
 	public int getId() {
 		return id;
 	}
@@ -233,6 +236,30 @@ public class Order implements Serializable {
 
 	public void setSkuIds(String[] skuIds) {
 		this.skuIds = skuIds;
+	}
+
+	public String getBuyeId() {
+		return buyeId;
+	}
+
+	public void setBuyeId(String buyeId) {
+		this.buyeId = buyeId;
+	}
+
+	public String getBuyerEmail() {
+		return buyerEmail;
+	}
+
+	public void setBuyerEmail(String buyerEmail) {
+		this.buyerEmail = buyerEmail;
+	}
+
+	public String getTradeNo() {
+		return tradeNo;
+	}
+
+	public void setTradeNo(String tradeNo) {
+		this.tradeNo = tradeNo;
 	}
 
 }
