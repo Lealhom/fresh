@@ -44,9 +44,9 @@ public class ApiOrderController extends ApiBasicController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "add")
+	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseMessage add(HttpServletRequest request, Order order, @RequestParam("skus[]") SkuDTO[] skus) {
+	public ResponseMessage add(HttpServletRequest request, Order order, @RequestParam(value = "skus[]") SkuDTO[] skus) {
 		
 		int uid = this.getUid(request);
 		order.setCustomerId(uid);

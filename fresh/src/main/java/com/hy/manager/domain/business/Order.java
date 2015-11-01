@@ -31,9 +31,9 @@ public class Order implements Serializable {
 	public static final int STATUS_DEL = 9;
 
 	private int id;
-	@JSONField(format = "yyyy/HH/dd hh:mm")
+	@JSONField(format = "yyyy/HH/dd hh:mm", deserialize = false)
 	private Date createTime;// 订单创建时间
-	@JSONField(format = "yyyy/HH/dd hh:mm")
+	@JSONField(format = "yyyy/HH/dd hh:mm", deserialize = false)
 	private Date payTime;// 付款时间
 	private int status;// 订单状态
 	private String no;// 订单编号（根据一定的业务规则进行生成）
@@ -50,6 +50,7 @@ public class Order implements Serializable {
 	private String message;// 给卖家留言
 	private int payType;// 付款方式
 	private String logisticsNo;// 物流编号（在卖家发货后，输入物流编号，方便消费者在相应的物流官网上进行查询）
+	@JSONField(deserialize = false)
 	private String skuIds[];// 关联的SKU
 	private String buyeId;//买家支付宝用户号，买家支付宝账号对应的支付宝唯一用户号。以2088开头的纯16位数字。
 	private String buyerEmail;//买家支付宝账号，买家支付宝账号，可以是Email或手机号码。
