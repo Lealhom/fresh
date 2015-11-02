@@ -1,8 +1,10 @@
 package com.hy.manager.service.business;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +71,13 @@ public class OrderService extends AbstractService<Order> {
 
 	public Map<String, Object> orderDetail(int orderId) {
 		return this.orderMapper.orderDetail(orderId);
+	}
+	
+	public void pay(@Param("no") String no, @Param("status") int status,
+			@Param("payTime") Date payTime, @Param("buyeId") String buyeId,
+			@Param("buyerEmail") String buyerEmail,
+			@Param("tradeNo") String tradeNo) {
+		this.orderMapper.pay(no, status, payTime, buyeId, buyerEmail, tradeNo);
 	}
 
 }

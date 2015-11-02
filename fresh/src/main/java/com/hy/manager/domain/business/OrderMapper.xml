@@ -34,8 +34,19 @@
 		#{id}
 		</foreach>
 	</update>
+	<update id="pay">
+		update t_order
+		<set>
+			status=#{status},
+			payTime=#{payTime},
+			buyeId=#{buyeId},
+			buyerEmail=#{buyerEmail},
+			tradeNo=#{tradeNo}
+		</set>
+		where no=#{no};
+	</update>
 	<update id="decreaseSkuQuantity">
-		update set t_sku set quantity = (quantity-#{quantity}) where id = #{skuId}
+		update t_sku set quantity = (quantity-#{quantity}) where id = #{skuId}
 	</update>
 	<update id="update" parameterType="Order">
 		update t_order

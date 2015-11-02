@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.manager.domain.business.Order;
@@ -46,10 +45,22 @@ public class ApiOrderController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseMessage add(HttpServletRequest request, Order order, @RequestParam(value = "skus[]") SkuDTO[] skus) {
+	public ResponseMessage add(HttpServletRequest request, Order order, String skus) {
 		
 		int uid = this.getUid(request);
 		order.setCustomerId(uid);
+		
+		String[] skuList = skus.split(":");
+		SkuDTO[] dtos = new SkuDTO[skuList.length];
+		for (int i = 0; i < skuList.length; i++) {
+			String sku = skuList[i];
+			String[] values = sku.split(",");
+			SkuDTO dto = new SkuDTO();
+			dto.setSkuId(values[0]);
+			dto.setQuantity(Integer.valueOf(values[1]));
+			dto.setUnitPrice(Integer.valueOf(values[2]));
+			dtos[i] = dto;
+		}
 		
 		order.setCreateTime(new Date());// 设置订单创建时间
 		// 设置订单编号
@@ -59,9 +70,9 @@ public class ApiOrderController extends ApiBasicController {
 		order.setStatus(Order.STATUS_NON_PAYMENT);// 待付款
 		orderService.insert(order);
 		// 添加订单中的sku相关信息，包括购买的数量，购买时的价格等等
-		orderService.addSkus(order.getId(), skus);
+		orderService.addSkus(order.getId(), dtos);
 		// 减少各个SKU的库存量
-		orderService.decreaseSkusQuantity(skus);
+		orderService.decreaseSkusQuantity(dtos);
 		ResponseMessage message = new ResponseMessage();
 		message.setMessage("下单成功!");
 		
