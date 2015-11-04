@@ -75,7 +75,7 @@ define('page/order', ['crud'], function(CRUD) {
 					iconCls: 'icon-undo',
 					handler: function() {
 						var checkRow = the.grid.datagrid('getChecked');
-						var orders = CRUD.getCheckedObjs(checkRow,['id','status','tradeNo','price']);
+						var orders = CRUD.getCheckedObjs(checkRow,['id','status','tradeNo','price','discountPrice']);
 						for(var i in orders){
 							if(orders[i]['status'] != 5){
 								$.messager.alert('提示','只有状态为“待退款”的订单才能退款','warning');
