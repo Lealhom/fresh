@@ -11,19 +11,17 @@ import com.hy.manager.domain.business.Order;
  */
 public class RefundOrderInfo {
 	String reason;//退款理由
-	List<Order> order;//多个退款订单，因为需要支持批量退款
-	
+	List<Order> orders;//多个退款订单，因为需要支持批量退款
 	public String getReason() {
 		return reason;
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	public List<Order> getOrder() {
-		return order;
+	public List<Order> getOrders() {
+		return orders;
 	}
-	public void setOrder(List<Order> order) {
-		this.order = order;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
 	}
-	
 }

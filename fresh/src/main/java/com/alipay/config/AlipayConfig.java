@@ -25,10 +25,9 @@ public class AlipayConfig {
 	
 	//↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 	// 合作身份者ID，以2088开头由16位纯数字组成的字符串
-	public static String partner = "";
+	public static String partner = "2088021510548286";
 	// 商户的私钥
-	public static String key = "";
-
+	public static String key = "jr11y50h8depwet69ip3ny80znv1jsog";
 	//↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 	
 
@@ -42,7 +41,6 @@ public class AlipayConfig {
 	public static String sign_type = "MD5";
 	
 	//以下代码是我新增的 add by lianghongl
-	public static String seller_email = "";//卖家的支付宝账号
-	public static String seller_user_id = "";//卖家用户ID
+	public static String seller_email = "331024571@qq.com";//卖家的支付宝账号
 
 }

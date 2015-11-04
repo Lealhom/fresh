@@ -60,16 +60,20 @@ public class UtilDate {
 	}
 	
 	/**
-	 * 产生随机的三位数
+	 * 产生随机的十个数字作为字符串
 	 * @return
 	 */
-	public static String getThree(){
+	public static String getTen(){
 		Random rad=new Random();
-		return rad.nextInt(1000)+"";
+		StringBuffer sb = new StringBuffer();
+		for(int i=0;i<10;i++){
+			sb.append(rad.nextInt(10));
+		}
+		return sb.toString();
 	}
-	//以下代码是我新增的 ，用于生成退款批次号，add by lianghongl
+	//以下代码是我新增的 ，用于生成退款批次号，add by lianghongl 退款日期（8位）+流水号（3～24位）
 	public static String getBatchNo() {
-		return getDate()+getThree();
+		return getDate()+getTen();
 	}
 	
 }

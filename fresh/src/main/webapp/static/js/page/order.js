@@ -15,7 +15,8 @@ define('page/order', ['crud'], function(CRUD) {
 				          [
 				           {field: 'id', title: 'ID', checkbox: true}, 
 				           {field: 'username', title: '用户名', width: 100}, 
-				           {field: 'showname', title: '昵称', width: 100}, 
+				           {field: 'showname', title: '昵称', width: 100},
+				           {field: 'status', title: '状态', width: 50,hidden:true}, 
 				           {field: 'statusInfo', title: '状态', width: 50}, 
 				           {field: 'price', title: '订单总价格', width: 100}, 
 				           {field: 'discountPrice', title: '订单折后价', width: 100}, 
@@ -25,7 +26,7 @@ define('page/order', ['crud'], function(CRUD) {
 				           {field: 'message', title: '买家留言', width: 150}, 
 				           {field: 'buyeId', title: '买家支付宝用户号', width: 150}, 
 				           {field: 'buyerEmail', title: '买家支付宝账号', width: 150}, 
-				           {field: 'tradeNo', title: '支付宝交易号', width: 150}, 
+				           {field: 'tradeNo', title: '支付宝交易号', width: 250}, 
 				           {field: 'createTime', title: '创建时间', width: 150}, 
 				           {field: 'payTime', title: '付款时间', width: 150}
 				          ]
@@ -74,9 +75,16 @@ define('page/order', ['crud'], function(CRUD) {
 					iconCls: 'icon-undo',
 					handler: function() {
 						var checkRow = the.grid.datagrid('getChecked');
-						var ids = CRUD.getCheckedIds(checkRow);
-						if (ids) {
-							the.refund(ids);
+						var orders = CRUD.getCheckedObjs(checkRow,['id','status','tradeNo','price']);
+						for(var i in orders){
+							if(orders[i]['status'] != 5){
+								$.messager.alert('提示','只有状态为“待退款”的订单才能退款','warning');
+								return false;
+							}
+						}
+						var reason = '协商退款';//退款理由是写死的，应该弹出一个窗口，填入退款理由
+						if (orders) {
+							the.refund(reason,orders);
 						}
 					}
 				}]
@@ -93,16 +101,38 @@ define('page/order', ['crud'], function(CRUD) {
 				the.reload();
 			});
 		},
-		refund: function(ids) {
+		refund: function(reason,orders) {
 			var the = this;
+			var params = {reason: reason,orders:orders};
+			 $.messager.confirm('提示','确认退款？', function(r){
+				 if (r) {
+					 $.ajax({
+							dataType: 'json',
+							type: 'POST',
+							url: 'order/refunded',
+							contentType:'application/json',
+							data: JSON.stringify(params),
+							success: function(data) {
+								var form = data['data'];
+								$("#refund_div").html(form);
+								the.reload();
+							}
+					});
+				 }
+			 });
+			/*
 			CRUD.operate({
 				url: 'order/refunded',
-				data: {ids: ids}
+				type:'POST',
+				contentType:'application/json',
+				data: JSON.stringify(params)
 			},
 			'确认退款？',
-			function() {
+			function(data) {
+				console.log(data);
 				the.reload();
 			});
+			*/
 		},
 		loaded: function(data) {
 		},

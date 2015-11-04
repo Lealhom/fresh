@@ -134,6 +134,22 @@ define('crud', ['data'], function(DATA) {
 				return false;
 			}
 			return values;
+		},
+		getCheckedObjs: function(checkedRow, fields) {
+			var objs = [];
+			for (var i in checkedRow) {
+				var row = checkedRow[i];
+				var obj = {};
+				for(var j in fields){
+					obj[fields[j]] = row[fields[j]]
+				}
+				objs.push(obj);
+			}
+			if (objs.length == 0) {
+				$.messager.alert('提示','至少选择一条数据！','warning');
+				return false;
+			}
+			return objs;
 		}
 	};
 	return crud;
