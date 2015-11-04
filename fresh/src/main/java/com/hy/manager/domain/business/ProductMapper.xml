@@ -96,7 +96,7 @@
 		FROM fresh.t_sku t1 
 		inner join t_product t2
 		on t1.productId = t2.id
-		where t2.name like '%${name}%'
+		where t2.name like CONCAT('%',#{name},'%' )
 		and t1.status = 1
 		and t2.status = 1
 		limit 20

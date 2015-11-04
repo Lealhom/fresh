@@ -39,7 +39,13 @@ public class TestProductService extends AbstractTest {
 		List<Map<String, Object>> list = productService.listCollection(1,p);
 		System.out.println(list);
 	}
-
+	@Test
+	public void testSearch() {
+		List<Map<String, Object>> list = productService.search("苹果");
+		for(Map<String,Object> m:list){
+			System.out.println(m.get("skuName"));
+		}
+	}
 	@Test
 	public void testListHotProduct() {
 		List<Map<String, Object>> list = productService.listHotProduct(new Parameter());
