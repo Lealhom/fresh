@@ -34,7 +34,6 @@ public class ApiController {
 		String buyer_id = request.getParameter("buyer_id");
 		String buyer_email = request.getParameter("buyer_email");
 		Map<String, String[]> result = request.getParameterMap();
-		System.out.println(JSON.toJSONString(result));
 		int status = 0;
 		if (trade_status.equals("WAIT_BUYER_PAY")) {
 			status = Order.STATUS_NON_PAYMENT;
