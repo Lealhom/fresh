@@ -1,7 +1,6 @@
 package com.hy.manager.web.controller.api;
 
 import java.util.Date;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.service.business.OrderService;
 
@@ -33,7 +31,6 @@ public class ApiController {
 		String trade_status = request.getParameter("trade_status");
 		String buyer_id = request.getParameter("buyer_id");
 		String buyer_email = request.getParameter("buyer_email");
-		Map<String, String[]> result = request.getParameterMap();
 		int status = 0;
 		if (trade_status.equals("WAIT_BUYER_PAY")) {
 			status = Order.STATUS_NON_PAYMENT;
