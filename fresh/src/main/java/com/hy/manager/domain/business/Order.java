@@ -108,6 +108,9 @@ public class Order implements Serializable {
 		if (status == Order.STATUS_SEND) {
 			return "已发货";
 		}
+		if (status == Order.STATUS_EXPIRE) {
+			return "已过期";
+		}
 		return String.valueOf(status);
 	}
 

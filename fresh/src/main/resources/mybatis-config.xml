@@ -23,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.hy.manager.domain.business.Category" alias="Category" />
 		<typeAlias type="com.hy.manager.domain.business.Customer" alias="Customer" />
 		<typeAlias type="com.hy.manager.domain.business.SkuDTO" alias="SkuDTO" />
+		<typeAlias type="com.hy.manager.domain.business.Coupon" alias="Coupon" />
 		
 		<typeAlias type="com.hy.manager.web.TreeNode" alias="TreeNode" />
 	</typeAliases>

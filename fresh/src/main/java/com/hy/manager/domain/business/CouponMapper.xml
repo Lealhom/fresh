@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hy.manager.domain.business.CouponMapper">
+	<insert id="insert" parameterType="Coupon" useGeneratedKeys="true" keyProperty="id">
+		insert into t_coupon
+		(batchNo,money,exceedMoney,startTime ,endTime,status,name,description)
+		values
+		(#{batchNo},#{money},#{exceedMoney},#{startTime},#{endTime},#{status},#{name},#{description})
+	</insert>
+	
+	<update id="update" parameterType="Coupon">
+		update t_coupon
+		<set>
+			<if test="customerId!=null">customerId=#{customerId},</if>  
+			<if test="orderId!=null">orderId=#{orderId},</if>     
+			<if test="batchNo!=null">batchNo=#{batchNo},</if>     
+			<if test="money!=0">money=#{money},</if>      
+			<if test="exceedMoney!=0">exceedMoney=#{exceedMoney},</if> 
+			<if test="startTime!=null">startTime=#{startTime},</if>   
+			<if test="endTime!=null">endTime=#{endTime},</if>     
+			<if test="useTime!=null">useTime=#{useTime},</if>     
+			<if test="status!=0">status=#{status},</if>      
+			<if test="name!=null">name=#{name},</if>        
+			<if test="description!=null">description=#{description}</if> 
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteById" parameterType="int">
+		delete from t_coupon where id=#{id}
+	</delete>
+	
+	<delete id="deleteByIds">
+		delete from t_coupon where id in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		#{id}
+		</foreach>
+	</delete>
+	
+	<select id="selectById" resultType="Coupon">
+		select * from t_coupon where id=#{id}
+	</select>
+	
+	<sql id="gridWhere">
+		from t_coupon u
+		<where>
+		</where>
+	</sql>
+	<select id="listPaged" resultType="Coupon">
+		select *
+		<include refid="gridWhere"/>
+		<if test="rows > 0">
+		limit #{start},#{rows}
+		</if>
+	</select>
+	<select id="listByCustomerId" resultType="map">
+		select * from t_coupon where customerId = #{customerId}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
+		</if>
+	</select>
+	<select id="count" resultType="long">
+		select count(*)
+		<include refid="gridWhere"/>
+	</select>
+
+</mapper>
