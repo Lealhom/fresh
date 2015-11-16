@@ -10,17 +10,14 @@ define('page/coupon', ['crud'], function(CRUD) {
 				pagination: true,
 				columns: [[
 				           {field: 'id', title: 'ID', checkbox: true}, 
-				           {field: 'customerId', title: '用户ID', width: 100},
-				           {field: 'orderId', title: '订单ID', width: 100},
-				           {field: 'batchNo', title: '批次号', width: 150},
-				           {field: 'money', title: '现金券金额', width: 100},
+				           {field: 'money', title: '现金券金额', width: 80},
 				           {field: 'startTime', title: '有效期起', width: 150},
 				           {field: 'endTime', title: '有效期止', width: 150},
-				           {field: 'useTime', title: '使用时间', width: 150},
-				           {field: 'status', title: '是否使用', width: 100},
+				           {field: 'statusInfo', title: '状态', width: 100},
+				           {field: 'typeInfo', title: '现金券类型', width: 100},
 				           {field: 'exceedMoney', title: '订单金额超过多少可用', width: 150},
 				           {field: 'name', title: '名称', width: 150},
-				           {field: 'description', title: '描述', width: 150}
+				           {field: 'description', title: '描述', width: 250}
 				         ]],
 				toolbar: [{
 					text: '添加',

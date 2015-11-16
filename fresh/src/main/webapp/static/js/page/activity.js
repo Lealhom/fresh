@@ -26,8 +26,10 @@ define('page/activity', ['crud'], function(CRUD) {
 				           {field: 'description', title: '描述', width: 300},
 				           {field: 'startTime', title: '开始时间', width: 200},
 				           {field: 'endTime', title: '结束时间', width: 200},
-				           {field: 'status', title: '状态', width: 100},
-				           {field: 'banner', title: '是否为banner', width: 100},
+				           {field: 'status', title: '状态', width: 100,hidden:true},
+				           {field: 'statusInfo', title: '状态', width: 100},
+				           {field: 'banner', title: '是否为banner', width: 100,hidden:true},
+				           {field: 'bannerInfo', title: '是否为banner', width: 100},
 				           {field: 'orderNum', title: '序号', width: 100}
 				         ]],
 				toolbar: [{

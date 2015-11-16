@@ -4,29 +4,34 @@
 <mapper namespace="com.hy.manager.domain.business.CouponMapper">
 	<insert id="insert" parameterType="Coupon" useGeneratedKeys="true" keyProperty="id">
 		insert into t_coupon
-		(batchNo,money,exceedMoney,startTime ,endTime,status,name,description)
+		(money,exceedMoney,startTime ,endTime,status,type,name,description)
 		values
-		(#{batchNo},#{money},#{exceedMoney},#{startTime},#{endTime},#{status},#{name},#{description})
+		(#{money},#{exceedMoney},#{startTime},#{endTime},#{status},#{type},#{name},#{description})
+	</insert>
+	<insert id="addCustomerCoupon">
+		insert into t_coupon_customer
+		(couponId,customerId,batchNo,status)
+		values
+		(#{couponId},#{customerId},#{batchNo},#{status})
 	</insert>
 	
 	<update id="update" parameterType="Coupon">
 		update t_coupon
 		<set>
-			<if test="customerId!=null">customerId=#{customerId},</if>  
-			<if test="orderId!=null">orderId=#{orderId},</if>     
-			<if test="batchNo!=null">batchNo=#{batchNo},</if>     
 			<if test="money!=0">money=#{money},</if>      
 			<if test="exceedMoney!=0">exceedMoney=#{exceedMoney},</if> 
 			<if test="startTime!=null">startTime=#{startTime},</if>   
 			<if test="endTime!=null">endTime=#{endTime},</if>     
-			<if test="useTime!=null">useTime=#{useTime},</if>     
 			<if test="status!=0">status=#{status},</if>      
+			<if test="type!=0">type=#{type},</if>      
 			<if test="name!=null">name=#{name},</if>        
 			<if test="description!=null">description=#{description}</if> 
 		</set>
 		where id = #{id}
 	</update>
-	
+	<update id="useCoupon">
+		update t_coupon_customer set useTime = #{useTime},orderId = #{orderId},batchNo = #{batchNo},status = 2
+	</update>
 	<delete id="deleteById" parameterType="int">
 		delete from t_coupon where id=#{id}
 	</delete>
@@ -42,6 +47,10 @@
 		select * from t_coupon where id=#{id}
 	</select>
 	
+	<select id="findByType" resultType="Coupon">
+		select * from t_coupon where type=#{type} limit 1
+	</select>
+	
 	<sql id="gridWhere">
 		from t_coupon u
 		<where>
@@ -55,7 +64,12 @@
 		</if>
 	</select>
 	<select id="listByCustomerId" resultType="map">
-		select * from t_coupon where customerId = #{customerId}
+		select t1.batchNo,t1.orderId,t1.useTime,t1.status,
+			   t2.money,t2.startTime,t2.endTime,t2.name,t2.description,t2.type	
+		from t_coupon_customer t1
+		left join t_coupon t2
+		on t1.couponId = t2.id
+		where t1.customerId = #{customerId}
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>

@@ -26,4 +26,21 @@ public class TestCouponService extends AbstractTest {
 		List<Map<String,Object>> list = couponService.listByCustomerId(1, parameter);
 		System.out.println(list.size());
 	}
+	
+	//发放现金券
+	@Test
+	public void testAddCustomerCoupon() {
+		String batchNo = String.valueOf(System.currentTimeMillis());
+		int status = 1;
+		couponService.addCustomerCoupon(1, 1, batchNo, status);
+	}
+	
+	//使用现金券
+	@Test
+	public void testUseCoupon() {
+		String useTime = "2015-11-07 15:30:53";
+		String batchNo = "1447683252847";
+		int orderId = 1;
+		couponService.useCoupon(useTime, batchNo,orderId);
+	}
 }

@@ -46,7 +46,24 @@ public class Product implements Serializable {
 	public int getStatus() {
 		return status;
 	}
-
+	public String getStatusInfo() {
+		if (status == 1) {
+			return "上架";
+		}
+		if (status == 2) {
+			return "下架";
+		}
+		return String.valueOf(status);
+	}
+	public String getHotInfo() {
+		if (status == 1) {
+			return "是";
+		}
+		if (status == 0) {
+			return "否";
+		}
+		return String.valueOf(hot);
+	}
 	public void setStatus(int status) {
 		this.status = status;
 	}

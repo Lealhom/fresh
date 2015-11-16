@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.alipay.util.UtilDate;
 import com.hy.manager.domain.File;
+import com.hy.manager.domain.business.Coupon;
 import com.hy.manager.domain.business.Customer;
 import com.hy.manager.domain.business.Product;
 import com.hy.manager.service.FileService;
+import com.hy.manager.service.business.CouponService;
 import com.hy.manager.service.business.CustomerService;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.service.business.ProductService;
@@ -39,7 +42,41 @@ public class ApiCustomerController extends ApiBasicController {
 	private OrderService orderService;
 	@Autowired
 	private ProductService productService;
-
+	@Autowired
+	private CouponService couponService;
+	
+	/**
+	 * 注册
+	 * @return
+	 */
+	@RequestMapping(value = "register", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseMessage register(HttpServletRequest request,Customer customer) {
+		ResponseMessage message = new ResponseMessage();
+		customerService.insert(customer);//注册用户
+		int customerId = customer.getId();
+		//发放两张注册类型的现金券
+		Coupon c = couponService.findByType(Coupon.TYPE_REGISTER);
+		for(int i=0;i<2;i++){
+			String batchNo = String.valueOf(System.currentTimeMillis());
+			int status = 1;//未使用
+			couponService.addCustomerCoupon(customerId,c.getId(),batchNo,status);
+		}
+		message.setData(customer);
+		return message;
+	}
+	/**
+	 * 使用现金券
+	 * @return
+	 */
+	@RequestMapping(value = "use_coupon", method = { RequestMethod.POST })
+	@ResponseBody
+	public ResponseMessage useCoupon(HttpServletRequest request,String batchNo,int orderId) {
+		ResponseMessage message = new ResponseMessage();
+		String useTime = UtilDate.getDateFormatter();
+		couponService.useCoupon(useTime, batchNo, orderId);
+		return message;
+	}
 	/**
 	 * app端登录
 	 * 

@@ -31,9 +31,13 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				},{
 					field: 'updateTime', title: '更新时间', width: 150
 				},{
-					field: 'status', title: '状态', width: 100
+					field: 'status', title: '状态', width: 100,hidden:true
 				},{
-					field: 'hot', title: '是否热销', width: 100
+					field: 'statusInfo', title: '状态', width: 100
+				},{
+					field: 'hot', title: '是否热销', width: 100,hidden:true
+				},{
+					field: 'hotInfo', title: '是否热销', width: 100
 				}]],
 				toolbar: [{
 					text: '添加',

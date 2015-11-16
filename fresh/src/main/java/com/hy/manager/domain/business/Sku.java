@@ -49,7 +49,15 @@ public class Sku implements Serializable {
 	public int getStatus() {
 		return status;
 	}
-
+	public String getStatusInfo() {
+		if (status == 1) {
+			return "上架";
+		}
+		if (status == 2) {
+			return "下架";
+		}
+		return String.valueOf(status);
+	}
 	public void setStatus(int status) {
 		this.status = status;
 	}

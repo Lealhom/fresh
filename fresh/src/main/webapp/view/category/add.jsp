@@ -27,7 +27,7 @@
 		<tr>
 			<td class="form-title">图片</td>
 			<td class="form-input">
-				<input type="file" name="file">
+				<input type="file" name="file" class="easyui-validatebox"  data-options="required:true">
 			</td>
 		</tr>
 	</table>

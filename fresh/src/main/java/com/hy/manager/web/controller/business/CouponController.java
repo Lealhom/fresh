@@ -44,8 +44,12 @@ public class CouponController extends BasicController {
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	public ResponseMessage add(Coupon coupon) {
 		ResponseMessage message = new ResponseMessage();
-		coupon.setBatchNo(String.valueOf(System.currentTimeMillis()));
-		couponService.insert(coupon);
+		Coupon c = couponService.findByType(coupon.getType());
+		if(null != c){
+			message.setMessage("已经存在此类型的现金券");
+		}else{
+			couponService.insert(coupon);
+		}
 		return message;
 	}
 

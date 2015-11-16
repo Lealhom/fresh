@@ -31,4 +31,16 @@ public class CouponService extends AbstractService<Coupon> {
 		return couponMapper.listByCustomerId(customerId,parameter);
 	}
 
+	public Coupon findByType(int type) {
+		return couponMapper.findByType(type);
+	}
+
+	public void addCustomerCoupon(int customerId, int couponId, String batchNo, int status) {
+		couponMapper.addCustomerCoupon(customerId,couponId,batchNo,status);
+	}
+	
+	public void useCoupon(String useTime,String batchNo,int orderId){
+		couponMapper.useCoupon(useTime,batchNo,orderId);
+	}
+
 }

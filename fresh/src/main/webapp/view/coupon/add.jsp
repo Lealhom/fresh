@@ -6,9 +6,15 @@
 			<td><input name="name" class="easyui-validatebox textbox" data-options="required:true,validType:'length[3,10]'"></td>
 			<td>状态</td>
 			<td><select class="easyui-combobox" name="status" style="width:80px;">
-				<option value="1">未使用</option>
-				<option value="2">已使用</option>
+				<option value="1">正常</option>
+				<option value="2">禁用</option>
 			</select></td>
+		</tr>
+		<tr>
+			<td>开始时间</td>
+			<td><input class="easyui-datetimebox" name="startTime" required style="width:210px"></td>
+			<td>结束时间</td>
+			<td><input class="easyui-datetimebox" name="endTime" required style="width:210px"></td>
 		</tr>
 		<tr>
 			<td >现金券金额</td>
@@ -17,10 +23,11 @@
 			<td class="form-input"><input name="exceedMoney" class="easyui-numberspinner" data-options="value:0,min:0"></td>
 		</tr>
 		<tr>
-			<td>开始时间</td>
-			<td><input class="easyui-datetimebox" name="startTime" required style="width:210px"></td>
-			<td>结束时间</td>
-			<td><input class="easyui-datetimebox" name="endTime" required style="width:210px"></td>
+			<td>类型</td>
+			<td  colspan="3"><select class="easyui-combobox" name="type" style="width:180px;">
+				<option value="1">普通型现金券</option>
+				<option value="2">注册型现金券</option>
+			</select></td>
 		</tr>
 		<tr>
 			<td >描述</td>

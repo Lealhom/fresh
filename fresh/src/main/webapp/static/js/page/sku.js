@@ -16,7 +16,8 @@ define('page/sku', ['crud'], function(CRUD) {
 				           	{field: 'discountPrice', title: '折扣价', width: 100}, 
 				           	{field: 'standard', title: '规格', width: 200},
 				           	{field: 'quantity', title: '库存', width: 100},
-				           	{field: 'status', title: '状态', width: 100}
+				           	{field: 'status', title: '状态', width: 100,hidden:true},
+				           	{field: 'statusInfo', title: '状态', width: 100}
 					]
 				],
 				toolbar: [{

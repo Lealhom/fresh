@@ -9,6 +9,7 @@ import java.io.Serializable;
  *
  */
 public class Activity implements Serializable {
+	
 
 	/**
 	 * 
@@ -25,7 +26,7 @@ public class Activity implements Serializable {
 	private String productNames;
 	private int orderNum;// 序号
 	private String imgUuid;// 活动图片uuid
-
+	
 	public int getId() {
 		return id;
 	}
@@ -37,7 +38,24 @@ public class Activity implements Serializable {
 	public int getStatus() {
 		return status;
 	}
-
+	public String getStatusInfo() {
+		if (status == 1) {
+			return "正常";
+		}
+		if (status == 2) {
+			return "禁用";
+		}
+		return String.valueOf(status);
+	}
+	public String getBannerInfo() {
+		if (status == 1) {
+			return "是";
+		}
+		if (status == 2) {
+			return "否";
+		}
+		return String.valueOf(banner);
+	}
 	public void setStatus(int status) {
 		this.status = status;
 	}
