@@ -12,6 +12,7 @@ public class Sku implements Serializable {
 	private int status;// 上架、下架状态
 	private double originalPrice;// 原价
 	private double discountPrice;// 折扣价
+	private double scoreConvertRate;// 允许兑换的积分比例
 	private String standard;// 规格
 	private int quantity;// 库存数量
 	private double avgScore;// 该sku的平均评分
@@ -80,6 +81,14 @@ public class Sku implements Serializable {
 
 	public void setDiscountPrice(double discountPrice) {
 		this.discountPrice = discountPrice;
+	}
+
+	public double getScoreConvertRate() {
+		return scoreConvertRate;
+	}
+
+	public void setScoreConvertRate(double scoreConvertRate) {
+		this.scoreConvertRate = scoreConvertRate;
 	}
 
 	public String getStandard() {

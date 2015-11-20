@@ -14,6 +14,7 @@ define('page/sku', ['crud'], function(CRUD) {
 				           	{field: 'productName', title: '产品名称', width: 300}, 
 				           	{field: 'originalPrice', title: '原价', width: 100}, 
 				           	{field: 'discountPrice', title: '折扣价', width: 100}, 
+				           	{field: 'scoreConvertRate', title: '积分兑换比例', width: 100}, 
 				           	{field: 'standard', title: '规格', width: 200},
 				           	{field: 'quantity', title: '库存', width: 100},
 				           	{field: 'status', title: '状态', width: 100,hidden:true},

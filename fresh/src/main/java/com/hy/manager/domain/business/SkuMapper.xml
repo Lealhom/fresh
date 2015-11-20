@@ -4,11 +4,10 @@
 <mapper namespace="com.hy.manager.domain.business.SkuMapper">
 	<insert id="insert" parameterType="Sku" useGeneratedKeys="true" keyProperty="id">
 		insert into t_sku
-		(status,productId,name,originalPrice,discountPrice,standard,quantity)
+		(status,productId,name,originalPrice,discountPrice,scoreConvertRate,standard,quantity)
 		values
-		(#{status},#{productId},#{name},#{originalPrice},#{discountPrice},#{standard},#{quantity})
+		(#{status},#{productId},#{name},#{originalPrice},#{discountPrice},#{scoreConvertRate},#{standard},#{quantity})
 	</insert>
-	
 	<update id="update" parameterType="Sku">
 		update t_sku
 		<set>
@@ -17,6 +16,7 @@
 			productId=#{productId},
 			originalPrice=#{originalPrice},
 			discountPrice=#{discountPrice},
+			scoreConvertRate=#{scoreConvertRate},
 			standard=#{standard},
 			quantity=#{quantity}
 		</set>
