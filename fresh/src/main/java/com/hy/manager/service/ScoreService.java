@@ -24,5 +24,7 @@ public class ScoreService extends AbstractService<Object> {
 	public void updateScoreRate(int rate) {
 		scoreMapper.updateScoreRate(rate);
 	}
-
+	public void updateCustomerScore(int customerId,double score){
+		scoreMapper.updateCustomerScore(customerId,score);
+	}
 }

@@ -6,4 +6,6 @@ public interface ScoreMapper extends AbstractMapper {
 
 	void updateScoreRate(@Param("rate") int rate);
 
+	void updateCustomerScore(@Param("customerId")int customerId, @Param("score")double score);
+
 }

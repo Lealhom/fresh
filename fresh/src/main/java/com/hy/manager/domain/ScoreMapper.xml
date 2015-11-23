@@ -5,6 +5,9 @@
 	<update id="updateScoreRate">
 		update t_score_configration set rate = #{rate}
 	</update>
+	<update id="updateCustomerScore">
+		update t_customer set score = (score + #{score}) where id = #{customerId}
+	</update>
 	<select id="selectById" resultType="map">
 		select * from t_score_configration limit 1
 	</select>
