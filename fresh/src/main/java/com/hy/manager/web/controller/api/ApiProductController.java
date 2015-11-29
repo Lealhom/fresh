@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hy.manager.service.business.CommentService;
 import com.hy.manager.service.business.ProductService;
+import com.hy.manager.service.business.SkuService;
 import com.hy.manager.web.Parameter;
 import com.hy.manager.web.ResponseMessage;
 
@@ -19,6 +20,8 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiProductController  extends ApiBasicController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private SkuService skuService;
 	@Autowired
 	private CommentService commentService;
 
@@ -90,7 +93,7 @@ public class ApiProductController  extends ApiBasicController {
 	public ResponseMessage detail(@PathVariable int productId,
 			@PathVariable int skuId, Parameter parameter) {
 		Map<String, Object> map = this.productService.detail(productId, skuId,parameter);
-		List<String> viceImgs = this.productService.findViceImgs(productId);// 得到副图
+		List<String> viceImgs = this.skuService.findViceImgs(skuId);// 得到SKU副图
 		map.put("viceImgs", viceImgs);
 		ResponseMessage message = new ResponseMessage();
 		message.setData(map);

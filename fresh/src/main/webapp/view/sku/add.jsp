@@ -42,5 +42,13 @@
 			">
 			</td>
 		</tr>
+		<tr>
+			<td class="form-title">主图</td>
+			<td class="form-input" colspan="3"><input name="mainImg" type="file" data-options="required:true" style="width: 300px;"></td>
+		</tr>
+		<tr>
+			<td class="form-title">副图</td>
+			<td class="form-input" colspan="3"><input name="viceImgs" type="file" multiple="multiple" data-options="required:true" style="width: 300px;"></td>
+		</tr>
 	</table>
 </form>

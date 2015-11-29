@@ -8,37 +8,27 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 				fit: true,
 				rownumbers: true,
 				pagination: true,
-				columns: [[{
-					field: 'id', title: 'ID', checkbox: true
-				},{
-					field: 'mainImgUuid', title: '主图', width: 90,
-					formatter:function(value){
-						var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
-						return s;
-					}
-				}, {
-					field: 'name', title: '名称', width: 200
-				}, {
-					field: 'brandName', title: '所属品牌', width: 150
-				},{
-					field: 'categoryNames', title: '所属品类', width: 200
-				},{
-					field: 'bornPlace', title: '产地', width: 100
-				},{
-					field: 'description', title: '描述', width: 350
-				},{
-					field: 'createTime', title: '创建时间', width: 150
-				},{
-					field: 'updateTime', title: '更新时间', width: 150
-				},{
-					field: 'status', title: '状态', width: 100,hidden:true
-				},{
-					field: 'statusInfo', title: '状态', width: 100
-				},{
-					field: 'hot', title: '是否热销', width: 100,hidden:true
-				},{
-					field: 'hotInfo', title: '是否热销', width: 100
-				}]],
+				columns: [[
+				           {field: 'id', title: 'ID', checkbox: true},
+							/*{
+								field: 'mainImgUuid', title: '主图', width: 90,
+								formatter:function(value){
+									var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
+									return s;
+								}
+							}, */
+							{field: 'name', title: '名称', width: 200}, 
+							{field: 'brandName', title: '所属品牌', width: 150},
+							{field: 'categoryNames', title: '所属品类', width: 200},
+							{field: 'bornPlace', title: '产地', width: 100},
+							{field: 'description', title: '描述', width: 350},
+							{field: 'createTime', title: '创建时间', width: 150},
+							{field: 'updateTime', title: '更新时间', width: 150},
+							{field: 'status', title: '状态', width: 100,hidden:true},
+							{field: 'statusInfo', title: '状态', width: 100},
+							{field: 'hot', title: '是否热销', width: 100,hidden:true},
+							{field: 'hotInfo', title: '是否热销', width: 100}
+				]],
 				toolbar: [{
 					text: '添加',
 					iconCls: 'icon-add',
@@ -117,7 +107,7 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 							});
 						}
 					}
-				},{
+				}/*,{
 					text: '更换主图',
 					iconCls: 'icon-large-picture',
 					handler: function() {
@@ -153,7 +143,7 @@ define('page/product', ['crud','fileuploader'], function(CRUD,FileUploader) {
 							});
 						}
 					}
-				}]
+				}*/]
 			});
 		},
 		loaded: function(data) {

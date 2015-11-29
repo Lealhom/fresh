@@ -9,7 +9,14 @@ define('page/sku', ['crud'], function(CRUD) {
 				rownumbers: true,
 				pagination: true,
 				columns: [[
-				           	{field: 'id', title: 'ID', checkbox: true}, 
+				           	{field: 'id', title: 'ID', checkbox: true},
+				           	{
+								field: 'mainImgUuid', title: '主图', width: 90,
+								formatter:function(value){
+									var s='<a href="javascript:void(0)"><img src="static/upload/'+value+'" style="width:80px;height:80px;"/></a>';
+									return s;
+								}
+							}, 
 				           	{field: 'name', title: '名称', width: 150}, 
 				           	{field: 'productName', title: '产品名称', width: 300}, 
 				           	{field: 'originalPrice', title: '原价', width: 100}, 
@@ -62,6 +69,42 @@ define('page/sku', ['crud'], function(CRUD) {
 								data: {ids: ids}
 							}, function() {
 								the.reload();
+							});
+						}
+					}
+				},{
+					text: '更换主图',
+					iconCls: 'icon-large-picture',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换主图--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'sku/updateMainImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
+							});
+						}
+					}
+				},{
+					text: '更换副图',
+					iconCls: 'icon-large-clipart',
+					handler: function() {
+						var checkRow = the.grid.datagrid('getChecked');
+						if (CRUD.onlyCheckedOne(checkRow)) {
+							CRUD.edit({
+								title: '更换副图--' + checkRow[0].name,
+								width:420,
+								height:420,
+								href: 'sku/updateViceImg?id=' + checkRow[0].id
+							}, function() {
+								the.loaded();
+							}, function() {
+								the.saveOrUpdate();
 							});
 						}
 					}

@@ -47,5 +47,20 @@ public class SkuService extends AbstractService<Sku> {
 	public void updateSkuComment(int skuId,int score) {
 		this.skuMapper.updateSkuComment(skuId,score);
 	}
-
+	public void addViceImgUuid(int skuId, String viceImgUuid, int orderNum) {
+		this.skuMapper.addViceImgUuid(Integer.toString(skuId),
+				viceImgUuid, orderNum);
+	}
+	public void addViceImgUuids(int skuId, List<String> viceImgUuids) {
+		for (int i = 0; i < viceImgUuids.size(); i++) {
+			this.addViceImgUuid(skuId, viceImgUuids.get(i), (i + 1));
+		}
+	}
+	public void delViceImgUuids(int skuId) {
+		this.skuMapper.delViceImgUuids(skuId);
+	}
+	
+	public List<String> findViceImgs(int productId) {
+		return this.skuMapper.findViceImgs(productId);
+	}
 }

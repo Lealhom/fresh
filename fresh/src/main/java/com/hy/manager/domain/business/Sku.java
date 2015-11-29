@@ -19,6 +19,7 @@ public class Sku implements Serializable {
 	private int haopingQuantity;//好评数量
 	private int zhongpingQuantity;//好评数量
 	private int chapingQuantity;//好评数量
+	private String mainImgUuid;// 主图的uuid
 	public int getId() {
 		return id;
 	}
@@ -139,4 +140,11 @@ public class Sku implements Serializable {
 		this.chapingQuantity = chapingQuantity;
 	}
 
+	public String getMainImgUuid() {
+		return mainImgUuid;
+	}
+
+	public void setMainImgUuid(String mainImgUuid) {
+		this.mainImgUuid = mainImgUuid;
+	}
 }
