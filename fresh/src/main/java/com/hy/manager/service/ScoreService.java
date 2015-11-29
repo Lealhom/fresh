@@ -1,5 +1,7 @@
 package com.hy.manager.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,14 @@ public class ScoreService extends AbstractService<Object> {
 		return scoreMapper;
 	}
 
-	public void updateScoreRate(int rate) {
-		scoreMapper.updateScoreRate(rate);
+	public void updateScoreRate(int rate,String type) {
+		scoreMapper.updateScoreRate(rate,type);
 	}
 	public void updateCustomerScore(int customerId,double score){
 		scoreMapper.updateCustomerScore(customerId,score);
+	}
+
+	public Map<String,Object> findRateByType(String type) {
+		return scoreMapper.findRateByType(type);
 	}
 }

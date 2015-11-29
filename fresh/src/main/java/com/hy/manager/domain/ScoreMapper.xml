@@ -3,12 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hy.manager.domain.ScoreMapper">
 	<update id="updateScoreRate">
-		update t_score_configration set rate = #{rate}
+		update t_score_configration set rate = #{rate} where type=#{type}
 	</update>
 	<update id="updateCustomerScore">
 		update t_customer set score = (score + #{score}) where id = #{customerId}
 	</update>
-	<select id="selectById" resultType="map">
-		select * from t_score_configration limit 1
+	<select id="listAll" resultType="map">
+		select * from t_score_configration
+	</select>
+	<select id="findRateByType" resultType="map">
+		select * from t_score_configration where type=#{type}
 	</select>
 </mapper>

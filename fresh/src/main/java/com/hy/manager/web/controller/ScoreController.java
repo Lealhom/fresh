@@ -1,5 +1,6 @@
 package com.hy.manager.web.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +21,29 @@ public class ScoreController extends BasicController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "page")
 	public ModelAndView index() {
-		Map<String,Object> map = (Map<String, Object>) scoreService.selectById(1);
-		int rate = Integer.valueOf(map.get("rate").toString());
+		List<Object> list =  scoreService.listAll();
+//		int rate = Integer.valueOf(map.get("rate").toString());
+//		mav.addObject("rate1", rate);
 		ModelAndView mav = new ModelAndView("score/page");
-		mav.addObject("rate", rate);
+		for(int i=0;i<list.size();i++){
+			Map<String,Object> map = (Map<String, Object>) list.get(i);
+			if("moneyToScore".equals((String)map.get("type"))){
+				int rate = Integer.valueOf(map.get("rate").toString());
+				mav.addObject("rate1", rate);
+			}
+			if("scoreToMoney".equals((String)map.get("type"))){
+				int rate = Integer.valueOf(map.get("rate").toString());
+				mav.addObject("rate2", rate);
+			}
+		}
 		return mav;
 	}
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public ResponseMessage update(int rate) {
+	public ResponseMessage update1(int rate1,int rate2) {
 		ResponseMessage message = new ResponseMessage();
-		scoreService.updateScoreRate(rate);
+		scoreService.updateScoreRate(rate1,"moneyToScore");
+		scoreService.updateScoreRate(rate2,"scoreToMoney");
 		return message;
 	}
 }

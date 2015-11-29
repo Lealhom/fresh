@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hy.manager.domain.business.Coupon;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.domain.business.SkuDTO;
+import com.hy.manager.service.ScoreService;
+import com.hy.manager.service.business.CouponService;
+import com.hy.manager.service.business.CustomerService;
 import com.hy.manager.service.business.OrderService;
 import com.hy.manager.web.ResponseMessage;
 
@@ -23,7 +27,12 @@ import com.hy.manager.web.ResponseMessage;
 public class ApiOrderController extends ApiBasicController {
 	@Autowired
 	private OrderService orderService;
-	
+	@Autowired
+	private CouponService couponService;
+	@Autowired
+	private CustomerService customerService;
+	@Autowired
+	private ScoreService scoreService;
 	/**
 	 * 点击某个订单，进入订单详情
 	 * 
@@ -45,7 +54,7 @@ public class ApiOrderController extends ApiBasicController {
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseMessage add(HttpServletRequest request, Order order, String skus) {
+	public ResponseMessage add(HttpServletRequest request, Order order, String skus,String couponId,int score) {
 		
 		int uid = this.getUid(request);
 		order.setCustomerId(uid);
@@ -68,6 +77,29 @@ public class ApiOrderController extends ApiBasicController {
 		String no = l + "" + order.getCustomerId();
 		order.setNo(no);
 		order.setStatus(Order.STATUS_NON_PAYMENT);// 待付款
+		
+		
+		double price = order.getPrice();
+		if(order.getDiscountPrice()>0){
+			price = order.getDiscountPrice();
+		}
+		//减去现金券抵扣的金额
+		Coupon coupon = couponService.selectById(couponId);
+		if(coupon !=null){
+			double d = coupon.getMoney();
+			price = price - d;
+		}
+		//减去积分抵扣的金额
+		if(score>0){
+			Map<String,Object> map = scoreService.findRateByType("scoreToMoney");
+			int rate = Integer.valueOf(map.get("rate").toString());
+			double d = score*rate*0.1;
+			price = price -d;
+		}
+		if(price!=order.getPrice()){
+			order.setDiscountPrice(price);
+		}
+		
 		orderService.insert(order);
 		// 添加订单中的sku相关信息，包括购买的数量，购买时的价格等等
 		orderService.addSkus(order.getId(), dtos);
