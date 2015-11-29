@@ -9,7 +9,6 @@ import com.hy.manager.domain.AbstractMapper;
 import com.hy.manager.domain.business.Sku;
 import com.hy.manager.domain.business.SkuMapper;
 import com.hy.manager.service.AbstractService;
-import com.hy.manager.web.GridData;
 
 @Service
 public class SkuService extends AbstractService<Sku> {
@@ -26,12 +25,8 @@ public class SkuService extends AbstractService<Sku> {
 		return skuMapper;
 	}
 
-	public GridData selectByOrderId(int orderId) {
-		GridData data = new GridData();
-		List<Sku> skus = this.skuMapper.selectByOrderId(orderId);
-		data.setRows(skus);
-		data.setTotal(skus.size());
-		return data;
+	public List<Sku> selectByOrderId(int orderId) {
+		return this.skuMapper.selectByOrderId(orderId);
 	}
 
 	/**

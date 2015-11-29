@@ -80,4 +80,8 @@ public class OrderService extends AbstractService<Order> {
 		this.orderMapper.pay(no, status, payTime, buyeId, buyerEmail, tradeNo);
 	}
 
+	public List<Map<String, Object>> listByIds(String ids[]) {
+		return this.orderMapper.listByIds(ids);
+	}
+
 }

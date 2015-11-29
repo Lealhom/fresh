@@ -1,7 +1,6 @@
 package com.hy.manager.web.controller.business;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hy.manager.domain.File;
-import com.hy.manager.domain.business.Product;
 import com.hy.manager.domain.business.Sku;
 import com.hy.manager.service.FileService;
 import com.hy.manager.service.business.SkuService;
@@ -185,6 +183,10 @@ public class SkuController extends BasicController {
 	@ResponseBody
 	@RequestMapping(value = "selectByorderId/{orderId}", method = RequestMethod.POST)
 	public GridData selectByOrderId(@PathVariable int orderId) {
-		return skuService.selectByOrderId(orderId);
+		GridData data = new GridData();
+		List<Sku> skus = skuService.selectByOrderId(orderId);
+		data.setRows(skus);
+		data.setTotal(skus.size());
+		return data;
 	}
 }

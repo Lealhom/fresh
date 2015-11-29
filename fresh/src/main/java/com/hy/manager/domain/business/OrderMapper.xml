@@ -140,7 +140,22 @@
 			left join t_comment t6 on t1.id=t6.orderId
 		where t1.id = #{orderId}
 	</select>
-	
+	<select id="listByIds" resultType="map">
+		select 
+		   a.id,a.status,a.price,a.discountPrice, a.message,a.buyerEmail,a.tradeNo,a.createTime,a.payTime, b.username,b.showname,  c.address,c.consignee,c.phone
+		from
+		    t_order a
+		        left join
+		    t_customer b ON a.customerId = b.id
+		        left join
+		    t_address c ON a.addressId = c.id
+		    <if test="ids != null and ids.length!=0">
+				where a.id in
+				<foreach collection="ids" item="id" open="(" close=")" separator=",">
+				#{id}
+				</foreach>
+			</if>
+	</select>
 	<resultMap type="hashmap" id="OrderListMap">
 		<id property="id" column="id"/>
 		<result property="no" column="no"/>

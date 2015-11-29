@@ -34,4 +34,6 @@ public interface OrderMapper extends AbstractMapper {
 	public void decreaseSkuQuantity(@Param("skuId") String skuId,
 			@Param("quantity") int quantity);
 
+	public List<Map<String, Object>> listByIds(@Param("ids") String[] ids);
+
 }
