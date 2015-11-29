@@ -45,6 +45,7 @@
 				/api/address/** = app
 				/api/comment/** = app
 				/api/customer/** = app
+				/api/coupon/** = app
 				/api/order/** = app
 		    	/** = user
 		 	</value>

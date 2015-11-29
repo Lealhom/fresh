@@ -11,6 +11,7 @@ import com.hy.manager.web.Parameter;
 public interface CouponMapper extends AbstractMapper {
 
 	List<Map<String,Object>> listByCustomerId(@Param("customerId")int customerId, @Param("param")Parameter parameter);
+	List<Map<String,Object>> uselistByCustomerId(@Param("customerId")int customerId, @Param("param")Parameter parameter, @Param("exceedMoney") double exceedMoney);
 
 	Coupon findByType(@Param("type")int type);
 

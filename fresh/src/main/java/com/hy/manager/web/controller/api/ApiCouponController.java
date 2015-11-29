@@ -34,4 +34,19 @@ public class ApiCouponController extends ApiBasicController {
 		message.setData(list);
 		return message;
 	}
+	
+	/**
+	 * 可用的现金券列表
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "use_coupon")
+	@ResponseBody
+	public ResponseMessage uselist(HttpServletRequest request, Parameter parameter, double price) {
+		int customerId = this.getUid(request);
+		List<Map<String,Object>> list = this.couponService.listByCustomerId(customerId,parameter);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
+	}
 }

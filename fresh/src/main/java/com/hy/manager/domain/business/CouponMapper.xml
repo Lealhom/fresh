@@ -65,11 +65,22 @@
 	</select>
 	<select id="listByCustomerId" resultType="map">
 		select t1.batchNo,t1.orderId,t1.useTime,t1.status,
-			   t2.money,t2.startTime,t2.endTime,t2.name,t2.description,t2.type	
+			   t2.money,t2.startTime,t2.endTime,t2.name,t2.description,t2.type,t2.id
 		from t_coupon_customer t1
-		left join t_coupon t2
+		inner join t_coupon t2
 		on t1.couponId = t2.id
 		where t1.customerId = #{customerId}
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
+		</if>
+	</select>
+	<select id="uselistByCustomerId" resultType="map">
+		select t1.batchNo,t1.orderId,t1.useTime,t1.status,
+			   t2.money,t2.startTime,t2.endTime,t2.name,t2.description,t2.type,t2.id
+		from t_coupon_customer t1
+		inner join t_coupon t2
+		on t1.couponId = t2.id
+		where t1.customerId = #{customerId} and t2.exceedMoney > #{exceedMoney}
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
