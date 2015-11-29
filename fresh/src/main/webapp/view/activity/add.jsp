@@ -54,7 +54,7 @@
 			<td class="form-input" colspan="3"><textarea name="description"></textarea></td>
 		</tr>
 		<tr>
-			<td class="form-input" colspan="4">banner图片尺寸640*640，其他活动图片尺寸640*220</td>
+			<td class="form-input" colspan="4">banner图片尺寸640*640，其他活动图片尺寸640*240</td>
 		</tr>
 	</table>
 </form>
