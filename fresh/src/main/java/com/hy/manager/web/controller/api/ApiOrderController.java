@@ -67,7 +67,7 @@ public class ApiOrderController extends ApiBasicController {
 			SkuDTO dto = new SkuDTO();
 			dto.setSkuId(values[0]);
 			dto.setQuantity(Integer.valueOf(values[1]));
-			dto.setUnitPrice(Integer.valueOf(values[2]));
+			dto.setUnitPrice(Double.valueOf(values[2]));
 			dtos[i] = dto;
 		}
 		
