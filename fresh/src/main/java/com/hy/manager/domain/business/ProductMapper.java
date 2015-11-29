@@ -30,6 +30,7 @@ public interface ProductMapper extends AbstractMapper {
 	public List<Map<String, Object>> listHotProduct(@Param("param") Parameter parameter);
 
 	public List<Map<String, Object>> listByActivityId(@Param("activityId") int activityId,@Param("param") Parameter parameter);
+	public List<Map<String, Object>> listByJifen(@Param("param") Parameter parameter);
 
 	public List<Map<String, Object>> listByCategoryId(@Param("categoryId") int categoryId,@Param("param") Parameter parameter);
 

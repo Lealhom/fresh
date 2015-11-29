@@ -68,6 +68,21 @@ public class ApiProductController  extends ApiBasicController {
 		message.setData(list);
 		return message;
 	}
+	
+	/**
+	 * 获取某品类下的产品
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "list_by_jifen")
+	@ResponseBody
+	public ResponseMessage listByJifen(Parameter parameter) {
+		List<Map<String, Object>> list = this.productService
+				.listByJifen(parameter);
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
+	}
 
 	/**
 	 * 搜索

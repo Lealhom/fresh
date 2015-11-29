@@ -80,6 +80,10 @@ public class ProductService extends AbstractService<Product> {
 	public List<Map<String, Object>> listByActivityId(int activityId, Parameter parameter) {
 		return this.productMapper.listByActivityId(activityId,parameter);
 	}
+	
+	public List<Map<String, Object>> listByJifen(Parameter parameter) {
+		return this.productMapper.listByJifen(parameter);
+	}
 
 	public List<Map<String, Object>> listByCategoryId(int categoryId, Parameter parameter) {
 		return this.productMapper.listByCategoryId(categoryId,parameter);

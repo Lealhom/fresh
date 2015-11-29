@@ -121,8 +121,8 @@
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid ,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
 		FROM t_sku t1 
-		left join t_product t2 on t1.productId = t2.id
-		left join t_activity_product t3 on t2.id = t3.productId
+		inner join t_product t2 on t1.productId = t2.id
+		inner join t_activity_product t3 on t2.id = t3.productId
 		where t3.activityId = #{activityId}
 		and t1.status = 1
 		and t2.status = 1
@@ -135,11 +135,23 @@
 			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
 		FROM fresh.t_sku t1 
-		left join t_product t2 on t1.productId = t2.id
-		left join t_category_product t3 on t2.id = t3.productId
+		inner join t_product t2 on t1.productId = t2.id
+		inner join t_category_product t3 on t2.id = t3.productId
 		where t3.categoryId = #{categoryId}
 		and t1.status = 1
 		and t2.status = 1
+		<if test="param.rows > 0">
+		limit #{param.start},#{param.rows}
+		</if>
+	</select>
+	<select id="listByJifen" resultType="map">
+		SELECT 
+			t1.scoreConvertRate,t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid,
+			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
+		FROM fresh.t_sku t1 
+		left join t_product t2 on t1.productId = t2.id
+		where t1.status = 1
+		and t2.status = 1 and t1.scoreConvertRate > 0
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
