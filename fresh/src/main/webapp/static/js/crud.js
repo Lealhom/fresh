@@ -4,7 +4,7 @@ define('crud', ['data'], function(DATA) {
 		var dialog = $('<div></div>').appendTo('body').dialog($.extend({
 			title: '',
 			width: 700,
-			height: 500,
+			height: 600,
 			modal: true,
 			resizable: true,
 			buttons: [{

@@ -50,5 +50,8 @@
 			<td class="form-title">副图</td>
 			<td class="form-input" colspan="3"><input name="viceImgs" type="file" multiple="multiple" data-options="required:true" style="width: 300px;"></td>
 		</tr>
+		<tr>
+			<td class="form-input" colspan="4">图片尺寸640*640</td>
+		</tr>
 	</table>
 </form>

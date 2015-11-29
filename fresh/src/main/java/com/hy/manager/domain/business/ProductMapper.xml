@@ -82,7 +82,7 @@
 	</select>
 	<select id="detail" resultType="map">
 		SELECT 
-			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.scoreConvertRate,
+			t1.scoreConvertRate,t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.scoreConvertRate,
 			t1.standard,t1.quantity,t1.avgScore,t1.haopingQuantity,t1.zhongpingQuantity,t1.chapingQuantity,t1.mainImgUuid,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
 		FROM fresh.t_sku t1 
@@ -92,7 +92,7 @@
 	</select>
 	<select id="search" resultType="hashmap">
 		SELECT 
-			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid ,
+			t1.scoreConvertRate,t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid ,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
 		FROM fresh.t_sku t1 
 		inner join t_product t2
@@ -118,7 +118,7 @@
 	</select>
 	<select id="listByActivityId" resultType="map">
 		SELECT 
-			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid ,
+			t1.scoreConvertRate,t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid ,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
 		FROM t_sku t1 
 		inner join t_product t2 on t1.productId = t2.id
@@ -132,7 +132,7 @@
 	</select>
 	<select id="listByCategoryId" resultType="map">
 		SELECT 
-			t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid,
+			t1.scoreConvertRate,t1.id skuId,t1.status skuStatus,t1.name skuName,t1.originalPrice,t1.discountPrice,t1.standard,t1.quantity,t1.scoreConvertRate,t1.mainImgUuid,
 			t2.id productId,t2.status productStatus,t2.name productName,t2.description,t2.bornPlace,t2.hot
 		FROM fresh.t_sku t1 
 		inner join t_product t2 on t1.productId = t2.id

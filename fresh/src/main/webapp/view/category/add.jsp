@@ -30,5 +30,8 @@
 				<input type="file" name="file" class="easyui-validatebox"  data-options="required:true">
 			</td>
 		</tr>
+		<tr>
+			<td class="form-input" colspan="2">图片尺寸320*320</td>
+		</tr>
 	</table>
 </form>

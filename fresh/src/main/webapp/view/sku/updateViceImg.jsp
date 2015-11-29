@@ -8,5 +8,8 @@
 				<input type="file" name="file" multiple="multiple">
 			</td>
 		</tr>
+		<tr>
+			<td class="form-input" colspan="2">图片尺寸640*640</td>
+		</tr>
 	</table>
 </form>
