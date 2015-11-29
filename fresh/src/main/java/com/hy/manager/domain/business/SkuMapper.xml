@@ -8,17 +8,31 @@
 		values
 		(#{status},#{productId},#{name},#{originalPrice},#{discountPrice},#{scoreConvertRate},#{standard},#{quantity})
 	</insert>
+	<insert id="addViceImgUuid">
+		insert into t_sku_file 
+		(skuId,imgUuid,orderNum,type)
+		values
+		(#{skuId},#{viceImgUuid},#{orderNum},1)
+	</insert>
+	<delete id="delViceImgUuids">
+		delete from t_sku_file
+		where skuId = #{skuId}
+	</delete>
+	<select id="findViceImgs" resultType="string">
+		select imgUuid from t_sku_file where type = 1 and skuId = #{skuId} order by orderNum
+	</select>
 	<update id="update" parameterType="Sku">
 		update t_sku
 		<set>
-			name=#{name},
-			status=#{status},
-			productId=#{productId},
-			originalPrice=#{originalPrice},
-			discountPrice=#{discountPrice},
-			scoreConvertRate=#{scoreConvertRate},
-			standard=#{standard},
-			quantity=#{quantity}
+			<if test="name!=null">name=#{name},</if>
+			<if test="status!=0">status=#{status},</if>
+			<if test="productId!=null">productId=#{productId},</if>
+			<if test="originalPrice!=0">originalPrice=#{originalPrice},</if>
+			<if test="discountPrice!=0">discountPrice=#{discountPrice},</if>
+			<if test="scoreConvertRate!=0">scoreConvertRate=#{scoreConvertRate},</if>
+			<if test="standard!=null">standard=#{standard},</if>
+			<if test="mainImgUuid!=null">mainImgUuid=#{mainImgUuid},</if>
+			<if test="quantity!=0">quantity=#{quantity}</if>
 		</set>
 		where id = #{id}
 	</update>

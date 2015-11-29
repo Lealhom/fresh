@@ -12,4 +12,10 @@ public interface SkuMapper extends AbstractMapper {
 	public void updateSkuScore();
 
 	public void updateSkuComment(@Param("skuId") int skuId,@Param("score") int score);
+	
+	public void addViceImgUuid(@Param("skuId") String skuId,@Param("viceImgUuid") String viceImgUuid,@Param("orderNum") int orderNum);
+	
+	public void delViceImgUuids(@Param("skuId") int skuId);
+	
+	public List<String> findViceImgs(@Param("skuId") int skuId);
 }
