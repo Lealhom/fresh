@@ -18,5 +18,7 @@ public interface CouponMapper extends AbstractMapper {
 	void addCustomerCoupon(@Param("customerId")int customerId, @Param("couponId")int couponId, @Param("batchNo")String batchNo, @Param("status")int status);
 
 	void useCoupon(@Param("useTime")String useTime,@Param("batchNo")String batchNo,@Param("orderId")int orderId);
+	
+	Map<String, Object> selectCustomerCoupon(@Param("id")String id);
 
 }

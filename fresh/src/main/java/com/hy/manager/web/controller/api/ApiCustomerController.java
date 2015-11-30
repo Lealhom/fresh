@@ -58,7 +58,7 @@ public class ApiCustomerController extends ApiBasicController {
 		//发放两张注册类型的现金券
 		Coupon c = couponService.findByType(Coupon.TYPE_REGISTER);
 		for(int i=0;i<2;i++){
-			String batchNo = String.valueOf(System.currentTimeMillis());
+			String batchNo = customerId+String.valueOf(System.currentTimeMillis());//用户id加上时间戳作为批次号
 			int status = 1;//未使用
 			couponService.addCustomerCoupon(customerId,c.getId(),batchNo,status);
 		}

@@ -43,4 +43,8 @@ public class CouponService extends AbstractService<Coupon> {
 		couponMapper.useCoupon(useTime,batchNo,orderId);
 	}
 
+	public Map<String, Object> selectCustomerCoupon(String id) {
+		return couponMapper.selectCustomerCoupon(id);
+	}
+
 }

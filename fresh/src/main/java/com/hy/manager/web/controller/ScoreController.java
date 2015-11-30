@@ -40,7 +40,7 @@ public class ScoreController extends BasicController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public ResponseMessage update1(int rate1,int rate2) {
+	public ResponseMessage update(int rate1,int rate2) {
 		ResponseMessage message = new ResponseMessage();
 		scoreService.updateScoreRate(rate1,"moneyToScore");
 		scoreService.updateScoreRate(rate2,"scoreToMoney");

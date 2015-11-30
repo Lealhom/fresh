@@ -81,9 +81,18 @@
 		inner join t_coupon t2
 		on t1.couponId = t2.id
 		where t1.customerId = #{customerId} and t2.exceedMoney > #{exceedMoney}
+		and t2.startTime &lt; now() and now() &lt; t2.endTime <!-- 当前时间在有效期起止范围内 -->
 		<if test="param.rows > 0">
 		limit #{param.start},#{param.rows}
 		</if>
+	</select>
+	<select id="selectCustomerCoupon" resultType="map">
+		select t1.batchNo,t1.status,t2.money
+		from t_coupon_customer t1
+		inner join t_coupon t2
+		on t1.couponId = t2.id
+		where t1.id = #{id}
+		and t2.startTime &lt; now() and now() &lt; t2.endTime <!-- 当前时间在有效期起止范围内 -->
 	</select>
 	<select id="count" resultType="long">
 		select count(*)

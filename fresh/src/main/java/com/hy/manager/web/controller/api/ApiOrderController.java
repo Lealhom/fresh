@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hy.manager.domain.business.Coupon;
+import com.alipay.util.UtilDate;
 import com.hy.manager.domain.business.Order;
 import com.hy.manager.domain.business.SkuDTO;
 import com.hy.manager.service.ScoreService;
@@ -83,11 +83,15 @@ public class ApiOrderController extends ApiBasicController {
 		if(order.getDiscountPrice()>0){
 			price = order.getDiscountPrice();
 		}
+		String batchNo = "";
 		//减去现金券抵扣的金额
-		Coupon coupon = couponService.selectById(couponId);
-		if(coupon !=null){
-			double d = coupon.getMoney();
-			price = price - d;
+		if(!"".equals(couponId)){
+			Map<String,Object> map = couponService.selectCustomerCoupon(couponId);
+			if(map !=null){
+				double d = Double.valueOf(map.get("money").toString());
+				price = price - d;
+				batchNo = map.get("batchNo").toString();
+			}
 		}
 		//减去积分抵扣的金额
 		if(score>0){
@@ -95,12 +99,18 @@ public class ApiOrderController extends ApiBasicController {
 			int rate = Integer.valueOf(map.get("rate").toString());
 			double d = score*rate*0.1;
 			price = price -d;
+			scoreService.updateCustomerScore(uid, -score);//减掉积分
 		}
 		if(price!=order.getPrice()){
 			order.setDiscountPrice(price);
 		}
 		
 		orderService.insert(order);
+		if(!"".equals(batchNo)){
+			String useTime = UtilDate.getDateFormatter();
+			couponService.useCoupon(useTime, batchNo, order.getId());//更新现金券
+		}
+		
 		// 添加订单中的sku相关信息，包括购买的数量，购买时的价格等等
 		orderService.addSkus(order.getId(), dtos);
 		// 减少各个SKU的库存量
