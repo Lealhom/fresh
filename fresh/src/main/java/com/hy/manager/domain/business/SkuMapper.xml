@@ -4,9 +4,9 @@
 <mapper namespace="com.hy.manager.domain.business.SkuMapper">
 	<insert id="insert" parameterType="Sku" useGeneratedKeys="true" keyProperty="id">
 		insert into t_sku
-		(status,productId,name,originalPrice,discountPrice,scoreConvertRate,standard,quantity)
+		(status,productId,name,originalPrice,discountPrice,scoreConvertRate,standard,quantity,mainImgUuid)
 		values
-		(#{status},#{productId},#{name},#{originalPrice},#{discountPrice},#{scoreConvertRate},#{standard},#{quantity})
+		(#{status},#{productId},#{name},#{originalPrice},#{discountPrice},#{scoreConvertRate},#{standard},#{quantity},#{mainImgUuid})
 	</insert>
 	<insert id="addViceImgUuid">
 		insert into t_sku_file 
