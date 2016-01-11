@@ -18,4 +18,6 @@ public interface ActivityMapper extends AbstractMapper {
 
 	public List<Map<String, Object>> listActivity();
 
+	public List<Map<String, Object>> listPresell();
+
 }

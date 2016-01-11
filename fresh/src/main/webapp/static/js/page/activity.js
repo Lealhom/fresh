@@ -22,7 +22,7 @@ define('page/activity', ['crud'], function(CRUD) {
 								}
 						    }, 
 				           {field: 'name', title: '名称', width: 150}, 
-				           {field: 'productNames', title: '参加活动的产品', width: 350}, 
+				           {field: 'productNames', title: '参加活动的产品', width: 320}, 
 				           {field: 'description', title: '描述', width: 300},
 				           {field: 'startTime', title: '开始时间', width: 200},
 				           {field: 'endTime', title: '结束时间', width: 200},
@@ -30,7 +30,10 @@ define('page/activity', ['crud'], function(CRUD) {
 				           {field: 'statusInfo', title: '状态', width: 100},
 				           {field: 'banner', title: '是否为banner', width: 100,hidden:true},
 				           {field: 'bannerInfo', title: '是否为banner', width: 100},
-				           {field: 'orderNum', title: '序号', width: 100}
+				           {field: 'presell', title: '是否预售', width: 100,hidden:true},
+				           {field: 'presellInfo', title: '是否预售', width: 60},
+				           {field: 'pre_rate', title: '预付几成', width: 60},
+				           {field: 'orderNum', title: '序号', width: 60}
 				         ]],
 				toolbar: [{
 					text: '添加',

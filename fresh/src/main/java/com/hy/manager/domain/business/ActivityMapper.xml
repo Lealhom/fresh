@@ -4,9 +4,9 @@
 <mapper namespace="com.hy.manager.domain.business.ActivityMapper">
 	<insert id="insert" parameterType="Activity" useGeneratedKeys="true" keyProperty="id">
 		insert into t_activity
-		(name,imgUuid,description,startTime,endTime,status,banner,orderNum)
+		(name,imgUuid,description,startTime,endTime,status,banner,orderNum,presell,pre_rate)
 		values
-		(#{name},#{imgUuid},#{description},#{startTime},#{endTime},#{status},#{banner},#{orderNum})
+		(#{name},#{imgUuid},#{description},#{startTime},#{endTime},#{status},#{banner},#{orderNum},#{presell},#{pre_rate})
 	</insert>
 	<insert id="addProductId">
 		insert into t_activity_product 
@@ -25,6 +25,8 @@
 			<if test="orderNum!=null">orderNum=#{orderNum},</if>
 			<if test="status!=0">status=#{status},</if>
 			<if test="banner!=0">banner=#{banner},</if>
+			<if test="presell!=0">presell=#{presell},</if>
+			<if test="pre_rate!=0">pre_rate=#{pre_rate},</if>
 			<if test="description!=null">description=#{description},</if>
 			<if test="startTime!=null">startTime=#{startTime},</if>
 			<if test="imgUuid!=null">imgUuid=#{imgUuid},</if>
@@ -45,7 +47,7 @@
 	</delete>
 	
 	<select id="selectById" resultType="Activity">
-		select t1.id,t1.name,t1.description,t1.status,t1.banner,t1.startTime,t1.endTime,t1.imgUuid,t1.orderNum,
+		select t1.id,t1.name,t1.description,t1.status,t1.banner,t1.startTime,t1.endTime,t1.imgUuid,t1.orderNum,t1.presell,t1.pre_rate,
 			   group_concat(t3.id) productNames
 		from t_activity t1 
 		left join t_activity_product t2 on t1.id = t2.activityId
@@ -55,18 +57,23 @@
 	</select>
 	<select id="listAll" resultType="Activity">
 		SELECT * FROM t_activity 
-		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
+		where startTime &lt;=date_format(now(),'%Y-%m-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%m-%d %H:%i:%s') 
 		and status = 1
 	</select>
 	<select id="listActivity" resultType="map">
 		SELECT id,name,imgUuid FROM t_activity 
-		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 2 order by orderNum 
+		where startTime &lt;=date_format(now(),'%Y-%m-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%m-%d %H:%i:%s') 
+		and status = 1 and banner = 2  and presell=2 order by orderNum 
 	</select>
 	<select id="listBanner" resultType="map">
 		SELECT id,name,imgUuid FROM t_activity 
-		where startTime &lt;=date_format(now(),'%Y-%c-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%c-%d %H:%i:%s') 
-		and status = 1 and banner = 1 order by orderNum 
+		where startTime &lt;=date_format(now(),'%Y-%m-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%m-%d %H:%i:%s') 
+		and status = 1 and banner = 1 and presell=2 order by orderNum 
+	</select>
+	<select id="listPresell" resultType="map">
+		SELECT id,name,imgUuid,presell,pre_rate FROM t_activity 
+		where startTime &lt;=date_format(now(),'%Y-%m-%d %H:%i:%s') and endTime &gt;= date_format(now(),'%Y-%m-%d %H:%i:%s') 
+		and status = 1 and presell=1 order by orderNum 
 	</select>
 	<sql id="gridWhere">
 		from t_activity u
@@ -74,7 +81,7 @@
 		</where>
 	</sql>
 	<select id="listPaged" resultType="Activity">
-		select t1.id,t1.name,t1.description,t1.status,t1.banner,t1.startTime,t1.endTime,t1.imgUuid,t1.orderNum,
+		select t1.id,t1.name,t1.description,t1.status,t1.banner,t1.startTime,t1.endTime,t1.imgUuid,t1.orderNum,t1.presell,t1.pre_rate,
 			   group_concat(t3.name) productNames
 		from t_activity t1 
 		left join t_activity_product t2 on t1.id = t2.activityId

@@ -42,7 +42,16 @@
 				<option value="2" ${activity.banner == 2 ? 'selected' : '' }>否</option>
 			</select></td>
 			<td class="form-title">序号</td>
-			<td class="form-input"><input name="orderNum" class="easyui-numberspinner" data-options="value:1,min:1"></td>
+			<td class="form-input"><input name="orderNum" class="easyui-numberspinner" data-options="value:${activity.orderNum},min:1"></td>
+		</tr>
+		<tr>
+		<td>是否预售</td>
+			<td><select class="easyui-combobox" name="presell" style="width:80px;">
+				<option value="1" ${activity.presell == 1 ? 'selected' : '' }>是</option>
+				<option value="2" ${activity.presell == 2 ? 'selected' : '' }>否</option>
+			</select></td>
+			<td class="form-title">预付几成</td>
+			<td class="form-input"><input name="pre_rate" class="easyui-numberspinner" data-options="value:${activity.pre_rate},min:1"></td>
 		</tr>
 		<tr>
 			<td>描述</td>

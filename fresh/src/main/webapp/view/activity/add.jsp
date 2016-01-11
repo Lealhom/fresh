@@ -44,6 +44,15 @@
 			<td class="form-input"><input name="orderNum" class="easyui-numberspinner" data-options="value:1,min:1"></td>
 		</tr>
 		<tr>
+		<td>是否预售</td>
+			<td><select class="easyui-combobox" name="presell" style="width:80px;">
+				<option value="2">否</option>
+				<option value="1">是</option>
+			</select></td>
+			<td class="form-title">预付几成</td>
+			<td class="form-input"><input name="pre_rate" class="easyui-numberspinner" data-options="value:1,min:1"></td>
+		</tr>
+		<tr>
 			<td class="form-title">图片</td>
 			<td class="form-input">
 				<input type="file" name="file">

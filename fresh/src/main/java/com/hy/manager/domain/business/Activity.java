@@ -22,6 +22,24 @@ public class Activity implements Serializable {
 	private String startTime;
 	private String endTime;
 	private int banner;// 是否为banner
+	private int presell;// 是否为预售
+	private int pre_rate;//预售时需要预付几成的定金
+	public int getPresell() {
+		return presell;
+	}
+
+	public void setPresell(int presell) {
+		this.presell = presell;
+	}
+
+	public int getPre_rate() {
+		return pre_rate;
+	}
+
+	public void setPre_rate(int pre_rate) {
+		this.pre_rate = pre_rate;
+	}
+
 	private String productIds[];
 	private String productNames;
 	private int orderNum;// 序号
@@ -47,11 +65,20 @@ public class Activity implements Serializable {
 		}
 		return String.valueOf(status);
 	}
-	public String getBannerInfo() {
-		if (status == 1) {
+	public String getPresellInfo() {
+		if (presell == 1) {
 			return "是";
 		}
-		if (status == 2) {
+		if (presell == 2) {
+			return "否";
+		}
+		return String.valueOf(presell);
+	}
+	public String getBannerInfo() {
+		if (banner == 1) {
+			return "是";
+		}
+		if (banner == 2) {
 			return "否";
 		}
 		return String.valueOf(banner);

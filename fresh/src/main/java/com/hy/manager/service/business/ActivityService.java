@@ -48,4 +48,8 @@ public class ActivityService extends AbstractService<Activity> {
 		activityMapper.delProductIds(activityId);
 	}
 
+	public List<Map<String, Object>> listPresell() {
+		return this.activityMapper.listPresell();
+	}
+
 }

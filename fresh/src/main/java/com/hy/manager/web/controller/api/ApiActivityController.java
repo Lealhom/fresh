@@ -44,4 +44,17 @@ public class ApiActivityController {
 		message.setData(list);
 		return message;
 	}
+	/**
+	 * 获取预售活动
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "list_presell")
+	@ResponseBody
+	public ResponseMessage listPresell() {
+		List<Map<String, Object>> list = activityService.listPresell();
+		ResponseMessage message = new ResponseMessage();
+		message.setData(list);
+		return message;
+	}
 }
